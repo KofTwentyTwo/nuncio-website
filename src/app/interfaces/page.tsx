@@ -108,25 +108,34 @@ export default function InterfacesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {experiences.map((exp) => (
-              <div key={exp.id} className={`glass-card p-8 space-y-6 ${exp.accentColor}`}>
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-2xl bg-slate-900 border border-white/10">
-                      {exp.icon}
+              <div
+                key={exp.id}
+                className={`glass-card p-6 sm:p-8 flex flex-col justify-between h-full space-y-6 ${exp.accentColor}`}
+              >
+                {/* Top Block: Header + Description */}
+                <div className="space-y-4">
+                  {/* Header Bar */}
+                  <div className="flex items-start sm:items-center justify-between gap-3 w-full min-h-[3.5rem]">
+                    <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                      <div className="p-3 rounded-2xl bg-slate-900 border border-white/10 shadow-sm shrink-0">
+                        {exp.icon}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h2 className="text-base sm:text-lg font-bold text-white leading-tight">{exp.title}</h2>
+                        <p className="text-xs font-medium text-slate-400 leading-normal mt-0.5">{exp.subtitle}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="text-xl font-bold text-white">{exp.title}</h2>
-                      <p className="text-xs font-medium text-slate-400">{exp.subtitle}</p>
-                    </div>
+                    <span className={`text-xs px-3 py-1 rounded-full border whitespace-nowrap shrink-0 ${exp.badgeBg}`}>
+                      {exp.badgeText}
+                    </span>
                   </div>
-                  <span className={`text-xs px-3 py-1 rounded-full border ${exp.badgeBg}`}>
-                    {exp.badgeText}
-                  </span>
+
+                  {/* Description */}
+                  <p className="text-slate-300 text-sm leading-relaxed min-h-[4.25rem]">{exp.description}</p>
                 </div>
 
-                <p className="text-slate-300 text-sm leading-relaxed">{exp.description}</p>
-
-                <div className="space-y-2.5 pt-2 border-t border-white/10">
+                {/* Middle Block: User Benefits Checklist */}
+                <div className="space-y-2.5 pt-4 border-t border-white/10 flex-1 flex flex-col justify-start min-h-[9.5rem]">
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Core Features:</span>
                   <ul className="space-y-2 text-xs text-slate-200 font-medium">
                     {exp.highlights.map((h, idx) => (
@@ -136,6 +145,14 @@ export default function InterfacesPage() {
                       </li>
                     ))}
                   </ul>
+                </div>
+
+                {/* Bottom Block: Footer Command Pill */}
+                <div className="pt-4 mt-auto">
+                  <div className="px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-white/10 text-xs font-mono text-slate-300 flex items-center justify-between gap-2 overflow-x-auto whitespace-nowrap">
+                    <span className="truncate whitespace-nowrap">{exp.sampleCommand}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0 ml-2" />
+                  </div>
                 </div>
               </div>
             ))}
