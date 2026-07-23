@@ -13,9 +13,11 @@ export function Header() {
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo & Brand */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg group-hover:bg-blue-500 transition-colors">
-              <Terminal className="w-4 h-4 text-white" />
-            </div>
+            <img
+              src="/nuncio_app_icon.jpg"
+              alt="Nuncio App Icon"
+              className="w-8 h-8 rounded-lg object-cover shadow-lg border border-white/20 group-hover:scale-105 transition-transform"
+            />
             <span className="font-bold text-white tracking-tight text-base sm:text-lg group-hover:text-blue-400 transition-colors">
               Nuncio
             </span>
