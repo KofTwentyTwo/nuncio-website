@@ -38,7 +38,7 @@ export function Header() {
             <Link href="/mcp" className="hover:text-white transition-colors">
               AI MCP Hub
             </Link>
-            <Link href="/vs/superhuman" className="hover:text-white transition-colors">
+            <Link href="/vs" className="hover:text-white transition-colors">
               Comparisons
             </Link>
             <Link href="/docs" className="hover:text-white transition-colors">
