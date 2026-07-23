@@ -1,6 +1,7 @@
 import React from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { ManifestoPillarsSection } from "@/components/ManifestoPillarsSection";
 import { FourExperiencesSection } from "@/components/FourExperiencesSection";
 import { NsqlPlayground } from "@/components/NsqlPlayground";
 import { ComparisonSection } from "@/components/ComparisonSection";
@@ -20,6 +21,9 @@ export default function Home() {
       <Header />
       <main className="flex-grow space-y-0">
         <Hero />
+        <div id="manifesto">
+          <ManifestoPillarsSection />
+        </div>
         <div id="experiences">
           <FourExperiencesSection />
         </div>
