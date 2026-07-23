@@ -68,14 +68,14 @@ export function FourExperiencesSection() {
       accentColor: "border-emerald-500/30 bg-emerald-500/5 hover:border-emerald-500/60",
       badgeBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30 font-bold",
       description:
-        "Empower AI agents (Claude Desktop, Antigravity, ChatGPT) to assist you with mail triage, calendar scheduling, and draft generation — backed by fine-grained security policies that protect your privacy.",
+        "Aggregate ALL your email accounts into one local hub. Connect local LLMs and AI agents (Claude, Antigravity, Cursor) through Nuncio's security gateway—never granting uncontrolled direct credentials to Gmail or IMAP. Controlled via WORM audits, RBAC policies, and microsecond SQLite speed.",
       userBenefits: [
-        "Ask AI agents to summarize long email threads or draft replies automatically",
-        "Schedule calendar meetings & check availability via natural language",
-        "Granular security enclave: control exactly what data & folders AI agents can access",
-        "Automatic sensitive data redaction: protects SSNs and credit cards before AI inspection",
+        "Aggregate unlimited IMAP, JMAP & Gmail accounts into a single local vault",
+        "Controlled AI Gateway: Zero uncontrolled direct access to raw email providers",
+        "Immutable HMAC-SHA256 WORM audit ledger logs every AI tool call & email read",
+        "Sub-10ms local FTS5 search delivers microsecond speed without cloud fees",
       ],
-      sampleCommand: "nuncio-mcp (Native Model Context Protocol Server)",
+      sampleCommand: "nuncio-mcp --stdio (Native Model Context Protocol Server)",
     },
   ];
 
