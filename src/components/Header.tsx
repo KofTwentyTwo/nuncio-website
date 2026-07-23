@@ -26,13 +26,13 @@ export function Header() {
             <Link href="/features" className="hover:text-white transition-colors">
               Features
             </Link>
-            <Link href="/#experiences" className="hover:text-white transition-colors">
+            <Link href="/interfaces" className="hover:text-white transition-colors">
               Interfaces
             </Link>
-            <Link href="/#nsql" className="hover:text-white transition-colors">
+            <Link href="/nsql" className="hover:text-white transition-colors">
               NSQL Engine
             </Link>
-            <Link href="/#security" className="hover:text-white transition-colors">
+            <Link href="/security" className="hover:text-white transition-colors">
               Privacy &amp; Security
             </Link>
             <Link href="/mcp" className="hover:text-white transition-colors">
@@ -52,7 +52,7 @@ export function Header() {
           {/* CTA & Downloads */}
           <div className="hidden sm:flex items-center gap-3">
             <a
-              href="#downloads"
+              href="/#downloads"
               className="apple-button-primary px-4 py-1.5 text-xs font-semibold flex items-center gap-1.5 shadow-sm"
             >
               <Download className="w-3.5 h-3.5" />
@@ -74,17 +74,20 @@ export function Header() {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden backdrop-blur-2xl bg-slate-950/95 border-b border-white/10 px-4 pt-3 pb-6 space-y-3 text-sm text-slate-200">
-          <Link href="/#experiences" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
+          <Link href="/features" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
+            Features
+          </Link>
+          <Link href="/interfaces" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
             Interfaces
           </Link>
-          <Link href="/#nsql" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
+          <Link href="/nsql" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
             NSQL Engine
           </Link>
-          <Link href="/#security" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
+          <Link href="/security" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
             Privacy &amp; Security
           </Link>
-          <Link href="/#mcp" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
-            AI Co-Pilot (MCP)
+          <Link href="/mcp" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
+            AI MCP Hub
           </Link>
           <Link href="/vs/superhuman" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
             Comparisons
@@ -97,7 +100,7 @@ export function Header() {
           </Link>
           <div className="pt-2">
             <a
-              href="#downloads"
+              href="/#downloads"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full apple-button-primary py-2.5 text-xs font-semibold flex items-center justify-center gap-1.5"
             >
