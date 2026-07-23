@@ -18,18 +18,18 @@ export function ComparisonSection() {
   ];
 
   return (
-    <section id="compare" className="py-20 bg-[#FAFAFA] border-t border-slate-200/80">
+    <section id="compare" className="py-20 bg-[#0B0F19] border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold tracking-tight shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold tracking-tight shadow-lg">
+            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
             <span>Comprehensive Comparison Guides</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-slate-900">
-            Built for those who demand more.
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Built for those who <span className="gradient-text">demand more.</span>
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg">
+          <p className="text-slate-300 text-base sm:text-lg">
             See how Nuncio outperforms traditional desktop clients and expensive cloud subscriptions across Mac, Windows, and Linux.
           </p>
         </div>
@@ -40,22 +40,22 @@ export function ComparisonSection() {
             <Link
               key={c.href}
               href={c.href}
-              className="apple-card p-6 border border-slate-200/90 rounded-2xl bg-white hover:border-blue-400 hover:shadow-xl transition-all group flex flex-col justify-between"
+              className="glass-card p-6 border border-white/10 rounded-2xl bg-slate-900/60 hover:border-blue-500/50 hover:shadow-xl transition-all group flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300">
                     {c.platform}
                   </span>
-                  <span className="text-xs font-bold text-slate-500">{c.price}</span>
+                  <span className="text-xs font-bold text-blue-400">{c.price}</span>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
                   Nuncio vs {c.name}
                 </h3>
-                <p className="text-slate-600 text-xs leading-relaxed">{c.desc}</p>
+                <p className="text-slate-300 text-xs leading-relaxed">{c.desc}</p>
               </div>
 
-              <div className="pt-4 flex items-center gap-1.5 text-xs font-semibold text-blue-600 group-hover:gap-2.5 transition-all">
+              <div className="pt-4 flex items-center gap-1.5 text-xs font-semibold text-blue-400 group-hover:gap-2.5 transition-all">
                 <span>Read Full Comparison</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </div>

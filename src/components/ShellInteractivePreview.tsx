@@ -108,68 +108,68 @@ export function ShellInteractivePreview() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto rounded-2xl bg-white p-2 border border-slate-200/90 overflow-hidden shadow-xl">
+    <div className="w-full max-w-5xl mx-auto rounded-2xl glass-panel p-2 border border-white/10 overflow-hidden shadow-2xl">
       {/* macOS Window Title Bar */}
-      <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#F2F2F7] border-b border-slate-200/80 rounded-t-xl">
+      <div className="flex items-center justify-between px-3.5 py-2.5 bg-slate-950/90 border-b border-white/10 rounded-t-xl">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]" />
           <div className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]" />
           <div className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]" />
         </div>
-        <div className="text-[11px] font-semibold text-slate-600 font-sans tracking-tight">
+        <div className="text-[11px] font-semibold text-slate-400 font-sans tracking-tight">
           Nuncio Sovereign Mail &amp; Calendar — Native macOS / Linux / Windows Shell
         </div>
-        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-semibold text-emerald-700">
-          <Activity className="w-3 h-3 animate-pulse text-emerald-600" />
+        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-semibold text-emerald-400">
+          <Activity className="w-3 h-3 animate-pulse text-emerald-400" />
           <span>Daemon Connected</span>
         </div>
       </div>
 
       {/* Interface Selector Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 p-2 bg-[#F9F9FB] rounded-b-xl border-b border-slate-200/70">
+      <div className="flex flex-wrap items-center justify-between gap-2 p-2 bg-slate-900/90 rounded-b-xl border-b border-white/5">
         <div className="flex flex-wrap items-center gap-1.5">
           <button
             onClick={() => setActiveTab("gui")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all min-h-[44px] ${
               activeTab === "gui"
-                ? "bg-white text-slate-900 shadow-md border border-slate-300 font-bold"
-                : "text-slate-600 hover:text-slate-950 hover:bg-slate-200/50"
+                ? "bg-purple-600 text-white shadow-lg shadow-purple-500/40 border border-purple-400/50 font-bold"
+                : "text-slate-400 hover:text-white hover:bg-slate-800/50"
             }`}
           >
-            <Monitor className="w-4 h-4 text-purple-600" />
+            <Monitor className="w-4 h-4 text-purple-300" />
             1. Desktop GUI (Featured)
           </button>
           <button
             onClick={() => setActiveTab("tui")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all min-h-[44px] ${
               activeTab === "tui"
-                ? "bg-white text-slate-900 shadow-md border border-slate-300 font-bold"
-                : "text-slate-600 hover:text-slate-950 hover:bg-slate-200/50"
+                ? "bg-cyan-600 text-white shadow-md shadow-cyan-500/30 font-bold"
+                : "text-slate-400 hover:text-white hover:bg-slate-800/50"
             }`}
           >
-            <Code className="w-4 h-4 text-cyan-600" />
+            <Code className="w-4 h-4 text-cyan-300" />
             2. Vim Ratatui TUI
           </button>
           <button
             onClick={() => setActiveTab("cli")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all min-h-[44px] ${
               activeTab === "cli"
-                ? "bg-white text-slate-900 shadow-md border border-slate-300 font-bold"
-                : "text-slate-600 hover:text-slate-950 hover:bg-slate-200/50"
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/30 font-bold"
+                : "text-slate-400 hover:text-white hover:bg-slate-800/50"
             }`}
           >
-            <Terminal className="w-4 h-4 text-blue-600" />
+            <Terminal className="w-4 h-4 text-blue-300" />
             3. POSIX CLI
           </button>
           <button
             onClick={() => setActiveTab("mcp")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all min-h-[44px] ${
               activeTab === "mcp"
-                ? "bg-white text-slate-900 shadow-md border border-slate-300 font-bold"
-                : "text-slate-600 hover:text-slate-950 hover:bg-slate-200/50"
+                ? "bg-emerald-600 text-white shadow-md shadow-emerald-500/30 font-bold"
+                : "text-slate-400 hover:text-white hover:bg-slate-800/50"
             }`}
           >
-            <Bot className="w-4 h-4 text-emerald-600" />
+            <Bot className="w-4 h-4 text-emerald-300" />
             4. Native MCP AI
           </button>
         </div>
