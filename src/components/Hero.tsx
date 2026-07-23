@@ -29,13 +29,13 @@ export function Hero() {
 
         {/* Main Headline */}
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
-          One Email &amp; Calendar App. <br className="hidden sm:inline" />
-          <span className="gradient-text">Four Great Ways to Work.</span>
+          A New Way to Do <br className="hidden sm:inline" />
+          <span className="gradient-text">Email &amp; Calendars.</span>
         </h1>
 
         {/* Subtitle */}
         <p className="max-w-3xl mx-auto text-lg sm:text-xl text-gray-300 font-normal leading-relaxed">
-          Take total control of your inbox and schedule. Whether you live in the terminal, keyboard-drive your email, prefer a sleek desktop app, or delegate to local AI agents — Nuncio gives you <strong className="text-white font-semibold">100% feature parity across four great interfaces</strong>.
+          Experience total freedom and speed over your inbox and schedule. Work seamlessly across four great interfaces — lightning POSIX CLI, Vim terminal TUI, sleek desktop app, and autonomous local AI agents.
         </p>
 
         {/* Quick One-Line Install Terminal String */}
