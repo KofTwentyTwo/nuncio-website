@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://nuncio.mx"),
   title: "Nuncio — Sovereign Mail & Calendar Suite for Power Users and Autonomous Agents",
   description:
-    "Free open-source high-performance email and calendar suite featuring 100% Multi-Shell Parity across POSIX CLI, Vim Ratatui TUI, Desktop GUI, and Native MCP LLM Agent Interface.",
+    "Free open-source high-performance email and calendar suite featuring 100% Feature Parity across POSIX CLI, Vim Ratatui TUI, Desktop GUI, and Native MCP LLM Agent Interface.",
   keywords: [
     "Nuncio",
     "Email Client",

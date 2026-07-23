@@ -76,7 +76,7 @@ export function DocsHub() {
           <div className="bg-slate-900/90 p-4 rounded-xl border border-white/10 space-y-3">
             <span className="text-sm font-bold text-blue-300">First-Time Setup &amp; Daemon Auto-Spawn</span>
             <p className="text-xs text-gray-300">
-              When you launch any presentation shell (`nuncio`, `nuncio-tui`, `nuncio-gui`, `nuncio-mcp`), it automatically detects and auto-spawns the background daemon (`nunciod`) if it is not already running.
+              When you launch any Nuncio application interface (`nuncio`, `nuncio-tui`, `nuncio-gui`, `nuncio-mcp`), it automatically detects and auto-spawns the background daemon (`nunciod`) if it is not already running.
             </p>
             <pre className="bg-slate-950 p-3 rounded-lg text-blue-300 font-mono text-xs overflow-x-auto">
 {`# Add your first account interactively

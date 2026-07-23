@@ -35,7 +35,7 @@ export function Hero() {
 
         {/* Subtitle */}
         <p className="max-w-3xl mx-auto text-lg sm:text-xl text-gray-300 font-normal leading-relaxed">
-          High-performance email, calendar, and contacts suite built with Rust and SQLite WAL. Features <strong className="text-white font-semibold">100% Multi-Shell Parity</strong> across POSIX CLI, Vim Ratatui TUI, Desktop GUI, and Native MCP LLM Agent Interface.
+          High-performance email, calendar, and contacts suite built with Rust and SQLite WAL. Features <strong className="text-white font-semibold">100% Parity Across All 4 Interfaces</strong> — POSIX CLI, Vim Ratatui TUI, Desktop GUI, and Native MCP LLM Agent Interface.
         </p>
 
         {/* Quick One-Line Install Terminal String */}
@@ -91,7 +91,7 @@ export function Hero() {
           <div className="glass-card p-4 rounded-xl flex items-start gap-3">
             <Terminal className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-xs font-bold text-white uppercase">4 Presentation Shells</h4>
+              <h4 className="text-xs font-bold text-white uppercase">4 Great Interfaces</h4>
               <p className="text-xs text-gray-400">100% Parity Guaranteed</p>
             </div>
           </div>

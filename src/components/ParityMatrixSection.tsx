@@ -48,10 +48,10 @@ export function ParityMatrixSection() {
         <div className="text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold">
             <Layers className="w-3.5 h-3.5" />
-            <span>Standing Rule: 100% Multi-Shell Feature Parity</span>
+            <span>Standing Rule: 100% Parity Across All 4 Interfaces</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white">
-            One Core Engine. <span className="gradient-text">Four Equivalent Shells.</span>
+            One Core Engine. <span className="gradient-text">Four Great Interfaces.</span>
           </h2>
           <p className="max-w-3xl mx-auto text-gray-300 text-base sm:text-lg">
             Every feature in Nuncio is implemented 1:1 across POSIX CLI, Vim Ratatui TUI, Desktop GUI, and Native MCP LLM Agent interface without shells or mocks.
