@@ -35,8 +35,8 @@ export function Header() {
             <Link href="/#security" className="hover:text-white transition-colors">
               Privacy &amp; Security
             </Link>
-            <Link href="/#mcp" className="hover:text-white transition-colors">
-              AI Co-Pilot (MCP)
+            <Link href="/mcp" className="hover:text-white transition-colors">
+              AI MCP Hub
             </Link>
             <Link href="/vs/superhuman" className="hover:text-white transition-colors">
               Comparisons
