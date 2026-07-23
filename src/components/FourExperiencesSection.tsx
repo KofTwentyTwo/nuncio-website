@@ -104,14 +104,14 @@ export function FourExperiencesSection() {
               className={`glass-card p-6 sm:p-8 space-y-6 ${exp.accentColor}`}
             >
               {/* Header Bar */}
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-2xl bg-slate-900 border border-white/10 shadow-sm">
+              <div className="flex items-start sm:items-center justify-between gap-3 w-full">
+                <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                  <div className="p-3 rounded-2xl bg-slate-900 border border-white/10 shadow-sm shrink-0">
                     {exp.icon}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-lg sm:text-xl font-bold text-white whitespace-nowrap truncate">{exp.title}</h3>
-                    <p className="text-xs font-medium text-slate-400 whitespace-nowrap truncate">{exp.subtitle}</p>
+                    <h3 className="text-base sm:text-lg font-bold text-white leading-tight">{exp.title}</h3>
+                    <p className="text-xs font-medium text-slate-400 leading-normal mt-0.5">{exp.subtitle}</p>
                   </div>
                 </div>
                 <span className={`text-xs px-3 py-1 rounded-full border whitespace-nowrap shrink-0 ${exp.badgeBg}`}>
