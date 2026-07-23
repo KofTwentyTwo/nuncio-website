@@ -1,19 +1,52 @@
 import React from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { CheckCircle2, ArrowRight, Sparkles, Monitor, Code, Lock, Database, RefreshCw } from "lucide-react";
+import { CheckCircle2, ArrowRight, Sparkles, Monitor, Code, Lock, Database, RefreshCw, Mail, Calendar, Shield } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Nuncio Feature Matrix — Full Structured Capability Directory",
-  description: "Comprehensive scannable table of all Nuncio capabilities: GUI, TUI, CLI, MCP AI, NSQL filter engine, AES-256-GCM encryption, database self-healing, and auto-updater.",
+  title: "Nuncio Feature Matrix — Full Capability Directory",
+  description: "Comprehensive scannable table of all Nuncio capabilities: Core Email Engine, CalDAV/CardDAV Calendar, NSQL Automation, Four Presentation Shells, MCP AI, and Security.",
 };
 
 export default function FeaturesPage() {
   const featureTables = [
     {
-      category: "Four Great Interfaces (100% Feature Parity)",
-      icon: <Monitor className="w-5 h-5 text-purple-400" />,
+      category: "Core Email Engine & Inbox Power Tools",
+      icon: <Mail className="w-5 h-5 text-blue-400" />,
+      rows: [
+        { feature: "Multi-Account Inbox Aggregation", scope: "Mail Engine", benefit: "Unify unlimited IMAP/SMTP, Google Workspace, and JMAP push accounts into a single local SQLite inbox." },
+        { feature: "Microsecond SQLite FTS5 Search", scope: "Search Engine", benefit: "Trigram full-text index returning instant search results in <10ms across 100,000+ email messages." },
+        { feature: "Vim Triage Motion Velocity", scope: "TUI & GUI", benefit: "Single-key triage chords (j/k/h/l/g i/e/s/d/#) for processing hundreds of emails per minute." },
+        { feature: "Rich HTML & Inline Image Rendering", scope: "Reader Engine", benefit: "HTML-to-ANSI formatting with inline Kitty, iTerm2, and Sixel graphics protocols; press 'o' for browser view." },
+        { feature: "Universal Portable Data Export", scope: "Export Engine", benefit: "Export full accounts, folders, or NSQL query results to standard RFC 4155 MBOX, EML ZIP archives, or JSON/JSONL." },
+        { feature: "Tracking Beacon Neutralization", scope: "Reader Engine", benefit: "Automatic stripping of 1x1 tracking pixels, web bugs, and remote CSS import triggers before rendering." },
+      ],
+    },
+    {
+      category: "Calendar & Contacts Management",
+      icon: <Calendar className="w-5 h-5 text-purple-400" />,
+      rows: [
+        { feature: "Multi-Provider CalDAV Synchronization", scope: "Calendar Engine", benefit: "Sync Google Calendar, Fastmail, Apple iCloud, and custom CalDAV endpoints seamlessly." },
+        { feature: "Native Event Scheduling & RSVP", scope: "Calendar Engine", benefit: "Accept, decline, or mark tentative on event invitations with automatic ICS payload updates." },
+        { feature: "Google Calendar OAuth 2.0 PKCE", scope: "Auth Engine", benefit: "OAuth 2.0 PKCE loopback authentication with refresh token storage inside native OS Keyrings." },
+        { feature: "CardDAV Address Book Synchronization", scope: "Contacts Engine", benefit: "Sync contacts across providers with real-time recipient autocompletion in all 4 interfaces." },
+      ],
+    },
+    {
+      category: "Server-Side Email Filter Engine (NSQL)",
+      icon: <Code className="w-5 h-5 text-cyan-400" />,
+      rows: [
+        { feature: "Nuncio SQL Parser (sqlparser 0.54)", scope: "Core Engine", benefit: "Compiles human-readable NSQL text into typed Rust AST representations with 6-pass validation." },
+        { feature: "ON ACCOUNT & Domain Matching", scope: "NSQL / Rules", benefit: "Match rules against specific accounts, exact emails, or domain wildcards (*, %, %@company.com)." },
+        { feature: "Pre-Ingestion Background Execution", scope: "nunciod Daemon", benefit: "Executes priority-ordered rules during background IMAP IDLE / JMAP push loops before database persistence." },
+        { feature: "Dry-Run In-Memory Tester", scope: "All 4 Interfaces", benefit: "Test rules against inbox messages in microsecond time without database or network state mutations." },
+        { feature: "HMAC Webhooks & SSRF Defense", scope: "Webhooks", benefit: "Dispatch signed webhooks with HMAC-SHA256, pre-flight DNS IP blacklisting, and redirect blocking." },
+      ],
+    },
+    {
+      category: "Four Presentation Shells (100% Feature Parity)",
+      icon: <Monitor className="w-5 h-5 text-yellow-400" />,
       rows: [
         { feature: "Tauri v2 Native Desktop GUI", scope: "GUI", benefit: "Glassmorphic visual workspace, split-pane resizers, sandboxed HTML viewer, and visual drag-and-drop rule builder." },
         { feature: "Ratatui Terminal TUI", scope: "TUI", benefit: "Vim motions (j/k/h/l/g i/e/s), single-key triage chords, split-view text/HTML previewer, and live log inspector." },
@@ -22,57 +55,24 @@ export default function FeaturesPage() {
       ],
     },
     {
-      category: "Server-Side Email Filter Engine (NSQL)",
-      icon: <Code className="w-5 h-5 text-cyan-400" />,
+      category: "Native Model Context Protocol (MCP) AI Integration",
+      icon: <Sparkles className="w-5 h-5 text-emerald-400" />,
       rows: [
-        { feature: "Nuncio SQL Parser (sqlparser 0.54)", scope: "Core Engine", benefit: "Compiles human-readable NSQL text into typed Rust AST representations with 6-pass validation." },
-        { feature: "ON ACCOUNT Wildcard Matching", scope: "NSQL / Rules", benefit: "Match rules against specific accounts, exact emails, or domain wildcards (*, %, %@company.com)." },
-        { feature: "Pre-Ingestion Execution", scope: "nunciod Daemon", benefit: "Executes priority-ordered rules during background IMAP IDLE / JMAP push loops before database persistence." },
-        { feature: "Dry-Run In-Memory Tester", scope: "All 4 Interfaces", benefit: "Test rules against inbox messages in microsecond time without database or network state mutations." },
-        { feature: "HMAC Webhooks & SSRF Defense", scope: "Webhooks", benefit: "Dispatch signed webhooks with HMAC-SHA256, pre-flight DNS IP blacklisting, and redirect blocking." },
+        { feature: "Claude Desktop & LLM Integration", scope: "MCP Protocol", benefit: "Connect Claude Desktop, Antigravity, and Cursor directly to local mail and calendar databases over stdio." },
+        { feature: "McpAgentPolicy RBAC Gateway", scope: "MCP Security", benefit: "Enforce fine-grained capability flags (read_mail, send_mail, read_calendar), folder whitelists, and PII redaction." },
+        { feature: "Automatic PII Redaction", scope: "MCP Enclave", benefit: "Automatic masking of Social Security Numbers, Credit Cards, and private credentials before payloads touch LLMs." },
       ],
     },
     {
-      category: "Sovereign Privacy & Security Enclave",
-      icon: <Lock className="w-5 h-5 text-emerald-400" />,
+      category: "Sovereign Privacy, Security & Storage",
+      icon: <Lock className="w-5 h-5 text-red-400" />,
       rows: [
         { feature: "AES-256-GCM Encryption at Rest", scope: "Storage", benefit: "Column-level encryption for email bodies and subject lines using PayloadCipher." },
         { feature: "age X25519 Attachment Ciphers", scope: "Storage", benefit: "Large binary attachment streams encrypted with age ciphers and 64KB chunk authentication." },
         { feature: "Memory Page Zeroing on Drop", scope: "Core Vault", benefit: "Keyring secrets and passphrase buffers locked in memory and zeroed out on drop via ZeroizeOnDrop." },
         { feature: "Strict HTML Email Sandboxing", scope: "GUI / TUI", benefit: "<iframe sandbox=\"allow-same-origin\"> with CSP default-src 'none' disabling JS execution." },
-        { feature: "Tracking Pixel Neutralization", scope: "Reader Engine", benefit: "Automatic stripping of 1x1 tracking beacons, web bugs, and remote image triggers." },
-        { feature: "MCP Agent RBAC & Data Filtering", scope: "MCP Protocol", benefit: "McpAgentPolicy enforcing capability flags, account/folder access lists, and automatic SSN/credit card redaction." },
-      ],
-    },
-    {
-      category: "Universal Portable Data Export & Automated Backups",
-      icon: <Database className="w-5 h-5 text-emerald-400" />,
-      rows: [
-        { feature: "RFC 4155 MBOX & EML ZIP Archives", scope: "Core Export Engine", benefit: "Export full accounts, folders, or NSQL result sets to standard portable MBOX files or compressed EML ZIP archives with manifest.json." },
-        { feature: "Structured JSON & JSONL Streams", scope: "Export Formats", benefit: "Export structured JSON or line-delimited JSONL data streams optimized for LLM data pipelines and custom analytics." },
-        { feature: "Headless POSIX CLI Backup Jobs", scope: "CLI / Automation", benefit: "Automate periodic account backups via cron jobs using 'nuncio mail export --format mbox --output ~/backups/full_inbox.mbox'." },
-        { feature: "Multi-Shell Data Export Parity", scope: "GUI / TUI / MCP", benefit: "Instant export modal in Desktop GUI, [e] key chord in Ratatui TUI, POSIX CLI subcommands, and nuncio_export_data tool in MCP AI server." },
-      ],
-    },
-    {
-      category: "Self-Healing Storage & Auto-Update Engine",
-      icon: <Database className="w-5 h-5 text-blue-400" />,
-      rows: [
-        { feature: "Startup Integrity Check", scope: "DatabaseEngine", benefit: "PRAGMA quick_check(10) runs automatically on startup to catch hardware crashes and corruptions." },
-        { feature: "Corrupted Backup Isolation", scope: "Recovery Engine", benefit: "Isolates damaged .db, .db-wal, and .db-shm files into timestamped backup folders automatically." },
-        { feature: "Stream Salvage Recovery Engine", scope: "Recovery Engine", benefit: "Extracts valid account, rule, and message records into a fresh SQLite file automatically." },
-        { feature: "Self-Healing Sync Orchestrator", scope: "nunciod Daemon", benefit: "Triggers background remote IMAP/JMAP resync to reconstruct local email caches." },
-        { feature: "GitHub Releases Auto-Updater", scope: "All Executables", benefit: "Periodic 24h background update check, SHA-256 checksum verification, and atomic binary swapping." },
-      ],
-    },
-    {
-      category: "Protocols & Synchronization",
-      icon: <RefreshCw className="w-5 h-5 text-indigo-400" />,
-      rows: [
-        { feature: "Async IMAP IDLE & Lettre SMTP", scope: "Mail Engine", benefit: "Push email synchronization over TLS 993 / 587 / 465." },
-        { feature: "Wiremock-Verified JMAP Push", scope: "Mail Engine", benefit: "Modern JSON-based email push protocol with wiremock test coverage." },
-        { feature: "CalDAV & Google Calendar Sync", scope: "Calendar Engine", benefit: "Calendar event management with RRULE support and Google Calendar REST API integration." },
-        { feature: "SQLite FTS5 Full-Text Search", scope: "Search Engine", benefit: "Trigram full-text index returning search results in <10ms across 100,000+ messages." },
+        { feature: "WORM Audit Hash Chains", scope: "Compliance", benefit: "Immutable block-linked audit ledger (H_n = HMAC(K, H_n-1 || data)) preventing retroactive tampering." },
+        { feature: "Self-Healing Storage Engine", scope: "Recovery", benefit: "PRAGMA quick_check(10) integrity checks, CorruptedBackupManager isolation, and SqliteRecoveryEngine salvage." },
       ],
     },
   ];
@@ -93,7 +93,7 @@ export default function FeaturesPage() {
           </h1>
 
           <p className="text-slate-300 text-lg sm:text-xl font-normal max-w-2xl mx-auto">
-            A scannable, structured breakdown of every capability built into Nuncio.
+            A scannable, structured breakdown of every capability built into Nuncio — starting with Core Email and Calendar power tools.
           </p>
         </div>
 
