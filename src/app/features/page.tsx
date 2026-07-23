@@ -16,6 +16,7 @@ export default function FeaturesPage() {
       icon: <Mail className="w-5 h-5 text-blue-400" />,
       rows: [
         { feature: "Multi-Account Inbox Aggregation", scope: "Mail Engine", benefit: "Unify unlimited IMAP/SMTP, Google Workspace, and JMAP push accounts into a single local SQLite inbox." },
+        { feature: "Native JMAP Protocol Engine (RFC 8620 / 8621)", scope: "JMAP Driver", benefit: "Ultra-low latency session discovery (.well-known/jmap), JSON-RPC method batching, and differential update sync." },
         { feature: "Microsecond SQLite FTS5 Search", scope: "Search Engine", benefit: "Trigram full-text index returning instant search results in <10ms across 100,000+ email messages." },
         { feature: "Vim Triage Motion Velocity", scope: "TUI & GUI", benefit: "Single-key triage chords (j/k/h/l/g i/e/s/d/#) for processing hundreds of emails per minute." },
         { feature: "Rich HTML & Inline Image Rendering", scope: "Reader Engine", benefit: "HTML-to-ANSI formatting with inline Kitty, iTerm2, and Sixel graphics protocols; press 'o' for browser view." },
@@ -27,6 +28,7 @@ export default function FeaturesPage() {
       category: "Calendar & Contacts Management",
       icon: <Calendar className="w-5 h-5 text-purple-400" />,
       rows: [
+        { feature: "Natural Language Event Booking NLP Parser", scope: "Calendar NLP", benefit: "Create calendar events using human text ('Coffee with Bob next Tuesday at 2pm for 45 minutes')." },
         { feature: "Sovereign Contacts Engine (nuncio-contacts)", scope: "Contacts Engine", benefit: "Dedicated local SQLite contacts database with instant trigram FTS5 search index and vCard 4.0 generator." },
         { feature: "Multi-Provider CardDAV Synchronization", scope: "CardDAV Protocol", benefit: "Sync Google Contacts, Apple iCloud, Fastmail, and Nextcloud address books seamlessly over CardDAV." },
         { feature: "Automated Email Contact Harvesting", scope: "Mail / Contacts", benefit: "Automatically extracts name/email pairs from incoming and sent messages, updating interaction metrics." },
@@ -42,6 +44,7 @@ export default function FeaturesPage() {
         { feature: "ON ACCOUNT & Domain Matching", scope: "NSQL / Rules", benefit: "Match rules against specific accounts, exact emails, or domain wildcards (*, %, %@company.com)." },
         { feature: "Pre-Ingestion Background Execution", scope: "nunciod Daemon", benefit: "Executes priority-ordered rules during background IMAP IDLE / JMAP push loops before database persistence." },
         { feature: "Dry-Run In-Memory Tester", scope: "All 4 Interfaces", benefit: "Test rules against inbox messages in microsecond time without database or network state mutations." },
+        {feature: "WASM & QuickJS Sandboxed Plugin Engine", scope: "Plugin Runtime", benefit: "Execute custom WASI and QuickJS automation scripts with declared manifest security capabilities." },
         { feature: "HMAC Webhooks & SSRF Defense", scope: "Webhooks", benefit: "Dispatch signed webhooks with HMAC-SHA256, pre-flight DNS IP blacklisting, and redirect blocking." },
       ],
     },
@@ -59,6 +62,7 @@ export default function FeaturesPage() {
       category: "Native Model Context Protocol (MCP) AI Integration",
       icon: <Sparkles className="w-5 h-5 text-emerald-400" />,
       rows: [
+        { feature: "Autonomous Local LLM Summarization & Triage", scope: "Local AI Engine", benefit: "Offline Ollama/llama.cpp thread 3-bullet executive recaps, action item extraction, and smart replies." },
         { feature: "Claude Desktop & LLM Integration", scope: "MCP Protocol", benefit: "Connect Claude Desktop, Antigravity, and Cursor directly to local mail and calendar databases over stdio." },
         { feature: "McpAgentPolicy RBAC Gateway", scope: "MCP Security", benefit: "Enforce fine-grained capability flags (read_mail, send_mail, read_calendar), folder whitelists, and PII redaction." },
         { feature: "Automatic PII Redaction", scope: "MCP Enclave", benefit: "Automatic masking of Social Security Numbers, Credit Cards, and private credentials before payloads touch LLMs." },
@@ -68,6 +72,7 @@ export default function FeaturesPage() {
       category: "Sovereign Privacy, Security & Storage",
       icon: <Lock className="w-5 h-5 text-red-400" />,
       rows: [
+        { feature: "OpenPGP (RFC 3156) & S/MIME (RFC 8551) E2EE", scope: "E2EE Engine", benefit: "Native message signing, verification, encryption, and visual security badge rendering across all 4 UIs." },
         { feature: "AES-256-GCM Encryption at Rest", scope: "Storage", benefit: "Column-level encryption for email bodies and subject lines using PayloadCipher." },
         { feature: "age X25519 Attachment Ciphers", scope: "Storage", benefit: "Large binary attachment streams encrypted with age ciphers and 64KB chunk authentication." },
         { feature: "Memory Page Zeroing on Drop", scope: "Core Vault", benefit: "Keyring secrets and passphrase buffers locked in memory and zeroed out on drop via ZeroizeOnDrop." },
