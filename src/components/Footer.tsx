@@ -54,8 +54,7 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Open Source &amp; Legal</h4>
             <ul className="space-y-2 text-xs">
-              <li><a href="https://github.com/KofTwentyTwo/nuncio" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub Repository (Main App)</a></li>
-              <li><a href="https://github.com/KofTwentyTwo/nuncio-website" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub Repository (Website)</a></li>
+              <li><a href="https://github.com/KofTwentyTwo/nuncio" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub Repository</a></li>
               <li><a href="https://github.com/KofTwentyTwo" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">KofTwentyTwo GitHub Profile</a></li>
               <li><a href="https://kof22.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">James Maes Official Site (kof22.com)</a></li>
               <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
