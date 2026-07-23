@@ -1,13 +1,27 @@
 version: 2
 updates:
+  # 1. Next.js Web Application (npm)
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+      time: "04:00"
     open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "website"
+    commit-message:
+      prefix: "deps(npm)"
 
+  # 2. GitHub Actions Workflows
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
     open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "actions"
+    commit-message:
+      prefix: "deps(actions)"
