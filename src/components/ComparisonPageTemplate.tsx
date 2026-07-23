@@ -173,7 +173,7 @@ export function ComparisonPageTemplate({
               className="apple-button-primary px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
-              Download Nuncio v1.0.0
+              Download Latest Release
             </a>
             <Link
               href="/features"

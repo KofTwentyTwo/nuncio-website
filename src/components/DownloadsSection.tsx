@@ -28,7 +28,7 @@ export function DownloadsSection() {
         <div className="text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold">
             <Download className="w-3.5 h-3.5" />
-            <span>Install &amp; Download Nuncio v1.0.0</span>
+            <span>Install &amp; Download Nuncio (Latest Release)</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white">
             Available for <span className="gradient-text">macOS, Windows &amp; Linux</span>
@@ -50,11 +50,11 @@ export function DownloadsSection() {
               <p className="text-xs text-gray-300">Supports Apple Silicon (M1/M2/M3/M4) &amp; Intel x64.</p>
             </div>
             <a
-              href="https://github.com/KofTwentyTwo/nuncio/releases/latest/download/Nuncio-v1.0.0-universal.dmg"
+              href="https://github.com/KofTwentyTwo/nuncio/releases/latest"
               className="w-full py-3 rounded-xl gradient-bg font-bold text-white text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4" />
-              Download .DMG Disk Image
+              Download macOS Release (.DMG)
             </a>
           </div>
 
@@ -68,11 +68,11 @@ export function DownloadsSection() {
               <p className="text-xs text-gray-300">Native WiX Installer (.msi) with Windows Keyring support.</p>
             </div>
             <a
-              href="https://github.com/KofTwentyTwo/nuncio/releases/latest/download/Nuncio-v1.0.0-x64-setup.msi"
+              href="https://github.com/KofTwentyTwo/nuncio/releases/latest"
               className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 font-bold text-white text-xs hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4 text-cyan-400" />
-              Download .MSI Installer
+              Download Windows Release (.MSI)
             </a>
           </div>
 
@@ -86,11 +86,11 @@ export function DownloadsSection() {
               <p className="text-xs text-gray-300">Universal AppImage &amp; Tarball for Ubuntu, Fedora, Arch.</p>
             </div>
             <a
-              href="https://github.com/KofTwentyTwo/nuncio/releases/latest/download/Nuncio-v1.0.0-x86_64.AppImage"
+              href="https://github.com/KofTwentyTwo/nuncio/releases/latest"
               className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 font-bold text-white text-xs hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4 text-purple-400" />
-              Download .AppImage
+              Download Linux Release (.AppImage)
             </a>
           </div>
         </div>

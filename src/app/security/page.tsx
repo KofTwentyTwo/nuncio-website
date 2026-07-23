@@ -315,7 +315,7 @@ nuncio audit list --limit 50 --json
             href="/#downloads"
             className="apple-button-primary px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2"
           >
-            Download Nuncio v1.0.0
+            Download Latest Release
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

@@ -56,7 +56,7 @@ export function Header() {
               className="apple-button-primary px-4 py-1.5 text-xs font-semibold flex items-center gap-1.5 shadow-sm"
             >
               <Download className="w-3.5 h-3.5" />
-              Download Nuncio v1.0.0
+              Download Latest Release
             </a>
           </div>
 
@@ -105,7 +105,7 @@ export function Header() {
               className="w-full apple-button-primary py-2.5 text-xs font-semibold flex items-center justify-center gap-1.5"
             >
               <Download className="w-3.5 h-3.5" />
-              Download Nuncio v1.0.0
+              Download Latest Release
             </a>
           </div>
         </div>
