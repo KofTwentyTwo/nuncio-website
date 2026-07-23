@@ -10,10 +10,10 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Product Headline Block */}
         <div className="text-center space-y-6 max-w-4xl mx-auto">
-          {/* Subtle Announcement Pill */}
+          {/* Announcement Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold tracking-tight shadow-lg">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>Nuncio 1.0 — Free Open Source Sovereign Suite</span>
+            <span>Nuncio 1.0 — Open Source Sovereign Suite</span>
           </div>
 
           {/* Main Hero Headline */}
@@ -24,7 +24,7 @@ export function Hero() {
 
           {/* Subtitle */}
           <p className="text-slate-300 text-lg sm:text-xl font-normal max-w-2xl mx-auto leading-relaxed">
-            Four extraordinary ways to work. Powered by a single high-speed native engine that runs 100% locally on your machine.
+            Four extraordinary ways to work. Powered by a single high-speed native engine running 100% locally on your machine.
           </p>
 
           {/* Action Buttons */}
@@ -34,7 +34,7 @@ export function Hero() {
               className="apple-button-primary px-6 py-3 text-sm font-semibold flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
-              Download Nuncio Free
+              Download Nuncio v1.0.0
             </a>
             <a
               href="#experiences"

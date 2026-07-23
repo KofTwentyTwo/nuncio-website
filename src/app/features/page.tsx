@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { CheckCircle2, ArrowRight, Sparkles, Monitor, Code, Lock, Database, RefreshCw, Shield, Terminal } from "lucide-react";
+import { CheckCircle2, ArrowRight, Sparkles, Monitor, Code, Lock, Database, RefreshCw } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -91,7 +91,6 @@ export default function FeaturesPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {featureTables.map((section, sIdx) => (
             <div key={sIdx} className="glass-panel rounded-2xl border border-white/10 overflow-hidden shadow-2xl space-y-0">
-              {/* Table Header */}
               <div className="flex items-center gap-3 p-5 bg-slate-900/90 border-b border-white/10">
                 <div className="p-2 rounded-xl bg-slate-800 border border-white/10">
                   {section.icon}
@@ -99,7 +98,6 @@ export default function FeaturesPage() {
                 <h2 className="text-xl font-bold text-white tracking-tight">{section.category}</h2>
               </div>
 
-              {/* Responsive Table */}
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs sm:text-sm border-collapse">
                   <thead>

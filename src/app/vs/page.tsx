@@ -84,7 +84,7 @@ export default function ComparisonsHubPage() {
             href="/#downloads"
             className="apple-button-primary px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2"
           >
-            Download Nuncio v1.0.0 Free
+            Download Nuncio v1.0.0
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
