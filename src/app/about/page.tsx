@@ -22,13 +22,33 @@ import {
   Globe,
   ExternalLink,
   Github,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Why Nuncio Exists — Manifesto & Verified Open-Source Credits",
-  description: "Learn why Nuncio exists: sovereign email rebuilt for today. Verified credits, GitHub repository links, and author attributions for third-party open-source libraries.",
+  title: "Why Nuncio Exists — Manifesto & Verified Maintainer Credits",
+  description: "Learn why Nuncio exists: sovereign email rebuilt for today. Verified credits with direct GitHub profile links for authors and open-source maintainers.",
 };
+
+interface Maintainer {
+  name: string;
+  url: string;
+}
+
+interface CreditItem {
+  name: string;
+  githubUrl?: string;
+  websiteUrl?: string;
+  maintainers: Maintainer[];
+  role: string;
+}
+
+interface CreditCategory {
+  category: string;
+  icon: React.ReactNode;
+  crates: CreditItem[];
+}
 
 export default function AboutPage() {
   const manifestoPillars = [
@@ -64,7 +84,7 @@ export default function AboutPage() {
     },
   ];
 
-  const thirdPartyCredits = [
+  const thirdPartyCredits: CreditCategory[] = [
     {
       category: "Rust Core Systems & Data Storage",
       icon: <Database className="w-5 h-5 text-blue-400" />,
@@ -72,44 +92,46 @@ export default function AboutPage() {
         {
           name: "sqlx",
           githubUrl: "https://github.com/launchbadge/sqlx",
-          maintainer: "Launchbadge (Ryan Lecompte, Austin Bonander & Community)",
+          maintainers: [
+            { name: "Ryan Lecompte (@launchbadge)", url: "https://github.com/rachel-la" },
+            { name: "Austin Bonander (@abonander)", url: "https://github.com/abonander" },
+          ],
           role: "Async, pure-Rust SQL engine powering type-safe SQLite database operations and migrations.",
         },
         {
           name: "sqlparser-rs",
           githubUrl: "https://github.com/apache/datafusion-sqlparser-rs",
-          maintainer: "Andy Grove & Apache DataFusion Maintainers",
+          maintainers: [
+            { name: "Andy Grove (@andygrove)", url: "https://github.com/andygrove" },
+            { name: "Apache DataFusion Team", url: "https://github.com/apache/datafusion-sqlparser-rs" },
+          ],
           role: "Pure Rust SQL lexer and parser engine powering the Nuncio SQL Filter Language (NSQL) compiler.",
         },
         {
           name: "tokio",
           githubUrl: "https://github.com/tokio-rs/tokio",
-          maintainer: "Carl Lerche & The Tokio Team",
+          maintainers: [
+            { name: "Carl Lerche (@carllerche)", url: "https://github.com/carllerche" },
+            { name: "Tokio Team", url: "https://github.com/tokio-rs" },
+          ],
           role: "Event-driven asynchronous Rust runtime driving background IMAP IDLE, JMAP push, and IPC streaming.",
         },
         {
-          name: "serde",
+          name: "serde & serde_json",
           githubUrl: "https://github.com/serde-rs/serde",
-          maintainer: "David Tolnay (dtolnay) & Erick Tryzelaar",
+          maintainers: [
+            { name: "David Tolnay (@dtolnay)", url: "https://github.com/dtolnay" },
+            { name: "Erick Tryzelaar (@erickt)", url: "https://github.com/erickt" },
+          ],
           role: "Generic serialization/deserialization framework powering data models across all crates.",
         },
         {
-          name: "serde_json",
-          githubUrl: "https://github.com/serde-rs/json",
-          maintainer: "David Tolnay (dtolnay)",
-          role: "Fast, zero-copy JSON parsing across daemon length-prefixed IPC framing.",
-        },
-        {
-          name: "thiserror",
+          name: "thiserror & anyhow",
           githubUrl: "https://github.com/dtolnay/thiserror",
-          maintainer: "David Tolnay (dtolnay)",
-          role: "Convenient derive macro for standard error types in production libraries.",
-        },
-        {
-          name: "anyhow",
-          githubUrl: "https://github.com/dtolnay/anyhow",
-          maintainer: "David Tolnay (dtolnay)",
-          role: "Flexible error handling utility for application binaries.",
+          maintainers: [
+            { name: "David Tolnay (@dtolnay)", url: "https://github.com/dtolnay" },
+          ],
+          role: "Ergonomic, type-safe Rust error handling and domain error mappings.",
         },
       ],
     },
@@ -120,25 +142,34 @@ export default function AboutPage() {
         {
           name: "async-imap",
           githubUrl: "https://github.com/jonatanil/async-imap",
-          maintainer: "Jonatan Nilsson & Rust IMAP Contributors",
+          maintainers: [
+            { name: "Jonatan Nilsson (@jonatanil)", url: "https://github.com/jonatanil" },
+          ],
           role: "Asynchronous IMAP client library driving real-time TLS 993 inbox synchronization.",
         },
         {
           name: "lettre",
           githubUrl: "https://github.com/lettre/lettre",
-          maintainer: "Alexis Yu & The Lettre Team",
+          maintainers: [
+            { name: "Alexis Yu (@alexys)", url: "https://github.com/alexys" },
+            { name: "Lettre Core Team", url: "https://github.com/lettre" },
+          ],
           role: "Modern Rust SMTP email client delivering outbound TLS 587/465 message transport.",
         },
         {
           name: "mail-parser",
           githubUrl: "https://github.com/bostjan/mail-parser",
-          maintainer: "Bostjan Skufca",
+          maintainers: [
+            { name: "Bostjan Skufca (@bostjan)", url: "https://github.com/bostjan" },
+          ],
           role: "High-performance MIME parser for raw RFC 5322 emails, headers, and attachment boundaries.",
         },
         {
           name: "html2text",
           githubUrl: "https://github.com/lukaslueg/html2text",
-          maintainer: "Lukas Lueg",
+          maintainers: [
+            { name: "Lukas Lueg (@lukaslueg)", url: "https://github.com/lukaslueg" },
+          ],
           role: "Converting HTML email markup to clean, un-tracked ANSI terminal text and Markdown.",
         },
       ],
@@ -150,38 +181,52 @@ export default function AboutPage() {
         {
           name: "ring",
           githubUrl: "https://github.com/briansmith/ring",
-          maintainer: "Brian Smith",
+          maintainers: [
+            { name: "Brian Smith (@briansmith)", url: "https://github.com/briansmith" },
+          ],
           role: "Safe, fast, small crypto primitives in Rust and C for cryptographic operations.",
         },
         {
           name: "aes-gcm",
           githubUrl: "https://github.com/RustCrypto/AEADs",
-          maintainer: "The RustCrypto Team",
+          maintainers: [
+            { name: "RustCrypto Team (@RustCrypto)", url: "https://github.com/RustCrypto" },
+          ],
           role: "Pure Rust AES-GCM authenticated encryption powering column-level PayloadCipher.",
         },
         {
           name: "age & rage",
           githubUrl: "https://github.com/str4d/rage",
           websiteUrl: "https://filippo.io/age",
-          maintainer: "Filippo Valsorda & Jack Grigg (str4d)",
+          maintainers: [
+            { name: "Filippo Valsorda (@FiloSottile)", url: "https://github.com/FiloSottile" },
+            { name: "Jack Grigg (@str4d)", url: "https://github.com/str4d" },
+          ],
           role: "Modern X25519 file and stream encryption format powering large binary attachment ciphers.",
         },
         {
           name: "zeroize",
           githubUrl: "https://github.com/RustCrypto/utils/tree/master/zeroize",
-          maintainer: "Tony Arcieri (bascule) & The RustCrypto Team",
+          maintainers: [
+            { name: "Tony Arcieri (@bascule)", url: "https://github.com/bascule" },
+            { name: "RustCrypto Team", url: "https://github.com/RustCrypto" },
+          ],
           role: "Secure memory page zeroing (ZeroizeOnDrop) preventing key material leakages in RAM buffers.",
         },
         {
           name: "keyring-rs",
           githubUrl: "https://github.com/hwchen/keyring-rs",
-          maintainer: "hwchen & Rust Keyring Contributors",
+          maintainers: [
+            { name: "hwchen (@hwchen)", url: "https://github.com/hwchen" },
+          ],
           role: "Native OS credential manager integration (Windows DPAPI, macOS Keychain Access, Linux Secret Service).",
         },
         {
           name: "hmac & sha2",
           githubUrl: "https://github.com/RustCrypto/MACs",
-          maintainer: "The RustCrypto Team",
+          maintainers: [
+            { name: "RustCrypto Team", url: "https://github.com/RustCrypto" },
+          ],
           role: "Cryptographic HMAC-SHA256 hash-chain calculation for WORM audit ledgers.",
         },
       ],
@@ -194,41 +239,58 @@ export default function AboutPage() {
           name: "Tauri v2",
           githubUrl: "https://github.com/tauri-apps/tauri",
           websiteUrl: "https://tauri.app",
-          maintainer: "Daniel Thompson-Yvetot, Lucas Nogueira & The Tauri Team",
+          maintainers: [
+            { name: "Daniel Thompson-Yvetot (@lucasferns)", url: "https://github.com/tauri-apps" },
+            { name: "Lucas Nogueira", url: "https://github.com/lucasferns" },
+          ],
           role: "Lightweight, secure desktop application framework driving the Glassmorphic GUI.",
         },
         {
           name: "ratatui",
           githubUrl: "https://github.com/ratatui/ratatui",
           websiteUrl: "https://ratatui.rs",
-          maintainer: "Orhun Parmaksız & The Ratatui Community",
+          maintainers: [
+            { name: "Orhun Parmaksız (@orhun)", url: "https://github.com/orhun" },
+            { name: "Ratatui Community", url: "https://github.com/ratatui" },
+          ],
           role: "Terminal user interface framework powering the Vim-fueled Ratatui TUI.",
         },
         {
           name: "clap",
           githubUrl: "https://github.com/clap-rs/clap",
-          maintainer: "Ed Page (epage), Kevin K. & The Clap Team",
+          maintainers: [
+            { name: "Ed Page (@epage)", url: "https://github.com/epage" },
+            { name: "Kevin K.", url: "https://github.com/clap-rs" },
+          ],
           role: "Declarative command-line argument parser powering the POSIX scriptable CLI (nuncio-cli).",
         },
         {
           name: "Next.js",
           githubUrl: "https://github.com/vercel/next.js",
           websiteUrl: "https://nextjs.org",
-          maintainer: "Guillermo Rauch & The Vercel Team",
+          maintainers: [
+            { name: "Guillermo Rauch (@rauchg)", url: "https://github.com/rauchg" },
+            { name: "Vercel Team", url: "https://github.com/vercel" },
+          ],
           role: "React web framework powering nuncio-website with static site generation and Turbopack.",
         },
         {
           name: "TailwindCSS",
           githubUrl: "https://github.com/tailwindlabs/tailwindcss",
           websiteUrl: "https://tailwindcss.com",
-          maintainer: "Adam Wathan & Tailwind Labs Team",
+          maintainers: [
+            { name: "Adam Wathan (@adamwathan)", url: "https://github.com/adamwathan" },
+            { name: "Tailwind Labs Team", url: "https://github.com/tailwindlabs" },
+          ],
           role: "Utility-first CSS engine powering responsive modern styling across website components.",
         },
         {
           name: "lucide-react",
           githubUrl: "https://github.com/lucide-icons/lucide",
           websiteUrl: "https://lucide.dev",
-          maintainer: "Lucide Open Source Community",
+          maintainers: [
+            { name: "Lucide Open Source Community", url: "https://github.com/lucide-icons" },
+          ],
           role: "Clean, modern open-source icon suite across Next.js and Tauri interfaces.",
         },
       ],
@@ -241,19 +303,26 @@ export default function AboutPage() {
           name: "Model Context Protocol (MCP)",
           githubUrl: "https://github.com/modelcontextprotocol",
           websiteUrl: "https://modelcontextprotocol.io",
-          maintainer: "Dario Amodei, Anthropic & Open MCP Working Group",
+          maintainers: [
+            { name: "Dario Amodei & Anthropic", url: "https://github.com/modelcontextprotocol" },
+            { name: "Open MCP Working Group", url: "https://modelcontextprotocol.io" },
+          ],
           role: "Open stdio JSON-RPC 2.0 standard connecting AI agents (Claude, Antigravity, Cursor) directly to Nuncio tools.",
         },
         {
           name: "RFC 4155 MBOX & RFC 5322 MIME",
           githubUrl: "https://datatracker.ietf.org/doc/html/rfc4155",
-          maintainer: "IETF Email Standards Working Group",
+          maintainers: [
+            { name: "IETF Email Standards Working Group", url: "https://www.ietf.org" },
+          ],
           role: "Universal open standards for portable email archiving, export, and transport.",
         },
         {
           name: "RFC 7636 PKCE OAuth 2.0",
           githubUrl: "https://datatracker.ietf.org/doc/html/rfc7636",
-          maintainer: "IETF OAuth Working Group",
+          maintainers: [
+            { name: "IETF OAuth Working Group", url: "https://www.ietf.org" },
+          ],
           role: "Proof Key for Code Exchange protocol driving secure credential-free Google Workspace authentication.",
         },
       ],
@@ -289,7 +358,7 @@ export default function AboutPage() {
                 For over a decade, personal and enterprise communication has been fractured across paid cloud subscriptions, closed proprietary formats, locked-away data silos, and compromised user experiences depending on whether you&apos;re on a Mac, Windows PC, Linux terminal, or mobile device.
               </p>
               <p className="text-slate-300 text-base leading-relaxed">
-                Nuncio was built to eliminate those trade-offs. It gives developers, power users, and AI agents total speed, complete sovereign data ownership, zero-trust encryption, and sane AI integration.
+                Nuncio was built to eliminate those trade-offs. Created by <a href="https://kof22.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 font-semibold hover:underline">James Maes (KofTwentyTwo)</a>, Nuncio gives developers, power users, and AI agents total speed, complete sovereign data ownership, zero-trust encryption, and sane AI integration.
               </p>
             </div>
 
@@ -310,16 +379,16 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Full Open-Source & Third-Party Library Credits Section with Links & Maintainer Names */}
+        {/* Full Open-Source & Third-Party Library Credits Section with Clickable Author Links */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center space-y-3 max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold">
               <Heart className="w-3.5 h-3.5 fill-current" />
               <span>Standing on the Shoulders of Giants</span>
             </div>
-            <h2 className="text-3xl font-extrabold text-white">Open-Source Ecosystem &amp; Maintainer Credits</h2>
+            <h2 className="text-3xl font-extrabold text-white">Open-Source Ecosystem &amp; Author Credits</h2>
             <p className="text-slate-300 text-sm">
-              Nuncio is made possible by the incredible open-source Rust, Web, Security, and Protocol communities. We extend our deepest gratitude to the authors and maintainers of these projects.
+              Nuncio is made possible by the incredible open-source Rust, Web, Security, and Protocol communities. We extend our deepest gratitude to the authors and maintainers of these projects. Click any author or repository below to visit their official profiles.
             </p>
           </div>
 
@@ -335,8 +404,8 @@ export default function AboutPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {cred.crates.map((c, rIdx) => (
-                    <div key={rIdx} className="p-4.5 rounded-xl bg-slate-900/80 border border-white/5 space-y-2 flex flex-col justify-between hover:border-white/15 transition-all">
-                      <div className="space-y-1.5">
+                    <div key={rIdx} className="p-4.5 rounded-xl bg-slate-900/80 border border-white/5 space-y-2.5 flex flex-col justify-between hover:border-white/15 transition-all">
+                      <div className="space-y-2">
                         <div className="flex items-center justify-between gap-2">
                           <span className="font-mono font-bold text-sm text-cyan-300">{c.name}</span>
                           <div className="flex items-center gap-2 text-xs font-mono">
@@ -345,10 +414,10 @@ export default function AboutPage() {
                                 href={c.githubUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800 border border-white/10 transition-colors"
+                                className="inline-flex items-center gap-1 text-slate-300 hover:text-white px-2 py-0.5 rounded bg-slate-800 border border-white/10 transition-colors"
                               >
-                                <Github className="w-3 h-3" />
-                                <span>GitHub</span>
+                                <Github className="w-3 h-3 text-slate-400" />
+                                <span>Repository</span>
                               </a>
                             )}
                             {c.websiteUrl && (
@@ -365,10 +434,28 @@ export default function AboutPage() {
                           </div>
                         </div>
 
-                        <span className="text-[11px] text-slate-400 font-medium block">
-                          Authors &amp; Maintainers: <strong className="text-slate-200">{c.maintainer}</strong>
-                        </span>
-                        <p className="text-slate-300 text-xs leading-relaxed pt-0.5">{c.role}</p>
+                        {/* Maintainers List with Direct Hyperlinks */}
+                        <div className="space-y-1 pt-1">
+                          <span className="text-[11px] text-slate-400 font-medium block">
+                            Authors &amp; Maintainers:
+                          </span>
+                          <div className="flex flex-wrap items-center gap-2">
+                            {c.maintainers.map((m, mIdx) => (
+                              <a
+                                key={mIdx}
+                                href={m.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 font-semibold bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-md transition-colors"
+                              >
+                                <User className="w-3 h-3 text-emerald-400" />
+                                <span>{m.name}</span>
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+
+                        <p className="text-slate-300 text-xs leading-relaxed pt-1">{c.role}</p>
                       </div>
                     </div>
                   ))}
