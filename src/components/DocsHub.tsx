@@ -227,6 +227,51 @@ nuncio account add --provider google --email user@company.com
       ),
     },
     {
+      id: "export-backups",
+      category: "Maintenance",
+      title: "Universal Portable Data Export & Backups",
+      icon: <Terminal className="w-4 h-4 text-emerald-400" />,
+      content: (
+        <div className="space-y-6">
+          <h3 className="text-xl font-bold text-white flex items-center gap-2">
+            <Terminal className="w-5 h-5 text-emerald-400" />
+            Universal Data Export &amp; Automated CLI Backups
+          </h3>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Nuncio empowers you to perform full backups or exports of all your emails, accounts, folders, or NSQL result sets into standard portable open formats without vendor lock-in.
+          </p>
+
+          <div className="space-y-4">
+            <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-3">
+              <span className="text-sm font-bold text-emerald-300 font-mono">1. Headless CLI Automated Backup Commands</span>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Run periodic headless backups via POSIX shell scripts, systemd timers, or cron jobs using <code className="text-emerald-400 font-mono">nuncio mail export</code>:
+              </p>
+              <pre className="bg-slate-950 p-3 rounded-lg text-emerald-300 font-mono text-xs overflow-x-auto">
+{`# Export full account inbox to standard RFC 4155 MBOX format
+nuncio mail export --account "alice@kof22.com" --format mbox --output ~/backups/inbox.mbox
+
+# Export specific folder to compressed EML ZIP archive with manifest.json
+nuncio mail export --folder "Archive" --format eml-zip --output ~/backups/archive.zip
+
+# Export NSQL filter query results to line-delimited JSONL for LLM data pipelines
+nuncio mail export --query "sender LIKE '%@kof22.com%'" --format jsonl --output ~/backups/kof22_vip.jsonl`}
+              </pre>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-2">
+              <span className="text-sm font-bold text-cyan-300">2. Supported Portable Export Formats</span>
+              <ul className="text-xs text-slate-300 space-y-1 list-disc list-inside">
+                <li><strong className="text-white">MBOX (`.mbox`)</strong>: Standard RFC 4155 mailbox format compatible with Thunderbird, Apple Mail, and python mailbox library.</li>
+                <li><strong className="text-white">EML ZIP Archive (`.zip`)</strong>: Individual `.eml` MIME files with structured `manifest.json` metadata index.</li>
+                <li><strong className="text-white">JSON (`.json`) &amp; JSONL (`.jsonl`)</strong>: Clean structured payload streams for LLM data pipelines and custom analytics.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
       id: "recovery",
       category: "Maintenance",
       title: "Self-Healing Database Recovery",

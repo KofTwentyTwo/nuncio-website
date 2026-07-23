@@ -45,6 +45,16 @@ export default function FeaturesPage() {
       ],
     },
     {
+      category: "Universal Portable Data Export & Automated Backups",
+      icon: <Database className="w-5 h-5 text-emerald-400" />,
+      rows: [
+        { feature: "RFC 4155 MBOX & EML ZIP Archives", scope: "Core Export Engine", benefit: "Export full accounts, folders, or NSQL result sets to standard portable MBOX files or compressed EML ZIP archives with manifest.json." },
+        { feature: "Structured JSON & JSONL Streams", scope: "Export Formats", benefit: "Export structured JSON or line-delimited JSONL data streams optimized for LLM data pipelines and custom analytics." },
+        { feature: "Headless POSIX CLI Backup Jobs", scope: "CLI / Automation", benefit: "Automate periodic account backups via cron jobs using 'nuncio mail export --format mbox --output ~/backups/full_inbox.mbox'." },
+        { feature: "Multi-Shell Data Export Parity", scope: "GUI / TUI / MCP", benefit: "Instant export modal in Desktop GUI, [e] key chord in Ratatui TUI, POSIX CLI subcommands, and nuncio_export_data tool in MCP AI server." },
+      ],
+    },
+    {
       category: "Self-Healing Storage & Auto-Update Engine",
       icon: <Database className="w-5 h-5 text-blue-400" />,
       rows: [
