@@ -61,16 +61,16 @@ export function ManifestoPillarsSection() {
           {manifestoPillars.map((p, idx) => (
             <div
               key={idx}
-              className="glass-card p-6 rounded-2xl border border-white/10 space-y-4 hover:border-blue-500/40 transition-all flex flex-col justify-between"
+              className="glass-card p-6 sm:p-7 rounded-2xl border border-white/10 flex flex-col justify-between h-full space-y-4 hover:border-blue-500/40 transition-all"
             >
               <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-2xl bg-slate-900 border border-white/10">
+                <div className="flex items-center gap-3 w-full min-w-0">
+                  <div className="p-3 rounded-2xl bg-slate-900 border border-white/10 shrink-0">
                     {p.icon}
                   </div>
-                  <h3 className="text-base font-bold text-white">{p.title}</h3>
+                  <h3 className="text-base font-bold text-white min-w-0 flex-1 leading-tight">{p.title}</h3>
                 </div>
-                <p className="text-slate-300 text-xs leading-relaxed">{p.desc}</p>
+                <p className="text-slate-300 text-xs leading-relaxed min-h-[4rem]">{p.desc}</p>
               </div>
             </div>
           ))}

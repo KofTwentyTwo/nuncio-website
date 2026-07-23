@@ -59,12 +59,12 @@ export function ComparisonPageTemplate({
             {heroHeadline}
           </p>
 
-          <div className="flex items-center justify-center gap-4 text-xs font-mono pt-2">
-            <span className="px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono pt-2">
+            <span className="px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold whitespace-nowrap shrink-0">
               Nuncio: {nuncioPrice}
             </span>
-            <span className="text-slate-500">vs</span>
-            <span className="px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 font-bold">
+            <span className="text-slate-500 shrink-0">vs</span>
+            <span className="px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 font-bold whitespace-nowrap shrink-0">
               {competitorName}: {competitorPrice}
             </span>
           </div>
@@ -74,12 +74,14 @@ export function ComparisonPageTemplate({
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {differentiators.map((diff, idx) => (
-              <div key={idx} className="glass-card p-6 rounded-2xl border border-white/10 space-y-3 hover:border-blue-500/40 transition-colors">
-                <div className="p-3 rounded-xl bg-slate-900 border border-white/10 w-fit">
-                  {diff.icon}
+              <div key={idx} className="glass-card p-6 rounded-2xl border border-white/10 flex flex-col justify-between h-full space-y-3 hover:border-blue-500/40 transition-colors">
+                <div className="space-y-3">
+                  <div className="p-3 rounded-xl bg-slate-900 border border-white/10 w-fit shrink-0">
+                    {diff.icon}
+                  </div>
+                  <h3 className="text-base font-bold text-white min-w-0 leading-tight">{diff.title}</h3>
+                  <p className="text-slate-300 text-xs leading-relaxed min-h-[4rem]">{diff.desc}</p>
                 </div>
-                <h3 className="text-base font-bold text-white">{diff.title}</h3>
-                <p className="text-slate-300 text-xs leading-relaxed">{diff.desc}</p>
               </div>
             ))}
           </div>
