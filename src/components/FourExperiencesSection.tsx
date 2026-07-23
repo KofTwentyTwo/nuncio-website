@@ -9,9 +9,9 @@ export function FourExperiencesSection() {
       id: "gui",
       title: "1. The Glassmorphic Desktop GUI (Featured)",
       subtitle: "Native Desktop Visual Elegance & Micro-Interactions",
-      icon: <Monitor className="w-6 h-6 text-purple-400" />,
-      accentColor: "border-purple-500/50 bg-purple-500/10 hover:border-purple-500/80 shadow-lg shadow-purple-500/10",
-      badgeBg: "bg-purple-500/20 text-purple-300 border-purple-500/40 font-bold",
+      icon: <Monitor className="w-6 h-6 text-purple-600" />,
+      accentColor: "border-purple-200 bg-white hover:border-purple-300 shadow-sm hover:shadow-xl",
+      badgeBg: "bg-purple-50 text-purple-700 border-purple-200 font-bold",
       description:
         "Our flagship primary interface. A premium native desktop app crafted with dark mode glassmorphism, responsive split panes, rich email inspectors, and interactive calendars — backed by native Rust performance.",
       highlights: [
@@ -25,9 +25,9 @@ export function FourExperiencesSection() {
       id: "tui",
       title: "2. The Vim-Fueled Terminal TUI",
       subtitle: "Keyboard-Driven Navigation for Distraction-Free Flow",
-      icon: <Code className="w-6 h-6 text-cyan-400" />,
-      accentColor: "border-cyan-500/30 bg-cyan-500/5 hover:border-cyan-500/60",
-      badgeBg: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+      icon: <Code className="w-6 h-6 text-cyan-600" />,
+      accentColor: "border-cyan-200 bg-white hover:border-cyan-300 shadow-sm hover:shadow-xl",
+      badgeBg: "bg-cyan-50 text-cyan-700 border-cyan-200 font-semibold",
       description:
         "A blazing-fast Ratatui terminal application built for power users who refuse to touch the mouse. Triage hundreds of emails per minute using Vim keybindings, single-key chords, and instant split views.",
       highlights: [
@@ -41,9 +41,9 @@ export function FourExperiencesSection() {
       id: "cli",
       title: "3. The Lightning POSIX CLI",
       subtitle: "Unmatched Command-Line Speed & Automation",
-      icon: <Terminal className="w-6 h-6 text-blue-400" />,
-      accentColor: "border-blue-500/30 bg-blue-500/5 hover:border-blue-500/60",
-      badgeBg: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+      icon: <Terminal className="w-6 h-6 text-blue-600" />,
+      accentColor: "border-blue-200 bg-white hover:border-blue-300 shadow-sm hover:shadow-xl",
+      badgeBg: "bg-blue-50 text-blue-700 border-blue-200 font-semibold",
       description:
         "Designed for developers, sysadmins, and shell enthusiasts who want zero-friction scriptability. Query inboxes, search calendars, and trigger automations directly from your shell with deterministic JSON outputs.",
       highlights: [
