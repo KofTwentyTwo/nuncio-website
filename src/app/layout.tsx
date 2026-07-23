@@ -1,0 +1,53 @@
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Nuncio — Sovereign Mail & Calendar Suite for Power Users and Autonomous Agents",
+  description:
+    "Free open-source high-performance email and calendar suite featuring 100% Multi-Shell Parity across POSIX CLI, Vim Ratatui TUI, Desktop GUI, and Native MCP LLM Agent Interface.",
+  keywords: [
+    "Nuncio",
+    "Email Client",
+    "Calendar App",
+    "Ratatui TUI",
+    "Tauri GUI",
+    "Model Context Protocol",
+    "MCP Server",
+    "NSQL Filter Engine",
+    "IMAP",
+    "JMAP",
+    "CalDAV",
+    "CardDAV",
+    "Open Source",
+  ],
+  authors: [{ name: "KofTwentyTwo", url: "https://kof22.com" }],
+  openGraph: {
+    title: "Nuncio — Sovereign Mail & Calendar Suite",
+    description:
+      "Free open-source high-performance email and calendar suite featuring 100% Multi-Shell Parity across CLI, TUI, GUI, and MCP interfaces.",
+    url: "https://nuncio.mx",
+    siteName: "Nuncio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nuncio — Sovereign Mail & Calendar Suite",
+    description:
+      "Free open-source high-performance email and calendar suite featuring 100% Multi-Shell Parity.",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className="dark">
+      <body className="antialiased min-h-screen flex flex-col bg-[#0B0F19] text-gray-100 selection:bg-blue-500 selection:text-white">
+        {children}
+      </body>
+    </html>
+  );
+}
