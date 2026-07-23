@@ -80,18 +80,19 @@ export function ComparisonSection() {
   ];
 
   return (
-    <section id="compare" className="py-20 bg-[#080C17] border-t border-white/10 relative">
+    <section className="py-20 bg-black border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
-            Competitive Feature Comparison
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-slate-300 text-xs font-medium tracking-tight">
+            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+            <span>Competitive Matrix</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white">
-            How Nuncio Compares to <span className="gradient-text">Other Mail &amp; Calendar Apps</span>
+          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-white">
+            Built for those who demand more.
           </h2>
-          <p className="text-gray-300 text-base sm:text-lg">
-            See why power users, developers, and AI agents choose Nuncio over proprietary cloud subscriptions and legacy mail clients.
+          <p className="text-slate-400 text-base sm:text-lg">
+            See how Nuncio compares against traditional email clients and expensive subscriptions.
           </p>
         </div>
 

@@ -109,15 +109,31 @@ export function ShellInteractivePreview() {
 
   return (
     <div className="w-full max-w-5xl mx-auto rounded-2xl glass-panel p-2 border border-white/10 overflow-hidden shadow-2xl">
+      {/* macOS Window Title Bar */}
+      <div className="flex items-center justify-between px-3 py-2 bg-black/60 border-b border-white/10 rounded-t-xl">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]" />
+          <div className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]" />
+          <div className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]" />
+        </div>
+        <div className="text-[11px] font-medium text-slate-400 font-sans tracking-tight">
+          Nuncio Sovereign Mail &amp; Calendar — Native macOS / Linux / Windows Shell
+        </div>
+        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-medium text-emerald-400">
+          <Activity className="w-3 h-3 animate-pulse" />
+          <span>Daemon Active</span>
+        </div>
+      </div>
+
       {/* Interface Selector Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 p-2 bg-slate-900/90 rounded-xl border border-white/5">
+      <div className="flex flex-wrap items-center justify-between gap-2 p-2 bg-slate-950/80 rounded-b-xl border-b border-white/5">
         <div className="flex flex-wrap items-center gap-1.5">
           <button
             onClick={() => setActiveTab("gui")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all min-h-[44px] ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all min-h-[44px] ${
               activeTab === "gui"
-                ? "bg-purple-600 text-white shadow-lg shadow-purple-500/40 border border-purple-400/50"
-                : "text-gray-400 hover:text-gray-200 hover:bg-slate-800/50"
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/30 border border-blue-400/30"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
             <Monitor className="w-4 h-4 text-purple-300" />
