@@ -1,7 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+export const viewport: Viewport = {
+  themeColor: "#0B0F19",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://nuncio.mx"),
   title: "Nuncio — Sovereign Mail & Calendar Suite for Power Users and Autonomous Agents",
   description:
     "Free open-source high-performance email and calendar suite featuring 100% Multi-Shell Parity across POSIX CLI, Vim Ratatui TUI, Desktop GUI, and Native MCP LLM Agent Interface.",
@@ -21,6 +28,12 @@ export const metadata: Metadata = {
     "Open Source",
   ],
   authors: [{ name: "KofTwentyTwo", url: "https://kof22.com" }],
+  alternates: {
+    canonical: "https://nuncio.mx",
+  },
+  icons: {
+    icon: "/icon.svg",
+  },
   openGraph: {
     title: "Nuncio — Sovereign Mail & Calendar Suite",
     description:
