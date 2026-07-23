@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Terminal, Shield, Cpu, Download, Github, BookOpen, Layers, Menu, X } from "lucide-react";
+import { Terminal, Shield, Cpu, Download, Github, BookOpen, Layers, Menu, X, Sparkles } from "lucide-react";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -23,22 +23,22 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-          <Link href="#features" className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
-            <Layers className="w-4 h-4 text-blue-400" />
-            Multi-Shell
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
+          <Link href="#experiences" className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+            <Sparkles className="w-4 h-4 text-blue-400" />
+            4 Experiences
           </Link>
           <Link href="#nsql" className="hover:text-cyan-400 transition-colors flex items-center gap-1.5">
             <Cpu className="w-4 h-4 text-cyan-400" />
-            NSQL Engine
-          </Link>
-          <Link href="#security" className="hover:text-purple-400 transition-colors flex items-center gap-1.5">
-            <Shield className="w-4 h-4 text-purple-400" />
-            Security &amp; Vault
+            NSQL Rules
           </Link>
           <Link href="#mcp" className="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
             <BookOpen className="w-4 h-4 text-emerald-400" />
-            MCP Agent Hub
+            AI Agent Hub
+          </Link>
+          <Link href="#docs" className="hover:text-purple-400 transition-colors flex items-center gap-1.5">
+            <Shield className="w-4 h-4 text-purple-400" />
+            Docs &amp; Guides
           </Link>
           <Link href="#downloads" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
             <Download className="w-4 h-4 text-amber-400" />
@@ -78,12 +78,12 @@ export function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden bg-slate-950/95 border-b border-white/10 px-4 pt-2 pb-6 space-y-3 font-medium text-sm">
           <Link
-            href="#features"
+            href="#experiences"
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center gap-2 p-2.5 rounded-lg hover:bg-slate-900 text-gray-200"
           >
-            <Layers className="w-4 h-4 text-blue-400" />
-            Multi-Shell Parity
+            <Sparkles className="w-4 h-4 text-blue-400" />
+            Four Great Experiences
           </Link>
           <Link
             href="#nsql"
@@ -91,15 +91,7 @@ export function Header() {
             className="flex items-center gap-2 p-2.5 rounded-lg hover:bg-slate-900 text-gray-200"
           >
             <Cpu className="w-4 h-4 text-cyan-400" />
-            NSQL Engine
-          </Link>
-          <Link
-            href="#security"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 p-2.5 rounded-lg hover:bg-slate-900 text-gray-200"
-          >
-            <Shield className="w-4 h-4 text-purple-400" />
-            Security &amp; Vault
+            NSQL Rules &amp; Webhooks
           </Link>
           <Link
             href="#mcp"
@@ -107,7 +99,15 @@ export function Header() {
             className="flex items-center gap-2 p-2.5 rounded-lg hover:bg-slate-900 text-gray-200"
           >
             <BookOpen className="w-4 h-4 text-emerald-400" />
-            MCP Agent Hub
+            AI Agent Hub (MCP)
+          </Link>
+          <Link
+            href="#docs"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2 p-2.5 rounded-lg hover:bg-slate-900 text-gray-200"
+          >
+            <Shield className="w-4 h-4 text-purple-400" />
+            Documentation &amp; Guides
           </Link>
           <Link
             href="#downloads"
