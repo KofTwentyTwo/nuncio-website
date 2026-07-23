@@ -388,6 +388,15 @@ export function NsqlPlayground() {
           <p className="max-w-3xl mx-auto text-slate-300 text-base sm:text-lg">
             Edit the NSQL query below and run a real in-browser AST evaluation against sample inbox messages with zero mock hardcoding.
           </p>
+          <div className="pt-1">
+            <a
+              href="/docs"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold hover:bg-cyan-500/20 hover:text-white transition-all"
+            >
+              <span>Read Full NSQL Language Specification &amp; Grammar Docs</span>
+              <span className="text-cyan-400">→</span>
+            </a>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
