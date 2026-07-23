@@ -109,9 +109,9 @@ export function FourExperiencesSection() {
                   <div className="p-3 rounded-2xl bg-slate-900 border border-white/10 shadow-sm">
                     {exp.icon}
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">{exp.title}</h3>
-                    <p className="text-xs font-medium text-slate-400">{exp.subtitle}</p>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-white whitespace-nowrap truncate">{exp.title}</h3>
+                    <p className="text-xs font-medium text-slate-400 whitespace-nowrap truncate">{exp.subtitle}</p>
                   </div>
                 </div>
                 <span className={`text-xs px-3 py-1 rounded-full border whitespace-nowrap shrink-0 ${exp.badgeBg}`}>
