@@ -242,6 +242,32 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
           };
         }
         parsedActions.push(`MOVE TO '${folder}'`);
+      } else if (upperAct.includes("COPY TO")) {
+        const folderMatch = act.match(/COPY\s+TO\s+['"]([^'"]+)['"]/i);
+        if (!folderMatch) {
+          return {
+            matched: false,
+            actions: [],
+            timeUs: 30,
+            ramKb: 4,
+            targetAccount,
+            traces: ["Action Validation Failed"],
+            syntaxError: "Syntax Error: COPY TO action requires target folder enclosed in quotes (e.g. COPY TO 'Archive')",
+          };
+        }
+        const folder = folderMatch[1];
+        if (!/^[a-zA-Z0-9_\-\s\/]+$/.test(folder)) {
+          return {
+            matched: false,
+            actions: [],
+            timeUs: 32,
+            ramKb: 4,
+            targetAccount,
+            traces: ["Security Check Failed"],
+            syntaxError: `Validation Error: Invalid target folder name '${folder}'. Folder names must be alphanumeric`,
+          };
+        }
+        parsedActions.push(`COPY TO '${folder}'`);
       } else if (upperAct.includes("CALL WEBHOOK")) {
         const urlMatch = act.match(/CALL\s+WEBHOOK\s+['"]([^'"]+)['"]/i);
         if (!urlMatch) {
@@ -299,7 +325,7 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
           ramKb: 4,
           targetAccount,
           traces: ["Unknown Action Command"],
-          syntaxError: `Syntax Error: Unknown NSQL action '${act}'. Valid actions: MOVE TO, SET read, SET flagged, CALL WEBHOOK, FORWARD TO, DELETE, ARCHIVE`,
+          syntaxError: `Syntax Error: Unknown NSQL action '${act}'. Valid actions: MOVE TO, COPY TO, SET read, SET flagged, CALL WEBHOOK, FORWARD TO, DELETE, ARCHIVE`,
         };
       }
     }
