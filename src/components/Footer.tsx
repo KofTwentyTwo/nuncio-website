@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Terminal, Heart } from "lucide-react";
+import { Terminal } from "lucide-react";
 
 export function Footer() {
   return (
@@ -28,10 +28,11 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Product &amp; Features</h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="/#experiences" className="hover:text-white transition-colors">Four Interfaces</Link></li>
-              <li><Link href="/#nsql" className="hover:text-white transition-colors">NSQL Filter Engine</Link></li>
-              <li><Link href="/#security" className="hover:text-white transition-colors">Privacy &amp; Security Hub</Link></li>
-              <li><Link href="/#mcp" className="hover:text-white transition-colors">AI Co-Pilot (MCP)</Link></li>
+              <li><Link href="/features" className="hover:text-white transition-colors">Full Feature Matrix</Link></li>
+              <li><Link href="/interfaces" className="hover:text-white transition-colors">Four Interfaces</Link></li>
+              <li><Link href="/nsql" className="hover:text-white transition-colors">NSQL Filter Engine</Link></li>
+              <li><Link href="/security" className="hover:text-white transition-colors">Privacy &amp; Security Hub</Link></li>
+              <li><Link href="/mcp" className="hover:text-white transition-colors">AI MCP Hub</Link></li>
               <li><Link href="/#downloads" className="hover:text-white transition-colors">Downloads &amp; Releases</Link></li>
             </ul>
           </div>
@@ -40,12 +41,12 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Comparison Guides</h4>
             <ul className="space-y-2 text-xs">
+              <li><Link href="/vs" className="hover:text-white font-bold text-blue-400 transition-colors">Master Comparisons Hub</Link></li>
               <li><Link href="/vs/superhuman" className="hover:text-white transition-colors">vs Superhuman</Link></li>
               <li><Link href="/vs/airmail" className="hover:text-white transition-colors">vs Airmail</Link></li>
               <li><Link href="/vs/canary-mail" className="hover:text-white transition-colors">vs Canary Mail</Link></li>
               <li><Link href="/vs/spark-mail" className="hover:text-white transition-colors">vs Spark Mail</Link></li>
               <li><Link href="/vs/hey" className="hover:text-white transition-colors">vs HEY Mail</Link></li>
-              <li><Link href="/vs/thunderbird" className="hover:text-white transition-colors">vs Thunderbird</Link></li>
             </ul>
           </div>
 

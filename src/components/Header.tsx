@@ -56,7 +56,7 @@ export function Header() {
               className="apple-button-primary px-4 py-1.5 text-xs font-semibold flex items-center gap-1.5 shadow-sm"
             >
               <Download className="w-3.5 h-3.5" />
-              Download v1.0.0
+              Download Nuncio v1.0.0
             </a>
           </div>
 
@@ -89,7 +89,7 @@ export function Header() {
           <Link href="/mcp" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
             AI MCP Hub
           </Link>
-          <Link href="/vs/superhuman" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
+          <Link href="/vs" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
             Comparisons
           </Link>
           <Link href="/docs" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
@@ -105,7 +105,7 @@ export function Header() {
               className="w-full apple-button-primary py-2.5 text-xs font-semibold flex items-center justify-center gap-1.5"
             >
               <Download className="w-3.5 h-3.5" />
-              Download Nuncio
+              Download Nuncio v1.0.0
             </a>
           </div>
         </div>

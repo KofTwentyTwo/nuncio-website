@@ -42,12 +42,14 @@ export const metadata: Metadata = {
     siteName: "Nuncio",
     locale: "en_US",
     type: "website",
+    images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nuncio — Sovereign Mail & Calendar Suite",
     description:
       "Free open-source high-performance email and calendar suite featuring 100% Multi-Shell Parity.",
+    images: ["/og-image.png"],
   },
 };
 

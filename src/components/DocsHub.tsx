@@ -235,9 +235,9 @@ ls -l ~/.nuncio/corrupted_backups/`}
             <BookOpen className="w-3.5 h-3.5" />
             Documentation &amp; How-To Guides
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Complete Nuncio User Guide &amp; Technical Manual
-          </h2>
+          </h1>
           <p className="mt-4 text-base sm:text-lg text-gray-300">
             Step-by-step instructions for installation, NSQL rule creation, protocol setup, and AI agent integration.
           </p>

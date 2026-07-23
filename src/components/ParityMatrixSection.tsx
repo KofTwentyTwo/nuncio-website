@@ -101,23 +101,31 @@ export function ParityMatrixSection() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5 font-mono text-xs">
-                {filtered.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
-                    <td className="p-4 pl-6 font-sans font-semibold text-white">
-                      <div>{item.name}</div>
-                      <span className="text-[10px] text-gray-400 font-mono">{item.area}</span>
-                    </td>
-                    <td className="p-4 text-blue-300">{item.cli}</td>
-                    <td className="p-4 text-cyan-300">{item.tui}</td>
-                    <td className="p-4 text-purple-300">{item.gui}</td>
-                    <td className="p-4 text-emerald-300">{item.mcp}</td>
-                    <td className="p-4 pr-6 text-center">
-                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-sans text-[10px] font-bold border border-emerald-500/30">
-                        <Check className="w-3 h-3" /> 100% PARITY
-                      </span>
+                {filtered.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="p-8 text-center text-slate-300 font-sans text-sm">
+                      No capabilities match &quot;{search}&quot;. Try searching for &quot;NSQL&quot;, &quot;Keyring&quot;, or &quot;FTS5&quot;.
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  filtered.map((item, idx) => (
+                    <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
+                      <td className="p-4 pl-6 font-sans font-semibold text-white">
+                        <div>{item.name}</div>
+                        <span className="text-[10px] text-slate-400 font-mono">{item.area}</span>
+                      </td>
+                      <td className="p-4 text-blue-300">{item.cli}</td>
+                      <td className="p-4 text-cyan-300">{item.tui}</td>
+                      <td className="p-4 text-purple-300">{item.gui}</td>
+                      <td className="p-4 text-emerald-300">{item.mcp}</td>
+                      <td className="p-4 pr-6 text-center">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-sans text-[10px] font-bold border border-emerald-500/30">
+                          <Check className="w-3 h-3" /> 100% PARITY
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
