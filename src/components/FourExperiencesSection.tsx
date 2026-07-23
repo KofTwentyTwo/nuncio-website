@@ -114,7 +114,7 @@ export function FourExperiencesSection() {
                     <p className="text-xs font-medium text-slate-400">{exp.subtitle}</p>
                   </div>
                 </div>
-                <span className={`text-xs px-3 py-1 rounded-full border ${exp.badgeBg}`}>
+                <span className={`text-xs px-3 py-1 rounded-full border whitespace-nowrap shrink-0 ${exp.badgeBg}`}>
                   {exp.badgeText}
                 </span>
               </div>
@@ -137,8 +137,8 @@ export function FourExperiencesSection() {
 
               {/* Footer Pill */}
               <div className="pt-2">
-                <div className="px-3.5 py-2 rounded-xl bg-slate-950/80 border border-white/10 text-xs font-mono text-slate-300 flex items-center justify-between">
-                  <span className="truncate">{exp.sampleCommand}</span>
+                <div className="px-3.5 py-2 rounded-xl bg-slate-950/80 border border-white/10 text-xs font-mono text-slate-300 flex items-center justify-between gap-2 overflow-x-auto whitespace-nowrap">
+                  <span className="truncate whitespace-nowrap">{exp.sampleCommand}</span>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0 ml-2" />
                 </div>
               </div>
