@@ -158,6 +158,44 @@ nuncio account add --provider google --email user@company.com
       ),
     },
     {
+      id: "html-rendering",
+      category: "User Experience",
+      title: "HTML & Image Rendering in TUI, CLI & MCP",
+      icon: <Cpu className="w-4 h-4 text-emerald-400" />,
+      content: (
+        <div className="space-y-6">
+          <h3 className="text-xl font-bold text-white flex items-center gap-2">
+            <Cpu className="w-5 h-5 text-emerald-400" />
+            Rendering HTML Emails &amp; Images Across Non-GUI Shells
+          </h3>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Nuncio provides seamless HTML and image rendering mechanics across Terminal TUI, POSIX CLI, and AI MCP agents without compromising security or terminal velocity.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-2">
+              <h4 className="text-sm font-bold text-cyan-300">1. Terminal TUI (Ratatui)</h4>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Converts HTML to clean ANSI text via <code className="text-cyan-400 font-mono">html2text</code> with tracking pixels blocked. High-resolution images render inline using <b>Kitty Graphics Protocol</b>, <b>iTerm2 Inline Images</b>, or <b>Sixel</b> graphics. Press <code className="text-white font-mono">o</code> to open in browser.
+              </p>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-2">
+              <h4 className="text-sm font-bold text-blue-300">2. POSIX CLI</h4>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                <code className="text-blue-400 font-mono">nuncio mail show &lt;id&gt;</code> prints formatted plain text. Use <code className="text-blue-400 font-mono">--html</code> for markdown, <code className="text-blue-400 font-mono">--raw-html</code> for piping to w3m/lynx, or <code className="text-blue-400 font-mono">--open</code> for system browser.
+              </p>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-2">
+              <h4 className="text-sm font-bold text-emerald-300">3. AI MCP Agents</h4>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Converts HTML to token-efficient Markdown for LLM prompt contexts. Image attachments are passed as Base64 multimodal vision content blocks to Vision LLMs.
+              </p>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
       id: "mcp-setup",
       category: "AI Integration",
       title: "Claude Desktop & LLM Agent Setup (MCP)",
