@@ -11,20 +11,39 @@ import { DocsHub } from "@/components/DocsHub";
 import { DownloadsSection } from "@/components/DownloadsSection";
 import { Footer } from "@/components/Footer";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0F19]">
+    <div className="min-h-screen flex flex-col bg-black text-slate-100">
       <Header />
-      <main className="flex-grow">
+      <main className="flex-grow space-y-0">
         <Hero />
-        <FourExperiencesSection />
-        <NsqlPlayground />
-        <ComparisonSection />
-        <ParityMatrixSection />
-        <SecurityHub />
-        <McpIntegrationHub />
-        <DocsHub />
-        <DownloadsSection />
+        <div id="experiences">
+          <FourExperiencesSection />
+        </div>
+        <div id="nsql">
+          <NsqlPlayground />
+        </div>
+        <div id="compare">
+          <ComparisonSection />
+        </div>
+        <div id="parity">
+          <ParityMatrixSection />
+        </div>
+        <div id="security">
+          <SecurityHub />
+        </div>
+        <div id="mcp">
+          <McpIntegrationHub />
+        </div>
+        <div id="docs">
+          <DocsHub />
+        </div>
+        <div id="downloads">
+          <DownloadsSection />
+        </div>
       </main>
       <Footer />
     </div>

@@ -5,17 +5,17 @@ import { Shield, Key, Lock, FileCheck, CheckCircle2, Server } from "lucide-react
 
 export function SecurityHub() {
   return (
-    <section id="security" className="py-20 border-t border-white/10 relative bg-slate-950/40">
+    <section id="security" className="py-20 border-t border-white/10 relative bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-semibold">
-            <Shield className="w-3.5 h-3.5" />
+        <div className="text-center space-y-4 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-slate-300 text-xs font-medium tracking-tight">
+            <Shield className="w-3.5 h-3.5 text-purple-400" />
             <span>Zero-Trust Enterprise Encryption</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white">
-            Built for Sovereign <span className="gradient-text">Privacy &amp; Security</span>
+          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight text-white">
+            Privacy and Security by Design.
           </h2>
-          <p className="max-w-3xl mx-auto text-gray-300 text-base sm:text-lg">
+          <p className="max-w-3xl mx-auto text-slate-400 text-base sm:text-lg">
             Nuncio implements column-level encryption at rest, secure memory zeroing, sandboxed web rendering, and cryptographic audit ledgers.
           </p>
         </div>
