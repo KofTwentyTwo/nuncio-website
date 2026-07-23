@@ -1,71 +1,73 @@
 import React from "react";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { Check, X, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
+import { Metadata } from "next";
+import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
 
-export const metadata = {
-  title: "Nuncio vs Microsoft Outlook — High-Speed Open Source Mail Suite",
-  description: "Compare Nuncio to Microsoft Outlook. Eliminate bloat, telemetry, and web-wrapper slowness with Nuncio's native Rust daemon, microsecond SQLite WAL search, and 4 great interfaces.",
+export const metadata: Metadata = {
+  title: "Nuncio vs Microsoft Outlook — Sovereign Open Source Alternative",
+  description: "Compare Nuncio vs Microsoft Outlook. Why put up with slow bloated electron builds, ads, and telemetry when Nuncio gives you lightweight native Rust speed, 4 unified interfaces, and zero data tracking?",
+  alternates: { canonical: "https://nuncio.mx/vs/outlook" },
+  openGraph: {
+    title: "Nuncio vs Microsoft Outlook — Sovereign Open Source Alternative",
+    description: "Compare Nuncio vs Microsoft Outlook. Lightweight native Rust speed, 4 unified interfaces, and zero telemetry 100% free.",
+    url: "https://nuncio.mx/vs/outlook",
+    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nuncio vs Microsoft Outlook",
+    description: "Compare Nuncio vs Microsoft Outlook. 100% Free & Open Source alternative.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function VsOutlookPage() {
+  const differentiators = [
+    {
+      title: "Lightweight Native Rust Speed",
+      icon: <Zap className="w-5 h-5 text-yellow-400" />,
+      desc: "Nuncio uses native Rust and Tauri v2 requiring under 80MB RAM. The new Outlook is an Electron web view using over 1GB RAM.",
+    },
+    {
+      title: "Zero Telemetry & Ads",
+      icon: <Database className="w-5 h-5 text-blue-400" />,
+      desc: "Nuncio contains zero ad network trackers or diagnostic telemetry. New Outlook displays sponsored ads directly inside your inbox.",
+    },
+    {
+      title: "Vim Terminal TUI & POSIX CLI",
+      icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
+      desc: "Work with single-key velocity inside terminal multiplexers or SSH sessions. Outlook offers zero command-line support.",
+    },
+    {
+      title: "NSQL Engine & WORM Audits",
+      icon: <Bot className="w-5 h-5 text-emerald-400" />,
+      desc: "Define declarative SQL automation rules and verify execution history in immutable HMAC-SHA256 WORM audit logs.",
+    },
+  ];
+
+  const comparisonRows: ComparisonFeatureRow[] = [
+    { feature: "Memory Usage", nuncioValue: "< 80 MB RAM (Native Rust)", competitorValue: "> 1.2 GB RAM (Electron Web)", description: "Nuncio uses 15x less memory" },
+    { feature: "Inbox Ads & Telemetry", nuncioValue: "Zero Ads / Zero Telemetry", competitorValue: "Display Ads in Free Version", description: "100% private open-source client" },
+    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Vim Ratatui terminal UI" },
+    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Command-line integration" },
+    { feature: "Native AI MCP Integration", nuncioValue: true, competitorValue: false, description: "Model Context Protocol tools & policies" },
+    { feature: "WORM Cryptographic Audits", nuncioValue: true, competitorValue: false, description: "HMAC-SHA256 audit log ledger" },
+    { feature: "NSQL Automation Engine", nuncioValue: true, competitorValue: "Basic Rules", description: "Full SQL syntax parser (WHEN/THEN rules)" },
+    { feature: "Data-at-Rest Encryption", nuncioValue: "AES-256-GCM Column Level", competitorValue: "Unencrypted Local Cache", description: "PayloadCipher encryption on local disk" },
+    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "PST Export Only", description: "Export entire accounts or NSQL query results" },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0F19]">
-      <Header />
-      <main className="flex-grow py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-12">
-          <div className="text-center space-y-4">
-            <span className="text-xs font-mono px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 font-semibold uppercase">
-              Comparison Guide
-            </span>
-            <h1 className="text-4xl sm:text-6xl font-extrabold text-white">
-              Nuncio vs <span className="gradient-text">Microsoft Outlook</span>
-            </h1>
-            <p className="text-gray-300 text-lg">
-              The new Microsoft Outlook is a slow web wrapper that forces cloud synchronization of your credentials. Nuncio is a high-speed native Rust application with zero-telemetry local SQLite WAL storage.
-            </p>
-          </div>
-
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
-            <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">Side-by-Side Breakdown</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-              <div className="space-y-4 p-4 rounded-xl bg-blue-950/30 border border-blue-500/30">
-                <span className="text-base font-bold text-blue-300">Nuncio v1.0</span>
-                <ul className="space-y-2 text-gray-200">
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Native Rust Performance (&lt;15MB RAM)</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Zero Telemetry &amp; Local SQLite Encryption</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> 4 Great Interfaces (CLI, TUI, GUI, MCP)</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Server-Side NSQL Rule Engine</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> 100% Free &amp; Open Source</li>
-                </ul>
-              </div>
-
-              <div className="space-y-4 p-4 rounded-xl bg-slate-900 border border-slate-800 text-gray-400">
-                <span className="text-base font-bold text-gray-300">Microsoft Outlook 365</span>
-                <ul className="space-y-2">
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> Electron / Web Wrapper bloat (500MB+ RAM)</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> Cloud syncing of non-Microsoft credentials</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> Heavy ad injection &amp; data telemetry</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> Subscription fees required ($6.99+/mo)</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> No terminal TUI or CLI support</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center pt-6">
-            <Link
-              href="/#downloads"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl gradient-bg text-base font-bold text-white shadow-xl shadow-blue-500/25 hover:scale-105 transition-all"
-            >
-              Replace Outlook with Nuncio Free
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <ComparisonPageTemplate
+      competitorName="Microsoft Outlook"
+      competitorSlug="outlook"
+      tagline="Why put up with slow bloated electron builds, ads, and telemetry when Nuncio gives you lightweight native Rust speed, 4 unified interfaces, and zero data tracking?"
+      nuncioPrice="100% Free & Open Source"
+      competitorPrice="Microsoft 360 Subscription / Ad-Supported"
+      heroHeadline="Why put up with slow bloated electron builds, ads, and telemetry when Nuncio gives you lightweight native Rust speed, 4 unified interfaces, and zero data tracking 100% free?"
+      whySwitchParagraph="Microsoft's transition to the web-based 'New Outlook' replaced native desktop performance with bloated web views, intrusive inbox ads, and mandatory cloud syncing. Nuncio provides a high-performance native alternative that starts in under 100 milliseconds and runs across macOS, Windows, Linux, and terminal environments."
+      comparisonRows={comparisonRows}
+      differentiators={differentiators}
+    />
   );
 }

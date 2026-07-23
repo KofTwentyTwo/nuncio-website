@@ -1,71 +1,73 @@
 import React from "react";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { Check, X, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
+import { Metadata } from "next";
+import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
 
-export const metadata = {
-  title: "Nuncio vs HEY Mail — Sovereign Open Source Alternative to HEY",
-  description: "Compare Nuncio to HEY Mail. Get powerful server-side NSQL rules, local privacy, zero subscription fees, and 4 great interfaces 100% free.",
+export const metadata: Metadata = {
+  title: "Nuncio vs HEY Mail — Sovereign Open Source Alternative",
+  description: "Compare Nuncio vs HEY Mail. Why pay $99/year for a closed email lock-in when Nuncio gives you NSQL rules, local data ownership, 4 unified interfaces, and WORM cryptographic audits?",
+  alternates: { canonical: "https://nuncio.mx/vs/hey" },
+  openGraph: {
+    title: "Nuncio vs HEY Mail — Sovereign Open Source Alternative",
+    description: "Compare Nuncio vs HEY Mail. NSQL rules, local data ownership, 4 unified interfaces, and WORM audits 100% free.",
+    url: "https://nuncio.mx/vs/hey",
+    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nuncio vs HEY Mail",
+    description: "Compare Nuncio vs HEY Mail. 100% Free & Open Source alternative.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function VsHeyPage() {
+  const differentiators = [
+    {
+      title: "$0 vs $99/Year Lock-In",
+      icon: <Zap className="w-5 h-5 text-yellow-400" />,
+      desc: "Nuncio works with all your existing IMAP, JMAP, Gmail, and iCloud accounts for free. HEY forces a $99/year custom email subscription.",
+    },
+    {
+      title: "Local SQLite vs Proprietary Cloud",
+      icon: <Database className="w-5 h-5 text-blue-400" />,
+      desc: "Your data stays on your machine in standard SQLite format. HEY locks your emails inside their custom cloud infrastructure.",
+    },
+    {
+      title: "NSQL Server-Side Engine",
+      icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
+      desc: "Write declarative SQL automation rules (WHEN/THEN) instead of basic drag-and-drop screening.",
+    },
+    {
+      title: "4 Unified Interfaces",
+      icon: <Bot className="w-5 h-5 text-emerald-400" />,
+      desc: "Enjoy equal parity across desktop GUI, Vim Ratatui Terminal TUI, POSIX CLI, and Model Context Protocol (MCP) AI agents.",
+    },
+  ];
+
+  const comparisonRows: ComparisonFeatureRow[] = [
+    { feature: "Pricing & Lock-In", nuncioValue: "100% Free & Open Source", competitorValue: "$99/year Subscription", description: "Zero subscription fees or proprietary domain lock-in" },
+    { feature: "Protocol Support", nuncioValue: "IMAP, JMAP, Gmail, SMTP, CalDAV", competitorValue: "HEY Cloud Only", description: "Use any standard email provider" },
+    { feature: "Local Data Ownership", nuncioValue: "100% Local SQLite WAL", competitorValue: "HEY Cloud Servers", description: "Your data stays on your disk" },
+    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Vim Ratatui terminal UI" },
+    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Command-line integration" },
+    { feature: "AI Model Context Protocol (MCP)", nuncioValue: true, competitorValue: false, description: "Native AI agent tools and policy enforcement" },
+    { feature: "WORM Cryptographic Audits", nuncioValue: true, competitorValue: false, description: "HMAC-SHA256 audit ledger" },
+    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "MBOX Export Only", description: "Export entire accounts or NSQL queries" },
+    { feature: "Database Self-Healing", nuncioValue: true, competitorValue: false, description: "Automatic recovery from corrupted states" },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0F19]">
-      <Header />
-      <main className="flex-grow py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-12">
-          <div className="text-center space-y-4">
-            <span className="text-xs font-mono px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-semibold uppercase">
-              Comparison Guide
-            </span>
-            <h1 className="text-4xl sm:text-6xl font-extrabold text-white">
-              Nuncio vs <span className="gradient-text">HEY Mail</span>
-            </h1>
-            <p className="text-gray-300 text-lg">
-              HEY forces you into a proprietary @hey.com address and a $99/year subscription. Nuncio works with your existing IMAP, JMAP, and Gmail accounts with server-side NSQL rules and zero fees.
-            </p>
-          </div>
-
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
-            <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">Side-by-Side Breakdown</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-              <div className="space-y-4 p-4 rounded-xl bg-blue-950/30 border border-blue-500/30">
-                <span className="text-base font-bold text-blue-300">Nuncio v1.0</span>
-                <ul className="space-y-2 text-gray-200">
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Use Any Custom Domain / Account</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Server-Side NSQL Filter Language</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> 100% Free &amp; Open Source</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> POSIX CLI &amp; Vim Terminal TUI</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Native MCP LLM Agent Co-Pilot</li>
-                </ul>
-              </div>
-
-              <div className="space-y-4 p-4 rounded-xl bg-slate-900 border border-slate-800 text-gray-400">
-                <span className="text-base font-bold text-gray-300">HEY Mail</span>
-                <ul className="space-y-2">
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> Locked to @hey.com address unless paying $120+/yr</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> $99 / year subscription</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> Closed proprietary cloud servers</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> No terminal TUI or CLI support</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> No custom SQL filter language</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center pt-6">
-            <Link
-              href="/#downloads"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl gradient-bg text-base font-bold text-white shadow-xl shadow-blue-500/25 hover:scale-105 transition-all"
-            >
-              Switch to Nuncio Free
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <ComparisonPageTemplate
+      competitorName="HEY Mail"
+      competitorSlug="hey"
+      tagline="Why pay $99/year for a closed email lock-in when Nuncio gives you NSQL rules, local data ownership, 4 unified interfaces, and WORM cryptographic audits?"
+      nuncioPrice="100% Free & Open Source"
+      competitorPrice="$99 / Year Subscription"
+      heroHeadline="Why pay $99/year for a closed email lock-in when Nuncio gives you NSQL rules, local data ownership, 4 unified interfaces, and WORM cryptographic audits 100% free?"
+      whySwitchParagraph="HEY introduced opinionated email workflows, but forces users into a $99/year cloud subscription and custom email addresses. Nuncio brings powerful workflow screening and NSQL automation to all your existing email addresses while keeping 100% of your data locally encrypted on your disk."
+      comparisonRows={comparisonRows}
+      differentiators={differentiators}
+    />
   );
 }

@@ -1,74 +1,76 @@
 import React from "react";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { Check, X, ArrowRight, ShieldCheck, Zap } from "lucide-react";
-import Link from "next/link";
+import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
+import { Metadata } from "next";
+import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
 
-export const metadata = {
-  title: "Nuncio vs Superhuman — Free Open Source Alternative to Superhuman Mail",
-  description: "Compare Nuncio to Superhuman. Why pay $360/year for closed cloud email when Nuncio gives you zero cloud tracking, local SQLite speed, 4 great interfaces, and native AI agent support 100% free?",
+export const metadata: Metadata = {
+  title: "Nuncio vs Superhuman — Sovereign Open Source Alternative",
+  description: "Compare Nuncio vs Superhuman. Why pay $360/year for closed cloud email when Nuncio gives you local SQLite WAL speed, 4 unified interfaces, Vim keyboard velocity, and native AI MCP agent integration 100% free?",
+  alternates: { canonical: "https://nuncio.mx/vs/superhuman" },
+  openGraph: {
+    title: "Nuncio vs Superhuman — Sovereign Open Source Alternative",
+    description: "Compare Nuncio vs Superhuman. Why pay $360/year for closed cloud email when Nuncio gives you local SQLite WAL speed, 4 unified interfaces, and AI MCP integration 100% free?",
+    url: "https://nuncio.mx/vs/superhuman",
+    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nuncio vs Superhuman",
+    description: "Compare Nuncio vs Superhuman. 100% Free & Open Source alternative with local SQLite speed.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function VsSuperhumanPage() {
+  const differentiators = [
+    {
+      title: "$0 Forever vs $360/Year",
+      icon: <Zap className="w-5 h-5 text-yellow-400" />,
+      desc: "Nuncio is 100% free and open source under MIT / Apache-2.0. Superhuman forces a $30/month recurring subscription.",
+    },
+    {
+      title: "Local SQLite vs Closed Cloud",
+      icon: <Database className="w-5 h-5 text-blue-400" />,
+      desc: "Your emails and search indices stay in local SQLite WAL files on your disk. Superhuman stores your metadata on proprietary cloud servers.",
+    },
+    {
+      title: "4 Unified Interfaces",
+      icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
+      desc: "Work seamlessly across macOS GUI, Windows, Linux, Vim Ratatui Terminal TUI, POSIX CLI, and Model Context Protocol (MCP).",
+    },
+    {
+      title: "Native AI MCP Integration",
+      icon: <Bot className="w-5 h-5 text-emerald-400" />,
+      desc: "Connect Anthropic Claude, Cursor, and custom AI agents securely using McpAgentPolicy capability controls and automatic PII redaction.",
+    },
+  ];
+
+  const comparisonRows: ComparisonFeatureRow[] = [
+    { feature: "Pricing & Subscription", nuncioValue: "100% Free & Open Source", competitorValue: "$30/mo ($360/year)", description: "Zero subscription fees forever" },
+    { feature: "Data Storage Location", nuncioValue: "100% Local SQLite WAL", competitorValue: "Proprietary Cloud Servers", description: "Sovereign data ownership on local disk" },
+    { feature: "Terminal TUI (Vim Chords)", nuncioValue: true, competitorValue: false, description: "Vim motions (j/k/h/l, g i, e, s) in terminal" },
+    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "nuncio mail list --json & pipeline integration" },
+    { feature: "Native AI Agent Support (MCP)", nuncioValue: true, competitorValue: false, description: "Model Context Protocol tools & policies" },
+    { feature: "WORM Cryptographic Audits", nuncioValue: true, competitorValue: false, description: "HMAC-SHA256 hash-chained execution logs" },
+    { feature: "Server-Side Automation (NSQL)", nuncioValue: true, competitorValue: "Basic Rules", description: "Full SQL syntax parser (WHEN/THEN rules)" },
+    { feature: "Full-Text Search Latency", nuncioValue: "<10ms (FTS5 Trigram)", competitorValue: "~250ms (Cloud API)", description: "Instant offline trigram index" },
+    { feature: "Data-at-Rest Encryption", nuncioValue: "AES-256-GCM Column Level", competitorValue: "Server-Side TLS Only", description: "PayloadCipher encryption on local disk" },
+    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "Limited", description: "Export entire accounts or NSQL queries" },
+    { feature: "Tracking Pixel Neutralization", nuncioValue: true, competitorValue: false, description: "Automatic 1x1 image blocking" },
+    { feature: "Cross-Platform Support", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS, Web, iOS", description: "Native binaries across all desktop & server OS" },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0F19]">
-      <Header />
-      <main className="flex-grow py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-12">
-          {/* Header */}
-          <div className="text-center space-y-4">
-            <span className="text-xs font-mono px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 font-semibold uppercase">
-              Comparison Guide
-            </span>
-            <h1 className="text-4xl sm:text-6xl font-extrabold text-white">
-              Nuncio vs <span className="gradient-text">Superhuman</span>
-            </h1>
-            <p className="text-gray-300 text-lg">
-              Why pay $360/year for proprietary cloud email when Nuncio gives you zero-tracking local privacy, Vim keyboard velocity, desktop beauty, and AI agent integration 100% free?
-            </p>
-          </div>
-
-          {/* Comparison Matrix */}
-          <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
-            <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">Side-by-Side Breakdown</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-              <div className="space-y-4 p-4 rounded-xl bg-blue-950/30 border border-blue-500/30">
-                <span className="text-base font-bold text-blue-300">Nuncio v1.0</span>
-                <ul className="space-y-2 text-gray-200">
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> 100% Free &amp; Open Source</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Local SQLite WAL Storage (Zero Cloud Tracking)</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> 4 Great Interfaces (CLI, TUI, GUI, MCP)</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Vim Ratatui Terminal Keyboard Triage</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-400" /> Native LLM Agent Integration (MCP)</li>
-                </ul>
-              </div>
-
-              <div className="space-y-4 p-4 rounded-xl bg-slate-900 border border-slate-800 text-gray-400">
-                <span className="text-base font-bold text-gray-300">Superhuman</span>
-                <ul className="space-y-2">
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> $30 / month ($360 / year) subscription</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> Closed proprietary cloud servers</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> Web app / GUI only</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> No terminal TUI or POSIX CLI</li>
-                  <li className="flex items-center gap-2"><X className="w-4 h-4 text-red-400" /> No Model Context Protocol (MCP) agent support</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center pt-6">
-            <Link
-              href="/#downloads"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl gradient-bg text-base font-bold text-white shadow-xl shadow-blue-500/25 hover:scale-105 transition-all"
-            >
-              Get Started with Nuncio Free
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <ComparisonPageTemplate
+      competitorName="Superhuman"
+      competitorSlug="superhuman"
+      tagline="Why pay $360/year for closed cloud email when Nuncio gives you local SQLite speed, 4 unified interfaces, and native AI MCP integration 100% free?"
+      nuncioPrice="100% Free & Open Source"
+      competitorPrice="$360 / Year Subscription"
+      heroHeadline="Why pay $360/year for closed cloud email when Nuncio gives you local SQLite WAL speed, 4 unified interfaces, Vim keyboard velocity, and native AI MCP agent integration 100% free?"
+      whySwitchParagraph="Superhuman popularized keyboard shortcuts for email, but locked users into a $30/month subscription model and centralized cloud servers. Nuncio takes the high-velocity keyboard workflow further by making it 100% local, blazing fast with SQLite WAL storage, and extensible across GUI, Vim Terminal TUI, POSIX CLI, and Model Context Protocol (MCP) AI agents."
+      comparisonRows={comparisonRows}
+      differentiators={differentiators}
+    />
   );
 }

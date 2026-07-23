@@ -1,69 +1,73 @@
 import React from "react";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { Check, X, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
+import { Metadata } from "next";
+import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
 
-export const metadata = {
-  title: "Nuncio vs Spark Mail — Sovereign Free Alternative to Spark Desktop",
-  description: "Compare Nuncio to Spark Mail. Why pay $59.99/year for Spark Premium subscription when Nuncio gives you zero cloud server dependencies, 4 interfaces, Vim terminal velocity, and native AI agents 100% free?",
+export const metadata: Metadata = {
+  title: "Nuncio vs Spark Mail — Sovereign Open Source Alternative",
+  description: "Compare Nuncio vs Spark Mail. Why trust proprietary cloud servers with your email credentials when Nuncio gives you local SQLite storage, zero subscription fees, and 4 unified interfaces?",
+  alternates: { canonical: "https://nuncio.mx/vs/spark-mail" },
+  openGraph: {
+    title: "Nuncio vs Spark Mail — Sovereign Open Source Alternative",
+    description: "Compare Nuncio vs Spark Mail. Local SQLite storage, zero subscription fees, and 4 unified interfaces 100% free.",
+    url: "https://nuncio.mx/vs/spark-mail",
+    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nuncio vs Spark Mail",
+    description: "Compare Nuncio vs Spark Mail. 100% Free & Open Source alternative.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function VsSparkMailPage() {
+  const differentiators = [
+    {
+      title: "100% Local Storage",
+      icon: <Zap className="w-5 h-5 text-yellow-400" />,
+      desc: "Nuncio stores all accounts and messages directly on your disk in SQLite WAL format. Spark routes push notifications through central servers.",
+    },
+    {
+      title: "Zero Subscription Fees",
+      icon: <Database className="w-5 h-5 text-blue-400" />,
+      desc: "Nuncio is 100% free and open source. Spark Premium requires a $59.99/year subscription for advanced team and priority inbox features.",
+    },
+    {
+      title: "Vim Terminal TUI & POSIX CLI",
+      icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
+      desc: "Work with single-key velocity in any Linux or macOS terminal. Spark offers no command-line or terminal interface.",
+    },
+    {
+      title: "Sane AI & WORM Audits",
+      icon: <Bot className="w-5 h-5 text-emerald-400" />,
+      desc: "Connect AI agents via Model Context Protocol with RBAC policies and inspect every mutation in WORM cryptographic audit logs.",
+    },
+  ];
+
+  const comparisonRows: ComparisonFeatureRow[] = [
+    { feature: "Pricing Model", nuncioValue: "100% Free & Open Source", competitorValue: "$59.99/year Premium", description: "No paid tiers or feature paywalls" },
+    { feature: "Push Notification Architecture", nuncioValue: "Direct Local IMAP/JMAP Daemon", competitorValue: "Central Spark Proxy Servers", description: "Nuncio connects directly from your machine" },
+    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Vim Ratatui terminal UI" },
+    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Command-line automation" },
+    { feature: "Native AI MCP Integration", nuncioValue: true, competitorValue: false, description: "Model Context Protocol tools" },
+    { feature: "WORM Cryptographic Audits", nuncioValue: true, competitorValue: false, description: "HMAC-SHA256 audit ledger" },
+    { feature: "NSQL Automation Engine", nuncioValue: true, competitorValue: "Basic Smart Inbox", description: "Full SQL syntax rule statements" },
+    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "PDF / Print Only", description: "Export entire accounts or queries" },
+    { feature: "Cross-Platform Support", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS, Windows, iOS, Android", description: "Native binaries across all desktop platforms" },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0F19] text-slate-100">
-      <Header />
-      <main className="flex-grow py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-12">
-          <div className="text-center space-y-4">
-            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 tracking-tight">
-              Comparison Guide
-            </span>
-            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">
-              Nuncio vs <span className="gradient-text">Spark Mail</span>
-            </h1>
-            <p className="text-slate-300 text-lg max-w-2xl mx-auto">
-              Why pay $59.99/year for proprietary Spark Premium when Nuncio gives you local SQLite privacy, Vim keybindings, desktop polish, and AI agent co-piloting 100% free?
-            </p>
-          </div>
-
-          <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl">
-            <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">Side-by-Side Breakdown</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-              <div className="space-y-4 p-5 rounded-2xl bg-blue-950/40 border border-blue-500/30">
-                <span className="text-base font-bold text-blue-300">Nuncio v1.0</span>
-                <ul className="space-y-2.5 text-slate-200 font-medium">
-                  <li className="flex items-center gap-2.5"><Check className="w-4 h-4 text-emerald-400 shrink-0" /> 100% Free &amp; Open Source</li>
-                  <li className="flex items-center gap-2.5"><Check className="w-4 h-4 text-emerald-400 shrink-0" /> Local SQLite Storage (Zero Cloud Server Proxies)</li>
-                  <li className="flex items-center gap-2.5"><Check className="w-4 h-4 text-emerald-400 shrink-0" /> 4 Interfaces (CLI, TUI, GUI, MCP)</li>
-                  <li className="flex items-center gap-2.5"><Check className="w-4 h-4 text-emerald-400 shrink-0" /> Native Model Context Protocol (MCP) Support</li>
-                </ul>
-              </div>
-
-              <div className="space-y-4 p-5 rounded-2xl bg-slate-900 border border-slate-800 text-slate-400">
-                <span className="text-base font-bold text-slate-300">Spark Mail</span>
-                <ul className="space-y-2.5">
-                  <li className="flex items-center gap-2.5"><X className="w-4 h-4 text-red-400 shrink-0" /> $59.99 / year Premium subscription</li>
-                  <li className="flex items-center gap-2.5"><X className="w-4 h-4 text-red-400 shrink-0" /> Proprietary cloud sync servers</li>
-                  <li className="flex items-center gap-2.5"><X className="w-4 h-4 text-red-400 shrink-0" /> Electron / GUI only</li>
-                  <li className="flex items-center gap-2.5"><X className="w-4 h-4 text-red-400 shrink-0" /> No terminal TUI or POSIX CLI</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center pt-4">
-            <Link
-              href="/#downloads"
-              className="apple-button-primary px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2"
-            >
-              Download Nuncio v1.0.0
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <ComparisonPageTemplate
+      competitorName="Spark Mail"
+      competitorSlug="spark-mail"
+      tagline="Why trust proprietary cloud servers with your email credentials when Nuncio gives you local SQLite storage, zero subscription fees, and 4 unified interfaces?"
+      nuncioPrice="100% Free & Open Source"
+      competitorPrice="$59.99 / Year Premium"
+      heroHeadline="Why trust proprietary cloud servers with your email credentials when Nuncio gives you local SQLite storage, zero subscription fees, and 4 unified interfaces 100% free?"
+      whySwitchParagraph="Spark Mail relies on central proxy servers to handle push notifications and cloud sync, creating a potential vector for credentials and email metadata. Nuncio's hybrid daemon (nunciod) runs locally on your computer—connecting directly to IMAP/JMAP servers with zero middleman proxies."
+      comparisonRows={comparisonRows}
+      differentiators={differentiators}
+    />
   );
 }
