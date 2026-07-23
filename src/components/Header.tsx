@@ -23,6 +23,9 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8 text-xs sm:text-sm font-medium text-slate-300">
+            <Link href="/features" className="hover:text-white transition-colors">
+              Features
+            </Link>
             <Link href="/#experiences" className="hover:text-white transition-colors">
               Interfaces
             </Link>
