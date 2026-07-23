@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { FourExperiencesSection } from "@/components/FourExperiencesSection";
 import { NsqlPlayground } from "@/components/NsqlPlayground";
+import { ComparisonSection } from "@/components/ComparisonSection";
 import { ParityMatrixSection } from "@/components/ParityMatrixSection";
 import { SecurityHub } from "@/components/SecurityHub";
 import { McpIntegrationHub } from "@/components/McpIntegrationHub";
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <FourExperiencesSection />
         <NsqlPlayground />
+        <ComparisonSection />
         <ParityMatrixSection />
         <SecurityHub />
         <McpIntegrationHub />
