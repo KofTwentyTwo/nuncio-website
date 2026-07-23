@@ -1,12 +1,32 @@
 import React from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ShieldCheck, Code, Sparkles, Terminal, Database, FileCheck, Lock, CheckCircle2, ArrowRight, Zap, Cpu, Key, Activity, Monitor, Bot } from "lucide-react";
+import {
+  ShieldCheck,
+  Code,
+  Sparkles,
+  Terminal,
+  Database,
+  FileCheck,
+  Lock,
+  CheckCircle2,
+  ArrowRight,
+  Zap,
+  Cpu,
+  Key,
+  Activity,
+  Monitor,
+  Bot,
+  Layers,
+  Heart,
+  Globe,
+  Award,
+} from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Why Nuncio Exists — The Sovereign Mail & Calendar Manifesto",
-  description: "Learn why Nuncio exists: email rebuilt for today — sane AI access, first-class UI/UX across GUI, TUI, CLI & MCP, microsecond speed, local control, zero-trust security, and WORM cryptographic audits.",
+  title: "Why Nuncio Exists — Manifesto & Open-Source Credits",
+  description: "Learn why Nuncio exists: sovereign email rebuilt for today. Full credits and acknowledgments for third-party libraries, Rust crates, protocols, and open-source frameworks.",
 };
 
 export default function AboutPage() {
@@ -43,15 +63,70 @@ export default function AboutPage() {
     },
   ];
 
+  const thirdPartyCredits = [
+    {
+      category: "Rust Core Systems & Data Storage",
+      icon: <Database className="w-5 h-5 text-blue-400" />,
+      crates: [
+        { name: "sqlx", role: "Async, pure-Rust SQL engine powering type-safe SQLite database operations and migrations." },
+        { name: "sqlparser-rs", role: "Pure Rust SQL lexer and parser engine powering the Nuncio SQL Filter Language (NSQL) compiler." },
+        { name: "tokio", role: "Event-driven asynchronous Rust runtime driving background IMAP IDLE, JMAP push, and IPC streaming." },
+        { name: "serde & serde_json", role: "Fast, zero-copy JSON serialization and deserialization across IPC framing and storage contracts." },
+        { name: "thiserror & anyhow", role: "Ergonomic, type-safe Rust error handling and domain error mappings." },
+      ],
+    },
+    {
+      category: "Mail Protocols & MIME Parsing",
+      icon: <Layers className="w-5 h-5 text-purple-400" />,
+      crates: [
+        { name: "async-imap", role: "Asynchronous IMAP client library driving real-time TLS 993 inbox synchronization." },
+        { name: "lettre", role: "Modern Rust SMTP email client delivering outbound TLS 587/465 message transport." },
+        { name: "mail-parser", role: "High-performance MIME parser for raw RFC 5322 emails, headers, and attachment boundaries." },
+        { name: "html2text", role: "Converting HTML email markup to clean, un-tracked ANSI terminal text and Markdown." },
+      ],
+    },
+    {
+      category: "Security, Cryptography & Vault Enclaves",
+      icon: <Lock className="w-5 h-5 text-emerald-400" />,
+      crates: [
+        { name: "ring & aes-gcm", role: "Authenticated encryption algorithm libraries driving column-level PayloadCipher." },
+        { name: "age", role: "Modern, simple X25519 file and stream encryption format powering large attachment ciphers." },
+        { name: "zeroize", role: "Secure memory page zeroing (ZeroizeOnDrop) preventing key material leakages in RAM buffers." },
+        { name: "keyring", role: "Native OS credential manager integration (Windows DPAPI, macOS Keychain Access, Linux Secret Service)." },
+        { name: "hmac & sha2", role: "Cryptographic HMAC-SHA256 hash-chain calculation for WORM audit ledgers." },
+      ],
+    },
+    {
+      category: "Presentation Shells & UI Frameworks",
+      icon: <Monitor className="w-5 h-5 text-yellow-400" />,
+      crates: [
+        { name: "Tauri v2", role: "Lightweight, secure desktop application framework driving the Glassmorphic GUI." },
+        { name: "ratatui", role: "Terminal user interface framework powering the Vim-fueled Ratatui TUI." },
+        { name: "clap", role: "Declarative command-line argument parser powering the POSIX scriptable CLI (nuncio-cli)." },
+        { name: "Next.js & TailwindCSS", role: "React web framework and utility-first CSS engine powering nuncio-website." },
+        { name: "lucide-react", role: "Clean, modern open-source icon suite across Next.js and Tauri interfaces." },
+      ],
+    },
+    {
+      category: "Open Protocols & Standards",
+      icon: <Globe className="w-5 h-5 text-cyan-400" />,
+      crates: [
+        { name: "Model Context Protocol (MCP)", role: "Anthropic's open stdio JSON-RPC 2.0 standard connecting AI agents (Claude, Antigravity, Cursor) directly to Nuncio tools." },
+        { name: "RFC 4155 MBOX & RFC 5322 MIME", role: "Universal open standards for portable email archiving, export, and transport." },
+        { name: "RFC 7636 PKCE OAuth 2.0", role: "Proof Key for Code Exchange protocol driving secure credential-free Google Workspace authentication." },
+      ],
+    },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col bg-[#0B0F19] text-slate-100">
       <Header />
-      <main className="flex-grow py-16 space-y-16">
+      <main className="flex-grow py-16 space-y-20">
         {/* Hero Header */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold tracking-tight shadow-lg">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>The Nuncio Manifesto</span>
+            <span>The Nuncio Manifesto &amp; Open-Source Credits</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
@@ -69,7 +144,7 @@ export default function AboutPage() {
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-white">Breaking Away From Walled Gardens</h2>
               <p className="text-slate-300 text-base leading-relaxed">
-                For over a decade, personal and enterprise communication has been fractured across paid cloud subscriptions, closed proprietary formats, locked-away data silos, and compromised user experiences depending on whether you're on a Mac, Windows PC, Linux terminal, or mobile device.
+                For over a decade, personal and enterprise communication has been fractured across paid cloud subscriptions, closed proprietary formats, locked-away data silos, and compromised user experiences depending on whether you&apos;re on a Mac, Windows PC, Linux terminal, or mobile device.
               </p>
               <p className="text-slate-300 text-base leading-relaxed">
                 Nuncio was built to eliminate those trade-offs. It gives developers, power users, and AI agents total speed, complete sovereign data ownership, zero-trust encryption, and sane AI integration.
@@ -81,15 +156,51 @@ export default function AboutPage() {
               {manifestoPillars.map((p, idx) => (
                 <div key={idx} className="space-y-3 p-6 rounded-2xl bg-slate-900 border border-white/10 hover:border-blue-500/40 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className="p-2.5 rounded-xl bg-slate-800 border border-white/10">
+                    <div className="p-2.5 rounded-xl bg-slate-800 border border-white/10 shrink-0">
                       {p.icon}
                     </div>
-                    <h3 className="text-base font-bold text-white">{p.title}</h3>
+                    <h3 className="text-base font-bold text-white leading-tight">{p.title}</h3>
                   </div>
                   <p className="text-slate-300 text-xs leading-relaxed">{p.desc}</p>
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Full Open-Source & Third-Party Library Credits Section */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="text-center space-y-3 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold">
+              <Heart className="w-3.5 h-3.5 fill-current" />
+              <span>Standing on the Shoulders of Giants</span>
+            </div>
+            <h2 className="text-3xl font-extrabold text-white">Open-Source Ecosystem &amp; Third-Party Credits</h2>
+            <p className="text-slate-300 text-sm">
+              Nuncio is made possible by the incredible open-source Rust, Web, Security, and Protocol communities. We extend our deepest gratitude to the maintainers of these core projects.
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            {thirdPartyCredits.map((cred, cIdx) => (
+              <div key={cIdx} className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-4 shadow-xl">
+                <div className="flex items-center gap-3 border-b border-white/10 pb-3">
+                  <div className="p-2.5 rounded-xl bg-slate-900 border border-white/10 shrink-0">
+                    {cred.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-white">{cred.category}</h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {cred.crates.map((c, rIdx) => (
+                    <div key={rIdx} className="p-4 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
+                      <span className="font-mono font-bold text-sm text-cyan-300 block">{c.name}</span>
+                      <p className="text-slate-300 text-xs leading-relaxed">{c.role}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
