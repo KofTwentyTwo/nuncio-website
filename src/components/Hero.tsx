@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Download, ArrowRight, ShieldCheck, Sparkles, Monitor, Code } from "lucide-react";
+import { Download, ArrowRight, ShieldCheck, Sparkles, Monitor, Code, FileCheck } from "lucide-react";
 import { ShellInteractivePreview } from "./ShellInteractivePreview";
 
 export function Hero() {
@@ -18,13 +18,13 @@ export function Hero() {
 
           {/* Main Hero Headline */}
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08]">
-            Email and Calendar.<br />
-            <span className="gradient-text">Reimagined.</span>
+            Email Rebuilt for Today.<br />
+            <span className="gradient-text">Private, Fast &amp; AI-Integrated.</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-slate-300 text-lg sm:text-xl font-normal max-w-2xl mx-auto leading-relaxed">
-            Four extraordinary ways to work. 100% Free and 100% Open Source mail and calendar suite running locally on your machine.
+          <p className="text-slate-300 text-lg sm:text-xl font-normal max-w-3xl mx-auto leading-relaxed">
+            No paid subscriptions, closed formats, or locked-away data. Enjoy four extraordinary interfaces, AI NSQL filters, and cryptographic audit logs without losing control of your data.
           </p>
 
           {/* Action Buttons */}
@@ -49,18 +49,18 @@ export function Hero() {
           <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-slate-400 text-xs font-medium">
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              100% Local Encryption
+              100% Local AES-256 Encryption
             </span>
             <span className="flex items-center gap-1.5">
               <Code className="w-4 h-4 text-cyan-400" />
               100% Free &amp; Open Source
             </span>
             <span className="flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-blue-400" />
-              Zero Telemetry / No Tracking
+              <FileCheck className="w-4 h-4 text-purple-400" />
+              HMAC Cryptographic Audit Logs
             </span>
             <span className="flex items-center gap-1.5">
-              <Monitor className="w-4 h-4 text-purple-400" />
+              <Monitor className="w-4 h-4 text-blue-400" />
               macOS, Linux &amp; Windows
             </span>
           </div>
