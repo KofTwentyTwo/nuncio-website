@@ -21,7 +21,7 @@ import {
   Heart,
   Globe,
   ExternalLink,
-  Github,
+  GitBranch,
   User,
 } from "lucide-react";
 import Link from "next/link";
@@ -416,7 +416,7 @@ export default function AboutPage() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-1 text-slate-300 hover:text-white px-2 py-0.5 rounded bg-slate-800 border border-white/10 transition-colors"
                               >
-                                <Github className="w-3 h-3 text-slate-400" />
+                                <GitBranch className="w-3 h-3 text-slate-400" />
                                 <span>Repository</span>
                               </a>
                             )}
