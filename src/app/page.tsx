@@ -8,7 +8,7 @@ import { ComparisonSection } from "@/components/ComparisonSection";
 import { ParityMatrixSection } from "@/components/ParityMatrixSection";
 import { SecurityHub } from "@/components/SecurityHub";
 import { McpIntegrationHub } from "@/components/McpIntegrationHub";
-import { DocsHub } from "@/components/DocsHub";
+import { DocsTeaserSection } from "@/components/DocsTeaserSection";
 import { DownloadsSection } from "@/components/DownloadsSection";
 import { Footer } from "@/components/Footer";
 
@@ -43,7 +43,7 @@ export default function Home() {
           <McpIntegrationHub />
         </div>
         <div id="docs">
-          <DocsHub />
+          <DocsTeaserSection />
         </div>
         <div id="downloads">
           <DownloadsSection />
