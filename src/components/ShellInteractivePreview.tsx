@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Terminal, Monitor, Bot, Code, CheckCircle, Copy, Check, Play, RefreshCw, Send, Calendar, ShieldCheck, Sparkles, ChevronRight, Activity, ArrowRight } from "lucide-react";
 
 export function ShellInteractivePreview() {
-  const [activeTab, setActiveTab] = useState<"tui" | "cli" | "gui" | "mcp">("tui");
+  const [activeTab, setActiveTab] = useState<"gui" | "tui" | "cli" | "mcp">("gui");
   const [copied, setCopied] = useState(false);
 
   // TUI State
@@ -58,23 +58,20 @@ export function ShellInteractivePreview() {
 `{
   "status": "HEALTHY",
   "pid": 84192,
-  "memory_rss_bytes": 14680064,
-  "db_size_bytes": 2097152,
-  "wal_size_bytes": 524288,
-  "active_ipc_clients": 3,
-  "active_imap_idle_connections": 2,
-  "pending_outbox_jobs": 0,
-  "filter_rules_executed": 14209,
-  "avg_api_latency_ms": 0.14
+  "memory_rss_mb": 42.4,
+  "db_size_mb": 1.04,
+  "fts_index_size_mb": 0.52,
+  "total_emails": 15000,
+  "integrity_status": "OK",
+  "active_ipc_clients": 2
 }`
       );
     } else if (cmd.includes("update")) {
       setCliOutput(
 `{
+  "status": "up_to_date",
   "current_version": "1.0.0",
-  "latest_version": "1.0.0",
-  "update_available": false,
-  "status": "Up to date! All binaries verified with SHA-256 checksums."
+  "latest_version": "1.0.0"
 }`
       );
     } else if (cmd.includes("search")) {
@@ -116,6 +113,17 @@ export function ShellInteractivePreview() {
       <div className="flex flex-wrap items-center justify-between gap-2 p-2 bg-slate-900/90 rounded-xl border border-white/5">
         <div className="flex flex-wrap items-center gap-1.5">
           <button
+            onClick={() => setActiveTab("gui")}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all min-h-[44px] ${
+              activeTab === "gui"
+                ? "bg-purple-600 text-white shadow-lg shadow-purple-500/40 border border-purple-400/50"
+                : "text-gray-400 hover:text-gray-200 hover:bg-slate-800/50"
+            }`}
+          >
+            <Monitor className="w-4 h-4 text-purple-300" />
+            1. Desktop GUI (Featured)
+          </button>
+          <button
             onClick={() => setActiveTab("tui")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all min-h-[44px] ${
               activeTab === "tui"
@@ -124,7 +132,7 @@ export function ShellInteractivePreview() {
             }`}
           >
             <Code className="w-4 h-4 text-cyan-300" />
-            1. Vim Ratatui TUI
+            2. Vim Ratatui TUI
           </button>
           <button
             onClick={() => setActiveTab("cli")}
@@ -135,18 +143,7 @@ export function ShellInteractivePreview() {
             }`}
           >
             <Terminal className="w-4 h-4 text-blue-300" />
-            2. POSIX CLI
-          </button>
-          <button
-            onClick={() => setActiveTab("gui")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all min-h-[44px] ${
-              activeTab === "gui"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-500/30"
-                : "text-gray-400 hover:text-gray-200 hover:bg-slate-800/50"
-            }`}
-          >
-            <Monitor className="w-4 h-4 text-purple-300" />
-            3. Desktop GUI
+            3. POSIX CLI
           </button>
           <button
             onClick={() => setActiveTab("mcp")}

@@ -6,20 +6,20 @@ import { Terminal, Code, Monitor, Bot, Zap, Keyboard, Sparkles, ShieldCheck, Arr
 export function FourExperiencesSection() {
   const experiences = [
     {
-      id: "cli",
-      title: "1. The Lightning POSIX CLI",
-      subtitle: "Unmatched Command-Line Speed & Automation",
-      icon: <Terminal className="w-6 h-6 text-blue-400" />,
-      accentColor: "border-blue-500/30 bg-blue-500/5 hover:border-blue-500/60",
-      badgeBg: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+      id: "gui",
+      title: "1. The Glassmorphic Desktop GUI (Featured)",
+      subtitle: "Native Desktop Visual Elegance & Micro-Interactions",
+      icon: <Monitor className="w-6 h-6 text-purple-400" />,
+      accentColor: "border-purple-500/50 bg-purple-500/10 hover:border-purple-500/80 shadow-lg shadow-purple-500/10",
+      badgeBg: "bg-purple-500/20 text-purple-300 border-purple-500/40 font-bold",
       description:
-        "Designed for developers, sysadmins, and shell enthusiasts who want zero-friction scriptability. Query inboxes, search calendars, and trigger automations directly from your shell with deterministic JSON outputs.",
+        "Our flagship primary interface. A premium native desktop app crafted with dark mode glassmorphism, responsive split panes, rich email inspectors, and interactive calendars — backed by native Rust performance.",
       highlights: [
-        "Pipeable JSON outputs for jq & shell scripts (`--json`)",
-        "Headless background sync daemon (`nunciod`)",
-        "Instant search across 100,000+ messages in microsecond time",
+        "Tauri v2 native performance with minimal memory & CPU footprint",
+        "Sandboxed HTML email rendering with strict tracking protection",
+        "Visual drag-and-drop rule builder, account switcher, and interactive calendar",
       ],
-      sampleCommand: "nuncio mail search --query 'urgent' --json",
+      sampleCommand: "Nuncio.app / Nuncio.exe (Tauri v2 Native Desktop)",
     },
     {
       id: "tui",
@@ -38,20 +38,20 @@ export function FourExperiencesSection() {
       sampleCommand: "nuncio-tui (press 'f' for rules, 'a' for accounts)",
     },
     {
-      id: "gui",
-      title: "3. The Glassmorphic Desktop GUI",
-      subtitle: "Native Desktop Visual Elegance & Micro-Interactions",
-      icon: <Monitor className="w-6 h-6 text-purple-400" />,
-      accentColor: "border-purple-500/30 bg-purple-500/5 hover:border-purple-500/60",
-      badgeBg: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+      id: "cli",
+      title: "3. The Lightning POSIX CLI",
+      subtitle: "Unmatched Command-Line Speed & Automation",
+      icon: <Terminal className="w-6 h-6 text-blue-400" />,
+      accentColor: "border-blue-500/30 bg-blue-500/5 hover:border-blue-500/60",
+      badgeBg: "bg-blue-500/20 text-blue-400 border-blue-500/30",
       description:
-        "A premium desktop interface crafted with dark mode glassmorphism, responsive split panes, and rich media previewers. Gives you the visual polish of modern design apps powered by native Rust performance.",
+        "Designed for developers, sysadmins, and shell enthusiasts who want zero-friction scriptability. Query inboxes, search calendars, and trigger automations directly from your shell with deterministic JSON outputs.",
       highlights: [
-        "Tauri v2 native performance with minimal RAM footprint",
-        "Sandboxed HTML email rendering with strict tracking protection",
-        "Visual drag-and-drop rule builder & account switcher",
+        "Pipeable JSON outputs for jq & shell scripts (`--json`)",
+        "Headless background sync daemon (`nunciod`)",
+        "Instant search across 100,000+ messages in microsecond time",
       ],
-      sampleCommand: "Nuncio.app / Nuncio.exe (Tauri v2 Native)",
+      sampleCommand: "nuncio mail search --query 'urgent' --json",
     },
     {
       id: "mcp",
