@@ -24,18 +24,18 @@ export function Hero() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold tracking-wide uppercase shadow-inner">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Nuncio v1.0 — Free Open Source Sovereign Mail &amp; Calendar</span>
+          <span>Nuncio v1.0 — Free Open-Source Mail &amp; Calendar for Power Users</span>
         </div>
 
         {/* Main Headline */}
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
-          The Sovereign Suite for <br className="hidden sm:inline" />
-          <span className="gradient-text">Developers &amp; Autonomous Agents</span>
+          One Email &amp; Calendar App. <br className="hidden sm:inline" />
+          <span className="gradient-text">Four Great Ways to Work.</span>
         </h1>
 
         {/* Subtitle */}
         <p className="max-w-3xl mx-auto text-lg sm:text-xl text-gray-300 font-normal leading-relaxed">
-          High-performance email, calendar, and contacts suite built with Rust and SQLite WAL. Features <strong className="text-white font-semibold">100% Parity Across All 4 Interfaces</strong> — POSIX CLI, Vim Ratatui TUI, Desktop GUI, and Native MCP LLM Agent Interface.
+          Take total control of your inbox and schedule. Whether you live in the terminal, keyboard-drive your email, prefer a sleek desktop app, or delegate to local AI agents — Nuncio gives you <strong className="text-white font-semibold">100% feature parity across four great interfaces</strong>.
         </p>
 
         {/* Quick One-Line Install Terminal String */}
