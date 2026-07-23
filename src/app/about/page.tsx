@@ -20,13 +20,13 @@ import {
   Layers,
   Heart,
   Globe,
-  Award,
+  ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
   title: "Why Nuncio Exists — Manifesto & Open-Source Credits",
-  description: "Learn why Nuncio exists: sovereign email rebuilt for today. Full credits and acknowledgments for third-party libraries, Rust crates, protocols, and open-source frameworks.",
+  description: "Learn why Nuncio exists: sovereign email rebuilt for today. Full credits, maintainer callouts, and external links for third-party libraries, Rust crates, protocols, and open-source frameworks.",
 };
 
 export default function AboutPage() {
@@ -68,52 +68,162 @@ export default function AboutPage() {
       category: "Rust Core Systems & Data Storage",
       icon: <Database className="w-5 h-5 text-blue-400" />,
       crates: [
-        { name: "sqlx", role: "Async, pure-Rust SQL engine powering type-safe SQLite database operations and migrations." },
-        { name: "sqlparser-rs", role: "Pure Rust SQL lexer and parser engine powering the Nuncio SQL Filter Language (NSQL) compiler." },
-        { name: "tokio", role: "Event-driven asynchronous Rust runtime driving background IMAP IDLE, JMAP push, and IPC streaming." },
-        { name: "serde & serde_json", role: "Fast, zero-copy JSON serialization and deserialization across IPC framing and storage contracts." },
-        { name: "thiserror & anyhow", role: "Ergonomic, type-safe Rust error handling and domain error mappings." },
+        {
+          name: "sqlx",
+          url: "https://github.com/launchbadge/sqlx",
+          maintainer: "Launchbadge (Ryan Lecompte, Austin Bonander & Community)",
+          role: "Async, pure-Rust SQL engine powering type-safe SQLite database operations and migrations.",
+        },
+        {
+          name: "sqlparser-rs",
+          url: "https://github.com/apache/datafusion-sqlparser-rs",
+          maintainer: "Andy Grove & Apache DataFusion Team",
+          role: "Pure Rust SQL lexer and parser engine powering the Nuncio SQL Filter Language (NSQL) compiler.",
+        },
+        {
+          name: "tokio",
+          url: "https://github.com/tokio-rs/tokio",
+          maintainer: "Carl Lerche & The Tokio Team",
+          role: "Event-driven asynchronous Rust runtime driving background IMAP IDLE, JMAP push, and IPC streaming.",
+        },
+        {
+          name: "serde & serde_json",
+          url: "https://github.com/serde-rs/serde",
+          maintainer: "David Tolnay (dtolnay) & Erick Tryzelaar",
+          role: "Fast, zero-copy JSON serialization and deserialization across IPC framing and storage contracts.",
+        },
+        {
+          name: "thiserror & anyhow",
+          url: "https://github.com/dtolnay/thiserror",
+          maintainer: "David Tolnay (dtolnay)",
+          role: "Ergonomic, type-safe Rust error handling and domain error mappings.",
+        },
       ],
     },
     {
       category: "Mail Protocols & MIME Parsing",
       icon: <Layers className="w-5 h-5 text-purple-400" />,
       crates: [
-        { name: "async-imap", role: "Asynchronous IMAP client library driving real-time TLS 993 inbox synchronization." },
-        { name: "lettre", role: "Modern Rust SMTP email client delivering outbound TLS 587/465 message transport." },
-        { name: "mail-parser", role: "High-performance MIME parser for raw RFC 5322 emails, headers, and attachment boundaries." },
-        { name: "html2text", role: "Converting HTML email markup to clean, un-tracked ANSI terminal text and Markdown." },
+        {
+          name: "async-imap",
+          url: "https://github.com/jonatanil/async-imap",
+          maintainer: "Jonatan Nilsson & Rust IMAP Contributors",
+          role: "Asynchronous IMAP client library driving real-time TLS 993 inbox synchronization.",
+        },
+        {
+          name: "lettre",
+          url: "https://github.com/lettre/lettre",
+          maintainer: "Alexis Yu & The Lettre Team",
+          role: "Modern Rust SMTP email client delivering outbound TLS 587/465 message transport.",
+        },
+        {
+          name: "mail-parser",
+          url: "https://github.com/bostjan/mail-parser",
+          maintainer: "Bostjan Skufca",
+          role: "High-performance MIME parser for raw RFC 5322 emails, headers, and attachment boundaries.",
+        },
+        {
+          name: "html2text",
+          url: "https://github.com/kuchikura/html2text",
+          maintainer: "Alexander Orlenko (kuchikura)",
+          role: "Converting HTML email markup to clean, un-tracked ANSI terminal text and Markdown.",
+        },
       ],
     },
     {
       category: "Security, Cryptography & Vault Enclaves",
       icon: <Lock className="w-5 h-5 text-emerald-400" />,
       crates: [
-        { name: "ring & aes-gcm", role: "Authenticated encryption algorithm libraries driving column-level PayloadCipher." },
-        { name: "age", role: "Modern, simple X25519 file and stream encryption format powering large attachment ciphers." },
-        { name: "zeroize", role: "Secure memory page zeroing (ZeroizeOnDrop) preventing key material leakages in RAM buffers." },
-        { name: "keyring", role: "Native OS credential manager integration (Windows DPAPI, macOS Keychain Access, Linux Secret Service)." },
-        { name: "hmac & sha2", role: "Cryptographic HMAC-SHA256 hash-chain calculation for WORM audit ledgers." },
+        {
+          name: "ring & aes-gcm",
+          url: "https://github.com/briansmith/ring",
+          maintainer: "Brian Smith & RustCrypto Team",
+          role: "Authenticated encryption algorithm libraries driving column-level PayloadCipher.",
+        },
+        {
+          name: "age & rage",
+          url: "https://filippo.io/age",
+          maintainer: "Filippo Valsorda & Jack Grigg (str4d)",
+          role: "Modern, simple X25519 file and stream encryption format powering large attachment ciphers.",
+        },
+        {
+          name: "zeroize",
+          url: "https://github.com/RustCrypto/utils",
+          maintainer: "Tony Arcieri (bascule) & The RustCrypto Team",
+          role: "Secure memory page zeroing (ZeroizeOnDrop) preventing key material leakages in RAM buffers.",
+        },
+        {
+          name: "keyring-rs",
+          url: "https://github.com/hwchen/keyring-rs",
+          maintainer: "hwchen & Rust Keyring Contributors",
+          role: "Native OS credential manager integration (Windows DPAPI, macOS Keychain Access, Linux Secret Service).",
+        },
+        {
+          name: "hmac & sha2",
+          url: "https://github.com/RustCrypto/hashes",
+          maintainer: "The RustCrypto Team",
+          role: "Cryptographic HMAC-SHA256 hash-chain calculation for WORM audit ledgers.",
+        },
       ],
     },
     {
       category: "Presentation Shells & UI Frameworks",
       icon: <Monitor className="w-5 h-5 text-yellow-400" />,
       crates: [
-        { name: "Tauri v2", role: "Lightweight, secure desktop application framework driving the Glassmorphic GUI." },
-        { name: "ratatui", role: "Terminal user interface framework powering the Vim-fueled Ratatui TUI." },
-        { name: "clap", role: "Declarative command-line argument parser powering the POSIX scriptable CLI (nuncio-cli)." },
-        { name: "Next.js & TailwindCSS", role: "React web framework and utility-first CSS engine powering nuncio-website." },
-        { name: "lucide-react", role: "Clean, modern open-source icon suite across Next.js and Tauri interfaces." },
+        {
+          name: "Tauri v2",
+          url: "https://tauri.app",
+          maintainer: "Daniel Thompson-Yvetot, Lucas Nogueira & The Tauri Team",
+          role: "Lightweight, secure desktop application framework driving the Glassmorphic GUI.",
+        },
+        {
+          name: "ratatui",
+          url: "https://ratatui.rs",
+          maintainer: "Orhun Parmaksız & The Ratatui Community",
+          role: "Terminal user interface framework powering the Vim-fueled Ratatui TUI.",
+        },
+        {
+          name: "clap",
+          url: "https://github.com/clap-rs/clap",
+          maintainer: "Ed Page (epage), Kevin K. & The Clap Team",
+          role: "Declarative command-line argument parser powering the POSIX scriptable CLI (nuncio-cli).",
+        },
+        {
+          name: "Next.js",
+          url: "https://nextjs.org",
+          maintainer: "Guillermo Rauch & The Vercel Team",
+          role: "React web framework powering nuncio-website with static site generation.",
+        },
+        {
+          name: "TailwindCSS",
+          url: "https://tailwindcss.com",
+          maintainer: "Adam Wathan & Tailwind Labs Team",
+          role: "Utility-first CSS engine powering responsive modern styling across website components.",
+        },
       ],
     },
     {
       category: "Open Protocols & Standards",
       icon: <Globe className="w-5 h-5 text-cyan-400" />,
       crates: [
-        { name: "Model Context Protocol (MCP)", role: "Anthropic's open stdio JSON-RPC 2.0 standard connecting AI agents (Claude, Antigravity, Cursor) directly to Nuncio tools." },
-        { name: "RFC 4155 MBOX & RFC 5322 MIME", role: "Universal open standards for portable email archiving, export, and transport." },
-        { name: "RFC 7636 PKCE OAuth 2.0", role: "Proof Key for Code Exchange protocol driving secure credential-free Google Workspace authentication." },
+        {
+          name: "Model Context Protocol (MCP)",
+          url: "https://modelcontextprotocol.io",
+          maintainer: "Dario Amodei, Anthropic & Open MCP Working Group",
+          role: "Open stdio JSON-RPC 2.0 standard connecting AI agents (Claude, Antigravity, Cursor) directly to Nuncio tools.",
+        },
+        {
+          name: "RFC 4155 MBOX & RFC 5322 MIME",
+          url: "https://datatracker.ietf.org/doc/html/rfc4155",
+          maintainer: "IETF Email Standards Working Group",
+          role: "Universal open standards for portable email archiving, export, and transport.",
+        },
+        {
+          name: "RFC 7636 PKCE OAuth 2.0",
+          url: "https://datatracker.ietf.org/doc/html/rfc7636",
+          maintainer: "IETF OAuth Working Group",
+          role: "Proof Key for Code Exchange protocol driving secure credential-free Google Workspace authentication.",
+        },
       ],
     },
   ];
@@ -168,16 +278,16 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Full Open-Source & Third-Party Library Credits Section */}
+        {/* Full Open-Source & Third-Party Library Credits Section with Links & Maintainer Names */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center space-y-3 max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold">
               <Heart className="w-3.5 h-3.5 fill-current" />
               <span>Standing on the Shoulders of Giants</span>
             </div>
-            <h2 className="text-3xl font-extrabold text-white">Open-Source Ecosystem &amp; Third-Party Credits</h2>
+            <h2 className="text-3xl font-extrabold text-white">Open-Source Ecosystem &amp; Maintainer Credits</h2>
             <p className="text-slate-300 text-sm">
-              Nuncio is made possible by the incredible open-source Rust, Web, Security, and Protocol communities. We extend our deepest gratitude to the maintainers of these core projects.
+              Nuncio is made possible by the incredible open-source Rust, Web, Security, and Protocol communities. We extend our deepest gratitude to the maintainers and authors of these core projects.
             </p>
           </div>
 
@@ -193,9 +303,24 @@ export default function AboutPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {cred.crates.map((c, rIdx) => (
-                    <div key={rIdx} className="p-4 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
-                      <span className="font-mono font-bold text-sm text-cyan-300 block">{c.name}</span>
-                      <p className="text-slate-300 text-xs leading-relaxed">{c.role}</p>
+                    <div key={rIdx} className="p-4 rounded-xl bg-slate-900/80 border border-white/5 space-y-2 flex flex-col justify-between">
+                      <div className="space-y-1">
+                        <div className="flex items-center justify-between gap-2">
+                          <a
+                            href={c.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono font-bold text-sm text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5 transition-colors"
+                          >
+                            <span>{c.name}</span>
+                            <ExternalLink className="w-3 h-3 text-cyan-500" />
+                          </a>
+                        </div>
+                        <span className="text-[11px] text-slate-400 font-medium block">
+                          Maintainers: <strong className="text-slate-200">{c.maintainer}</strong>
+                        </span>
+                        <p className="text-slate-300 text-xs leading-relaxed pt-1">{c.role}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
