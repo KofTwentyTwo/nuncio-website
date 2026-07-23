@@ -70,8 +70,8 @@ export function ShellInteractivePreview() {
       setCliOutput(
 `{
   "status": "up_to_date",
-  "current_version": "1.0.0",
-  "latest_version": "1.0.0"
+  "version": "latest",
+  "channel": "stable"
 }`
       );
     } else if (cmd.includes("search")) {
@@ -190,7 +190,7 @@ export function ShellInteractivePreview() {
             <div className="bg-cyan-950/80 border border-cyan-500/30 text-cyan-200 p-2 px-3 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center font-bold text-[11px] sm:text-xs gap-1">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>NUNCIO TUI v1.0.0 │ Account: james.maes@kof22.com │ State: Connected</span>
+                <span>NUNCIO TUI │ Account: james.maes@kof22.com │ State: Connected</span>
               </div>
               <span className="text-cyan-400">AppMode::{tuiMode === "rules" ? "FilterRules" : "QueryEditor"}</span>
             </div>

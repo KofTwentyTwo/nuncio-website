@@ -103,7 +103,7 @@ export function ComparisonPageTemplate({
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
               <div>
                 <h2 className="text-xl font-bold text-white">Detailed Capability Matrix</h2>
-                <p className="text-slate-400 text-xs">Direct technical breakdown comparing Nuncio v1.0 against {competitorName}.</p>
+                <p className="text-slate-400 text-xs">Direct technical breakdown comparing Nuncio against {competitorName}.</p>
               </div>
             </div>
 
@@ -112,7 +112,7 @@ export function ComparisonPageTemplate({
                 <thead>
                   <tr className="border-b border-white/10 text-slate-400 uppercase tracking-wider font-semibold">
                     <th className="p-3 pl-4">Capability / Dimension</th>
-                    <th className="p-3 text-blue-400 font-bold bg-blue-500/5">Nuncio v1.0</th>
+                    <th className="p-3 text-blue-400 font-bold bg-blue-500/5">Nuncio</th>
                     <th className="p-3 text-slate-300">{competitorName}</th>
                     <th className="p-3 pr-4 hidden md:table-cell">Technical Detail</th>
                   </tr>

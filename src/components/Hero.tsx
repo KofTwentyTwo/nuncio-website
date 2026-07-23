@@ -13,7 +13,7 @@ export function Hero() {
           {/* Announcement Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold tracking-tight shadow-lg">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>Nuncio 1.0 — 100% Free and 100% Open Source</span>
+            <span>Nuncio — Sovereign, Fast &amp; 100% Open Source</span>
           </div>
 
           {/* Main Hero Headline */}
