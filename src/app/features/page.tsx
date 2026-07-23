@@ -27,10 +27,11 @@ export default function FeaturesPage() {
       category: "Calendar & Contacts Management",
       icon: <Calendar className="w-5 h-5 text-purple-400" />,
       rows: [
-        { feature: "Multi-Provider CalDAV Synchronization", scope: "Calendar Engine", benefit: "Sync Google Calendar, Fastmail, Apple iCloud, and custom CalDAV endpoints seamlessly." },
+        { feature: "Sovereign Contacts Engine (nuncio-contacts)", scope: "Contacts Engine", benefit: "Dedicated local SQLite contacts database with instant trigram FTS5 search index and vCard 4.0 generator." },
+        { feature: "Multi-Provider CardDAV Synchronization", scope: "CardDAV Protocol", benefit: "Sync Google Contacts, Apple iCloud, Fastmail, and Nextcloud address books seamlessly over CardDAV." },
+        { feature: "Automated Email Contact Harvesting", scope: "Mail / Contacts", benefit: "Automatically extracts name/email pairs from incoming and sent messages, updating interaction metrics." },
         { feature: "Native Event Scheduling & RSVP", scope: "Calendar Engine", benefit: "Accept, decline, or mark tentative on event invitations with automatic ICS payload updates." },
-        { feature: "Google Calendar OAuth 2.0 PKCE", scope: "Auth Engine", benefit: "OAuth 2.0 PKCE loopback authentication with refresh token storage inside native OS Keyrings." },
-        { feature: "CardDAV Address Book Synchronization", scope: "Contacts Engine", benefit: "Sync contacts across providers with real-time recipient autocompletion in all 4 interfaces." },
+        { feature: "Google Calendar & Contacts OAuth 2.0", scope: "Auth Engine", benefit: "OAuth 2.0 PKCE loopback authentication with refresh token storage inside native OS Keyrings." },
       ],
     },
     {
