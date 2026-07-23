@@ -6,9 +6,12 @@ import { Download, Terminal, Check, Copy, Laptop, Command } from "lucide-react";
 export function DownloadsSection() {
   const [copiedBrew, setCopiedBrew] = useState(false);
   const [copiedCargo, setCopiedCargo] = useState(false);
+  const [activeChannel, setActiveChannel] = useState<"stable" | "nightly">("stable");
 
   const brewCmd = "brew install koftwentytwo/tap/nuncio";
-  const cargoCmd = "cargo install nuncio-cli nuncio-tui nuncio-mcp";
+  const cargoCmd = activeChannel === "stable" 
+    ? "cargo install nuncio-cli nuncio-tui nuncio-mcp" 
+    : "cargo install --git https://github.com/KofTwentyTwo/nuncio.git --branch dev nuncio-cli nuncio-tui nuncio-mcp nunciod";
 
   const handleCopyBrew = () => {
     navigator.clipboard.writeText(brewCmd);
@@ -25,16 +28,44 @@ export function DownloadsSection() {
   return (
     <section id="downloads" className="py-20 border-t border-white/10 relative bg-slate-950/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold">
             <Download className="w-3.5 h-3.5" />
-            <span>Install &amp; Download Nuncio (Latest Release)</span>
+            <span>Install &amp; Download Nuncio Packages</span>
           </div>
+
+          {/* Release Channel Toggle Pills */}
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={() => setActiveChannel("stable")}
+              className={`px-5 py-2 rounded-full text-xs font-bold transition-all border ${
+                activeChannel === "stable"
+                  ? "bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/30"
+                  : "bg-slate-900/80 border-white/10 text-slate-400 hover:text-white"
+              }`}
+            >
+              Production GA (Stable)
+            </button>
+            <button
+              onClick={() => setActiveChannel("nightly")}
+              className={`px-5 py-2 rounded-full text-xs font-bold transition-all border flex items-center gap-1.5 ${
+                activeChannel === "nightly"
+                  ? "bg-purple-600 border-purple-500 text-white shadow-lg shadow-purple-500/30"
+                  : "bg-slate-900/80 border-white/10 text-slate-400 hover:text-white"
+              }`}
+            >
+              <Terminal className="w-3.5 h-3.5 text-purple-300" />
+              Development Nightly (Bleeding-Edge)
+            </button>
+          </div>
+
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white">
             Available for <span className="gradient-text">macOS, Windows &amp; Linux</span>
           </h2>
           <p className="max-w-3xl mx-auto text-gray-300 text-base sm:text-lg">
-            Free and open-source under MIT &amp; Apache-2.0 licenses. Choose your preferred installer or package manager below.
+            {activeChannel === "stable"
+              ? "Free and open-source under MIT & Apache-2.0 licenses. Choose your preferred installer or package manager below."
+              : "Automated daily snapshot builds compiled directly from the bleeding-edge dev branch."}
           </p>
         </div>
 
@@ -50,11 +81,11 @@ export function DownloadsSection() {
               <p className="text-xs text-gray-300">Supports Apple Silicon (M1/M2/M3/M4) &amp; Intel x64.</p>
             </div>
             <a
-              href="https://github.com/KofTwentyTwo/nuncio/releases/latest"
+              href={activeChannel === "stable" ? "https://github.com/KofTwentyTwo/nuncio/releases/latest" : "https://github.com/KofTwentyTwo/nuncio/releases/tag/dev-nightly"}
               className="w-full py-3 rounded-xl gradient-bg font-bold text-white text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4" />
-              Download macOS Release (.DMG)
+              {activeChannel === "stable" ? "Download macOS Release (.DMG)" : "Download macOS Nightly (.tar.gz)"}
             </a>
           </div>
 
@@ -68,11 +99,11 @@ export function DownloadsSection() {
               <p className="text-xs text-gray-300">Native WiX Installer (.msi) with Windows Keyring support.</p>
             </div>
             <a
-              href="https://github.com/KofTwentyTwo/nuncio/releases/latest"
+              href={activeChannel === "stable" ? "https://github.com/KofTwentyTwo/nuncio/releases/latest" : "https://github.com/KofTwentyTwo/nuncio/releases/tag/dev-nightly"}
               className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 font-bold text-white text-xs hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4 text-cyan-400" />
-              Download Windows Release (.MSI)
+              {activeChannel === "stable" ? "Download Windows Release (.MSI)" : "Download Windows Nightly (.ZIP)"}
             </a>
           </div>
 
@@ -86,11 +117,11 @@ export function DownloadsSection() {
               <p className="text-xs text-gray-300">Universal AppImage &amp; Tarball for Ubuntu, Fedora, Arch.</p>
             </div>
             <a
-              href="https://github.com/KofTwentyTwo/nuncio/releases/latest"
+              href={activeChannel === "stable" ? "https://github.com/KofTwentyTwo/nuncio/releases/latest" : "https://github.com/KofTwentyTwo/nuncio/releases/tag/dev-nightly"}
               className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 font-bold text-white text-xs hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4 text-purple-400" />
-              Download Linux Release (.AppImage)
+              {activeChannel === "stable" ? "Download Linux Release (.AppImage)" : "Download Linux Nightly (.tar.gz)"}
             </a>
           </div>
         </div>
