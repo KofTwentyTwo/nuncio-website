@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Download, ArrowRight, ShieldCheck, Sparkles, Monitor } from "lucide-react";
+import { Download, ArrowRight, ShieldCheck, Sparkles, Monitor, Code } from "lucide-react";
 import { ShellInteractivePreview } from "./ShellInteractivePreview";
 
 export function Hero() {
@@ -13,7 +13,7 @@ export function Hero() {
           {/* Announcement Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold tracking-tight shadow-lg">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>Nuncio 1.0 — Open Source Sovereign Suite</span>
+            <span>Nuncio 1.0 — 100% Free and 100% Open Source</span>
           </div>
 
           {/* Main Hero Headline */}
@@ -24,7 +24,7 @@ export function Hero() {
 
           {/* Subtitle */}
           <p className="text-slate-300 text-lg sm:text-xl font-normal max-w-2xl mx-auto leading-relaxed">
-            Four extraordinary ways to work. Powered by a single high-speed native engine running 100% locally on your machine.
+            Four extraordinary ways to work. 100% Free and 100% Open Source mail and calendar suite running locally on your machine.
           </p>
 
           {/* Action Buttons */}
@@ -50,6 +50,10 @@ export function Hero() {
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               100% Local Encryption
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Code className="w-4 h-4 text-cyan-400" />
+              100% Free &amp; Open Source
             </span>
             <span className="flex items-center gap-1.5">
               <Sparkles className="w-4 h-4 text-blue-400" />
