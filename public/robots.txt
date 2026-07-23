@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nuncio.mx/sitemap.xml
