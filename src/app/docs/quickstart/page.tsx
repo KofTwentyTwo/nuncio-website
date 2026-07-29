@@ -4,7 +4,8 @@ import { Footer } from "@/components/Footer";
 import { DocsLayout } from "@/components/DocsLayout";
 import { AvailableNow } from "@/components/StatusBadge";
 import { GITHUB_URL } from "@/lib/status";
-import { Download, Terminal, Sparkles, GitBranch } from "lucide-react";
+import { GithubIcon } from "@/components/GithubIcon";
+import { Download, Terminal, Sparkles } from "lucide-react";
 
 export const metadata = {
   title: "Quickstart — Build & Run Nuncio From Source — Nuncio Docs",
@@ -88,7 +89,7 @@ cargo build --workspace`}
                 From source, you get real IMAP/SMTP sync, SQLite FTS5 full-text search, MBOX/EML/JSON/JSONL export, and
                 a hash-chained WORM audit ledger — driven entirely through the CLI. There is no desktop GUI, terminal
                 TUI, or MCP AI client yet; those are separate client projects planned on top of the same gRPC contract.
-                See <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline inline-flex items-center gap-1">the repository<GitBranch className="w-3 h-3" /></a> for
+                See <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline inline-flex items-center gap-1">the repository<GithubIcon className="w-3 h-3" /></a> for
                 the current state of the workspace.
               </p>
             </div>

@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Bell, Map, Menu, X } from "lucide-react";
+import { Map, Menu, X } from "lucide-react";
+import { GithubIcon } from "./GithubIcon";
 import { GITHUB_URL, ROADMAP_URL } from "@/lib/status";
 
 export function Header() {
@@ -68,8 +69,8 @@ export function Header() {
               rel="noopener noreferrer"
               className="apple-button-primary px-4 py-1.5 text-xs font-semibold flex items-center gap-1.5 shadow-sm"
             >
-              <Bell className="w-3.5 h-3.5" />
-              Notify Me at Launch
+              <GithubIcon className="w-3.5 h-3.5" />
+              Follow on GitHub
             </a>
           </div>
 
@@ -129,8 +130,8 @@ export function Header() {
               onClick={() => setMobileMenuOpen(false)}
               className="w-full apple-button-primary py-2.5 text-xs font-semibold flex items-center justify-center gap-1.5"
             >
-              <Bell className="w-3.5 h-3.5" />
-              Notify Me at Launch
+              <GithubIcon className="w-3.5 h-3.5" />
+              Follow on GitHub
             </a>
           </div>
         </div>

@@ -31,7 +31,7 @@ export default function VsSparkMailPage() {
     {
       title: "No Subscription Tier",
       icon: <ShieldCheck className="w-5 h-5 text-blue-400" />,
-      desc: "Nuncio is MIT / Apache-2.0 with no plan to gate features behind a subscription. Spark Premium is $59.99/year for team and priority-inbox features.",
+      desc: "Nuncio is MIT / Apache-2.0 with no plan to gate features behind a subscription. Spark's paid Plus/Pro tiers run $120-$240/year for team and priority-inbox features.",
     },
     {
       title: "A Scriptable CLI, Today",
@@ -47,7 +47,7 @@ export default function VsSparkMailPage() {
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "Pricing Model", nuncioValue: "Free & open source (in development)", competitorValue: "$59.99/yr Premium", description: "No paid tier planned" },
+    { feature: "Pricing Model", nuncioValue: "Free & open source (in development)", competitorValue: "$120-$240/yr (Plus/Pro)", description: "No paid tier planned" },
     { feature: "Sync Architecture", nuncioValue: "Direct local daemon to IMAP/SMTP", competitorValue: "Central Spark proxy servers", description: "Nuncio connects from your machine, not a vendor's cloud" },
     { feature: "Build & Run From Source", nuncioValue: true, competitorValue: false, description: "cargo build --workspace + run the daemon and CLI locally" },
     { feature: "Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Real gRPC client today, JSON output for pipelines" },
@@ -65,7 +65,7 @@ export default function VsSparkMailPage() {
       competitorSlug="spark-mail"
       tagline="A daemon that talks directly to your mail server, compared against Spark's proxy-server sync and Premium subscription."
       nuncioPrice="Free & open source (in development)"
-      competitorPrice="$59.99 / Year Premium"
+      competitorPrice="$120-$240 / Year (Plus/Pro)"
       heroHeadline="Spark Mail routes push notifications and sync through its own proxy servers, then paywalls team and priority-inbox features. We're building Nuncio's daemon to talk to your IMAP/SMTP server directly, with no subscription tier and no relay in between."
       whySwitchParagraph="Spark's central proxy servers sit between you and your mail provider, and its Premium plan gates advanced workflow features behind a yearly fee. Nuncio's architecture puts a single daemon (nunciod) on your own machine, talking directly to your provider and owning your mail state in local SQLite. That daemon, its IMAP/SMTP sync, full-text search, export, and WORM audit ledger already build and run from source; the terminal client and governed AI gateway are the next milestones, not shipped today."
       comparisonRows={comparisonRows}

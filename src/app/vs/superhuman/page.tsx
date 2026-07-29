@@ -4,11 +4,11 @@ import { Metadata } from "next";
 import { ShieldCheck, Database, Bot, Layers } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Nuncio vs Superhuman — A Free, Local-First Alternative to $360/yr Cloud Email",
-  description: "How Nuncio's local-first, open-source design compares to Superhuman's $360/yr closed cloud subscription. Nuncio is pre-alpha; this is a design comparison, not a claim it's ready to switch to today.",
+  title: "Nuncio vs Superhuman — A Free, Local-First Alternative to Paid Cloud Email",
+  description: "How Nuncio's local-first, open-source design compares to Superhuman's paid closed cloud subscription. Nuncio is pre-alpha; this is a design comparison, not a claim it's ready to switch to today.",
   alternates: { canonical: "https://nuncio.mx/vs/superhuman" },
   openGraph: {
-    title: "Nuncio vs Superhuman — A Free, Local-First Alternative to $360/yr Cloud Email",
+    title: "Nuncio vs Superhuman — A Free, Local-First Alternative to Paid Cloud Email",
     description: "A local SQLite store, an open NSQL rule language, and a WORM audit ledger, compared against Superhuman's closed cloud subscription.",
     url: "https://nuncio.mx/vs/superhuman",
     images: ["/og-image.png"],
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Nuncio vs Superhuman",
-    description: "A free, local-first, open-source design compared against Superhuman's $360/yr closed cloud subscription.",
+    description: "A free, local-first, open-source design compared against Superhuman's paid closed cloud subscription.",
     images: ["/og-image.png"],
   },
 };
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
 export default function VsSuperhumanPage() {
   const differentiators = [
     {
-      title: "Free & Open, Not $360/Year",
+      title: "Free & Open, Not a Paid Subscription",
       icon: <ShieldCheck className="w-5 h-5 text-yellow-400" />,
-      desc: "Nuncio is MIT / Apache-2.0 with no subscription planned. Superhuman charges $30/month for its closed cloud client.",
+      desc: "Nuncio is MIT / Apache-2.0 with no subscription planned. Superhuman charges a monthly or annual fee across its tiers for its closed cloud client.",
     },
     {
       title: "Local SQLite, Not Closed Cloud",
@@ -48,7 +48,7 @@ export default function VsSuperhumanPage() {
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "Pricing & Subscription", nuncioValue: "Free & open source (in development)", competitorValue: "$30/mo ($360/yr)", description: "No subscription tier planned" },
+    { feature: "Pricing & Subscription", nuncioValue: "Free & open source (in development)", competitorValue: "≈$300+/yr (tiered plans)", description: "No subscription tier planned" },
     { feature: "Data Storage Location", nuncioValue: "Local SQLite WAL, daemon you run", competitorValue: "Proprietary cloud servers", description: "Local data ownership" },
     { feature: "Build & Run From Source", nuncioValue: true, competitorValue: false, description: "cargo build --workspace + run the daemon and CLI locally" },
     { feature: "Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Real gRPC client today, JSON output for pipelines" },
@@ -66,11 +66,11 @@ export default function VsSuperhumanPage() {
     <ComparisonPageTemplate
       competitorName="Superhuman"
       competitorSlug="superhuman"
-      tagline="A free, open, local-first alternative we're building to Superhuman's $360/yr closed cloud email."
+      tagline="A free, open, local-first alternative we're building to Superhuman's paid closed cloud email."
       nuncioPrice="Free & open source (in development)"
-      competitorPrice="$360 / Year Subscription"
-      heroHeadline="Superhuman popularized fast keyboard-driven email, wrapped inside a $30/month closed cloud client. We're building Nuncio as a free, open, local-first alternative: the same keyboard-first ambition, running on a daemon you own."
-      whySwitchParagraph="Superhuman's keyboard-driven speed is real, but it's delivered through a closed client on top of centralized cloud servers, for $360 a year. Nuncio's architecture takes a different path: one daemon (nunciod) that owns your mail state in local SQLite, speaking a single versioned gRPC contract that a future terminal client, desktop GUI, and AI-agent gateway would all consume identically. The daemon, IMAP/SMTP sync, local FTS5 search, export, and the WORM audit ledger are real and buildable from source today; the additional clients and live NSQL rule-firing are what's ahead."
+      competitorPrice="≈$300+ / Year (tiered plans)"
+      heroHeadline="Superhuman popularized fast keyboard-driven email, wrapped inside a closed cloud client with a recurring subscription. We're building Nuncio as a free, open, local-first alternative: the same keyboard-first ambition, running on a daemon you own."
+      whySwitchParagraph="Superhuman's keyboard-driven speed is real, but it's delivered through a closed client on top of centralized cloud servers, for a few hundred dollars a year. Nuncio's architecture takes a different path: one daemon (nunciod) that owns your mail state in local SQLite, speaking a single versioned gRPC contract that a future terminal client, desktop GUI, and AI-agent gateway would all consume identically. The daemon, IMAP/SMTP sync, local FTS5 search, export, and the WORM audit ledger are real and buildable from source today; the additional clients and live NSQL rule-firing are what's ahead."
       comparisonRows={comparisonRows}
       differentiators={differentiators}
     />

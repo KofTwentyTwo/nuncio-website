@@ -18,9 +18,9 @@ import {
   FileCheck,
   HelpCircle,
   AlertTriangle,
-  GitBranch,
   MapPin,
 } from "lucide-react";
+import { GithubIcon } from "@/components/GithubIcon";
 import Link from "next/link";
 
 export const metadata = {
@@ -78,7 +78,7 @@ export default function DocsIndexPage() {
             </p>
             <div className="flex flex-wrap items-center gap-3 pt-1 text-xs font-semibold">
               <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-blue-400 hover:underline">
-                <GitBranch className="w-3.5 h-3.5" />
+                <GithubIcon className="w-3.5 h-3.5" />
                 Follow the build on GitHub
               </a>
               <a href={ROADMAP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-blue-400 hover:underline">

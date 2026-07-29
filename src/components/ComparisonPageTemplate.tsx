@@ -5,7 +5,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StatusBadge } from "@/components/StatusBadge";
 import { ROADMAP_URL, GITHUB_URL, type StatusVariant } from "@/lib/status";
-import { Check, X, ArrowRight, Bell, GitBranch, MapPin, Layers } from "lucide-react";
+import { Check, X, ArrowRight, Bell, MapPin, Layers } from "lucide-react";
+import { GithubIcon } from "./GithubIcon";
 import Link from "next/link";
 
 export interface ComparisonFeatureRow {
@@ -89,6 +90,9 @@ export function ComparisonPageTemplate({
               {competitorName}: {competitorPrice}
             </span>
           </div>
+          <p className="text-slate-500 text-[11px]">
+            {competitorName} pricing is approximate — pricing as of 2026; check the vendor&apos;s site for current rates.
+          </p>
         </div>
 
         {/* Core Differentiator Cards Grid */}
@@ -222,7 +226,7 @@ export function ComparisonPageTemplate({
               rel="noopener noreferrer"
               className="apple-button-secondary px-6 py-3.5 text-sm font-semibold inline-flex items-center gap-2"
             >
-              <GitBranch className="w-4 h-4" />
+              <GithubIcon className="w-4 h-4" />
               Follow the build on GitHub
             </a>
             <a

@@ -1,13 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Bell, GitBranch, Check, Copy, ArrowRight, Terminal, MapPin } from "lucide-react";
+import { Bell, Check, Copy, ArrowRight, Terminal, MapPin } from "lucide-react";
+import { GithubIcon } from "./GithubIcon";
 import { GITHUB_URL, ROADMAP_URL } from "@/lib/status";
 
 export function DownloadsSection() {
   const [copiedBuild, setCopiedBuild] = useState(false);
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
 
   const buildCmd = "git clone https://github.com/KofTwentyTwo/nuncio.git && cargo build --workspace";
 
@@ -15,13 +14,6 @@ export function DownloadsSection() {
     navigator.clipboard.writeText(buildCmd);
     setCopiedBuild(true);
     setTimeout(() => setCopiedBuild(false), 2000);
-  };
-
-  const handleNotifySubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Placeholder: no backend is wired up yet. This is a visual stand-in
-    // for the eventual launch-notification signup, not a live capture form.
-    setSubmitted(true);
   };
 
   return (
@@ -38,8 +30,7 @@ export function DownloadsSection() {
           </h2>
           <p className="max-w-3xl mx-auto text-gray-300 text-base sm:text-lg">
             There&apos;s no packaged app to download today. Follow the build in the open on GitHub, watch the
-            roadmap for milestones, or leave your email and we&apos;ll tell you the moment there&apos;s something
-            to install.
+            roadmap for milestones, or build it yourself from source right now.
           </p>
         </div>
 
@@ -49,7 +40,7 @@ export function DownloadsSection() {
           <div className="glass-card p-6 rounded-2xl border border-white/10 space-y-4 text-center flex flex-col justify-between">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-slate-800/60 text-slate-200 flex items-center justify-center mx-auto border border-white/10">
-                <GitBranch className="w-6 h-6" />
+                <GithubIcon className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-white">Follow the build</h3>
               <p className="text-xs text-gray-300">
@@ -62,7 +53,7 @@ export function DownloadsSection() {
               rel="noopener noreferrer"
               className="w-full py-3 rounded-xl gradient-bg font-bold text-white text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
-              <GitBranch className="w-4 h-4" />
+              <GithubIcon className="w-4 h-4" />
               Follow the build on GitHub
             </a>
           </div>
@@ -95,33 +86,29 @@ export function DownloadsSection() {
           <h4 className="text-center text-xs font-bold text-gray-400 uppercase tracking-widest">
             Notify me at launch
           </h4>
-          {submitted ? (
-            <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm text-center p-4 rounded-xl">
-              Thanks — we&apos;ll let you know the moment there&apos;s a build worth installing.
-            </div>
-          ) : (
-            <form onSubmit={handleNotifySubmit} className="flex flex-col sm:flex-row items-center gap-3">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                aria-label="Email address"
-                className="w-full bg-slate-900/90 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-blue-500 focus:outline-none shadow-inner"
-              />
-              <button
-                type="submit"
-                className="w-full sm:w-auto shrink-0 px-6 py-3 rounded-xl gradient-bg font-bold text-white text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all flex items-center justify-center gap-2"
-              >
-                <Bell className="w-4 h-4" />
-                Notify me
-              </button>
-            </form>
-          )}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl gradient-bg font-bold text-white text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105 transition-all flex items-center justify-center gap-2"
+            >
+              <GithubIcon className="w-4 h-4" />
+              Watch on GitHub for releases
+            </a>
+            <a
+              href={ROADMAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 font-bold text-white text-xs hover:scale-105 transition-all flex items-center justify-center gap-2"
+            >
+              See the roadmap
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
           <p className="text-center text-[11px] text-slate-500">
-            This is a placeholder signup — no email list is wired up yet. For real-time progress, GitHub is the
-            source of truth.
+            No email list exists to sign up for. On GitHub, set Watch → Custom → Releases on the repo and
+            you&apos;ll get notified the moment there&apos;s a build worth installing.
           </p>
         </div>
 

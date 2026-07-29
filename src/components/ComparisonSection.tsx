@@ -7,12 +7,12 @@ import { Check, X, Sparkles, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 export function ComparisonSection() {
   const competitorCards = [
     { name: "Airmail", platform: "macOS / iOS", price: "$29.99 / yr", href: "/vs/airmail", desc: "How Nuncio's sovereign design compares to Airmail for Mac and iOS." },
-    { name: "Canary Mail", platform: "macOS / iOS / Win", price: "$20.00 / yr", href: "/vs/canary-mail", desc: "How Nuncio's local-first AI gateway compares to Canary Mail's cloud AI." },
-    { name: "Spark Mail", platform: "macOS / Win / iOS", price: "$59.99 / yr", href: "/vs/spark-mail", desc: "How Nuncio compares to Spark Premium Desktop." },
-    { name: "Superhuman", platform: "macOS / Web", price: "$360.00 / yr", href: "/vs/superhuman", desc: "A free, open-source alternative to a $360/yr subscription." },
+    { name: "Canary Mail", platform: "macOS / iOS / Win", price: "$36-$100 / yr", href: "/vs/canary-mail", desc: "How Nuncio's local-first AI gateway compares to Canary Mail's cloud AI." },
+    { name: "Spark Mail", platform: "macOS / Win / iOS", price: "$120-$240 / yr", href: "/vs/spark-mail", desc: "How Nuncio compares to Spark Premium Desktop." },
+    { name: "Superhuman", platform: "macOS / Web", price: "≈$300+ / yr", href: "/vs/superhuman", desc: "A free, open-source alternative to a paid subscription." },
     { name: "HEY Mail", platform: "Web / iOS / Mac", price: "$99.00 / yr", href: "/vs/hey", desc: "Sovereign local storage vs HEY's closed, hosted servers." },
     { name: "Apple Mail", platform: "macOS", price: "Free (Proprietary)", href: "/vs/apple-mail", desc: "Four planned interfaces & NSQL filtering vs Apple Mail." },
-    { name: "Outlook 365", platform: "Windows / Mac", price: "$6.99+ / mo", href: "/vs/outlook", desc: "Local SQLite storage vs Outlook's cloud telemetry." },
+    { name: "Outlook 365", platform: "Windows / Mac", price: "≈$9.99 / mo", href: "/vs/outlook", desc: "Local SQLite storage vs Outlook's cloud telemetry." },
     { name: "Mozilla Thunderbird", platform: "Linux / Win / Mac", price: "Free Open Source", href: "/vs/thunderbird", desc: "A modern Rust architecture vs legacy Thunderbird." },
     { name: "Gmail", platform: "Web", price: "Free (Ad-Tracked)", href: "/vs/gmail", desc: "Zero-tracking, local-first privacy vs Gmail's data mining." },
   ];
@@ -64,6 +64,9 @@ export function ComparisonSection() {
             </Link>
           ))}
         </div>
+        <p className="text-center text-slate-500 text-xs">
+          Competitor prices are approximate — pricing as of 2026; check the vendor&apos;s site for current rates.
+        </p>
       </div>
     </section>
   );

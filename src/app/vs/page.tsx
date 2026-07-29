@@ -3,7 +3,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StatusBadge } from "@/components/StatusBadge";
 import { ROADMAP_URL, GITHUB_URL } from "@/lib/status";
-import { Layers, ArrowRight, Bell, GitBranch, MapPin } from "lucide-react";
+import { Layers, ArrowRight, Bell, MapPin } from "lucide-react";
+import { GithubIcon } from "@/components/GithubIcon";
 import Link from "next/link";
 
 export const metadata = {
@@ -13,13 +14,13 @@ export const metadata = {
 
 export default function ComparisonsHubPage() {
   const competitors = [
-    { id: "airmail", name: "Airmail", platform: "macOS / iOS", price: "$9.99 / yr", href: "/vs/airmail", desc: "A local-first, cross-platform design vs a macOS-only Pro subscription." },
-    { id: "canary", name: "Canary Mail", platform: "macOS / Win / iOS", price: "$20-$60 / yr", href: "/vs/canary-mail", desc: "A governed, local AI-agent policy vs proprietary cloud AI mail." },
-    { id: "spark", name: "Spark Mail", platform: "macOS / Win / iOS", price: "$59.99 / yr", href: "/vs/spark-mail", desc: "A daemon that talks to your mail server directly vs Spark's proxy-server architecture." },
-    { id: "superhuman", name: "Superhuman", platform: "macOS / Web", price: "$360.00 / yr", href: "/vs/superhuman", desc: "A free, open, local-first alternative we're building to $360/yr cloud email." },
+    { id: "airmail", name: "Airmail", platform: "macOS / iOS", price: "$29.99 / yr", href: "/vs/airmail", desc: "A local-first, cross-platform design vs a macOS-only Pro subscription." },
+    { id: "canary", name: "Canary Mail", platform: "macOS / Win / iOS", price: "$36-$100 / yr", href: "/vs/canary-mail", desc: "A governed, local AI-agent policy vs proprietary cloud AI mail." },
+    { id: "spark", name: "Spark Mail", platform: "macOS / Win / iOS", price: "$120-$240 / yr", href: "/vs/spark-mail", desc: "A daemon that talks to your mail server directly vs Spark's proxy-server architecture." },
+    { id: "superhuman", name: "Superhuman", platform: "macOS / Web", price: "≈$300+ / yr", href: "/vs/superhuman", desc: "A free, open, local-first alternative we're building to paid cloud email." },
     { id: "hey", name: "HEY Mail", platform: "Web / Mac / iOS", price: "$99.00 / yr", href: "/vs/hey", desc: "Bring your own address and rules engine vs HEY's closed $99/yr platform." },
     { id: "apple", name: "Apple Mail", platform: "macOS", price: "Free (Proprietary)", href: "/vs/apple-mail", desc: "One gRPC contract across future clients vs Apple Mail's single-platform reach." },
-    { id: "outlook", name: "Outlook 365", platform: "Windows / Mac", price: "$6.99+ / mo", href: "/vs/outlook", desc: "A minimal, memory-safe Rust daemon vs Outlook's telemetry and subscription model." },
+    { id: "outlook", name: "Outlook 365", platform: "Windows / Mac", price: "≈$9.99 / mo", href: "/vs/outlook", desc: "A minimal, memory-safe Rust daemon vs Outlook's telemetry and subscription model." },
     { id: "thunderbird", name: "Thunderbird", platform: "Linux / Win / Mac", price: "Free Open Source", href: "/vs/thunderbird", desc: "A from-scratch memory-safe Rust engine vs Thunderbird's decades-old C++ core." },
     { id: "gmail", name: "Gmail", platform: "Web", price: "Free (Ad-Tracked)", href: "/vs/gmail", desc: "Local data ownership vs Gmail's cloud-hosted, ad-supported model." },
   ];
@@ -82,6 +83,10 @@ export default function ComparisonsHubPage() {
               </Link>
             ))}
           </div>
+          <p className="text-center text-slate-500 text-xs">
+            Competitor prices are approximate, current as of when each page was written, and change without notice —
+            pricing as of 2026; check the vendor&apos;s site for what they charge today.
+          </p>
         </div>
 
         {/* Bottom CTA */}
@@ -99,7 +104,7 @@ export default function ComparisonsHubPage() {
             rel="noopener noreferrer"
             className="apple-button-secondary px-6 py-3.5 text-sm font-semibold inline-flex items-center gap-2"
           >
-            <GitBranch className="w-4 h-4" />
+            <GithubIcon className="w-4 h-4" />
             Follow the build on GitHub
           </a>
           <a

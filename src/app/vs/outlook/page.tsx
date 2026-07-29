@@ -47,7 +47,7 @@ export default function VsOutlookPage() {
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "Pricing Model", nuncioValue: "Free & open source (in development)", competitorValue: "Microsoft 365 subscription (from ~$6.99/mo)", description: "No subscription tier planned" },
+    { feature: "Pricing Model", nuncioValue: "Free & open source (in development)", competitorValue: "Microsoft 365 subscription (~$9.99/mo or ~$99.99/yr)", description: "No subscription tier planned" },
     { feature: "Ads & Telemetry", nuncioValue: "None in the engine", competitorValue: "Ads in free tier; telemetry in paid tiers", description: "Inspect the engine's source to verify" },
     { feature: "Build & Run From Source", nuncioValue: true, competitorValue: false, description: "cargo build --workspace + run the daemon and CLI locally" },
     { feature: "Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Real gRPC client today, JSON output for pipelines" },

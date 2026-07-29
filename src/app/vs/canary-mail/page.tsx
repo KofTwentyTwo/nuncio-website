@@ -64,7 +64,7 @@ export default function VsCanaryMailPage() {
       competitorSlug="canary-mail"
       tagline="A local, policy-governed AI gateway we're building, compared against Canary Mail's proprietary cloud AI mail."
       nuncioPrice="Free & open source (in development)"
-      competitorPrice="$20-$60 / Year Subscription"
+      competitorPrice="$36-$100 / Year (Growth/Pro+)"
       heroHeadline="Canary Mail routes AI features through proprietary cloud endpoints. We're building Nuncio around a different idea: an MCP gateway that lets AI agents touch your mail only through capability policies and an audit trail you control locally."
       whySwitchParagraph="Canary Mail's AI features send message context to cloud AI APIs with no user-configurable capability policy. Nuncio's design keeps that decision local: an MCP client (on the roadmap) would broker every agent action through the same daemon that already owns your mail, with fine-grained capability flags and an immutable WORM audit trail. The audit ledger, local SQLite storage, and open-source engine are real today; the MCP gateway itself is the next milestone, not a shipped feature."
       comparisonRows={comparisonRows}

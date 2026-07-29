@@ -15,6 +15,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { StatusBadge } from "@/components/StatusBadge";
+import { GithubIcon } from "@/components/GithubIcon";
 import { GITHUB_URL, ROADMAP_URL } from "@/lib/status";
 import type { StatusVariant } from "@/lib/status";
 
@@ -251,7 +252,7 @@ export default function AboutPage() {
             rel="noopener noreferrer"
             className="apple-button-primary px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2"
           >
-            <GitBranch className="w-4 h-4" />
+            <GithubIcon className="w-4 h-4" />
             Follow the build on GitHub
           </a>
           <a

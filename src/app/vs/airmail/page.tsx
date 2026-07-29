@@ -47,7 +47,7 @@ export default function VsAirmailPage() {
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "Pricing Model", nuncioValue: "Free & open source (in development)", competitorValue: "$9.99/yr Pro subscription", description: "No planned subscription tier for Nuncio" },
+    { feature: "Pricing Model", nuncioValue: "Free & open source (in development)", competitorValue: "$29.99/yr Pro subscription", description: "No planned subscription tier for Nuncio" },
     { feature: "OS Availability (engine + CLI)", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS & iOS only", description: "Build the daemon and CLI from source on any of the three today" },
     { feature: "Build & Run From Source", nuncioValue: true, competitorValue: false, description: "`cargo build --workspace` and run nunciod + nuncio-cli locally" },
     { feature: "Multi-Account IMAP/SMTP Sync", nuncioValue: true, competitorValue: true, description: "Real fetch -> store -> read -> send, tested against mock servers" },
@@ -67,7 +67,7 @@ export default function VsAirmailPage() {
       competitorSlug="airmail"
       tagline="A local-first, cross-platform architecture we're building against Airmail's macOS-only Pro subscription."
       nuncioPrice="Free & open source (in development)"
-      competitorPrice="$9.99 / Year Pro Subscription"
+      competitorPrice="$29.99 / Year Pro Subscription"
       heroHeadline="Airmail is a polished macOS-only client behind a Pro paywall. We're building Nuncio as a free, open, local-first alternative that runs the same engine on macOS, Windows, and Linux from day one."
       whySwitchParagraph="Airmail's clean interface is locked to Apple hardware, and multi-account syncing sits behind a recurring Pro subscription. Nuncio starts from a different premise: one daemon (nunciod) that owns your mail state locally and speaks a single versioned gRPC contract, so a terminal client, a desktop GUI, and the reference CLI can all be thin, interchangeable clients instead of three separate apps to maintain. The daemon, IMAP/SMTP sync, full-text search, export, and the WORM audit ledger are real and buildable from source today; the additional clients and the NSQL engine's live rule-firing are the next milestones."
       comparisonRows={comparisonRows}

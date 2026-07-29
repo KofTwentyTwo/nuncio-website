@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { Bell, ArrowRight, GitBranch, ShieldCheck, Sparkles, Monitor, Code, FileCheck } from "lucide-react";
+import { Bell, ArrowRight, ShieldCheck, Sparkles, Monitor, Code, FileCheck } from "lucide-react";
 import { ShellInteractivePreview } from "./ShellInteractivePreview";
+import { GithubIcon } from "./GithubIcon";
 import { AvailableNow, StatusBadge } from "./StatusBadge";
 import { ROADMAP_URL, GITHUB_URL } from "@/lib/status";
 
@@ -44,7 +45,7 @@ export function Hero() {
               rel="noopener noreferrer"
               className="apple-button-secondary px-6 py-3 text-sm font-semibold flex items-center gap-2"
             >
-              <GitBranch className="w-4 h-4" />
+              <GithubIcon className="w-4 h-4" />
               Follow the build on GitHub
             </a>
             <a
