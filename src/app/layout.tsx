@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { DevStatusRibbon } from "@/components/DevStatusRibbon";
 
 export const viewport: Viewport = {
   themeColor: "#0B0F19",
@@ -61,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="antialiased min-h-screen flex flex-col bg-[#0B0F19] text-gray-100 selection:bg-blue-500 selection:text-white">
+        <DevStatusRibbon />
         {children}
       </body>
     </html>

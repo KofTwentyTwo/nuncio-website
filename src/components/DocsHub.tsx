@@ -257,7 +257,7 @@ WITH STOP PROCESSING;`}
                 <li>• <code className="text-cyan-300">recipient / to</code>: Recipient email address</li>
                 <li>• <code className="text-cyan-300">body</code>: Plain text / HTML body</li>
                 <li>• <code className="text-cyan-300">size_bytes / size</code>: Attachment &amp; message size</li>
-                <li>• <code className="text-cyan-300">header['X-Spam']</code>: Custom MIME headers</li>
+                <li>• <code className="text-cyan-300">header[&apos;X-Spam&apos;]</code>: Custom MIME headers</li>
               </ul>
             </div>
 
@@ -290,7 +290,7 @@ WITH STOP PROCESSING;`}
               HMAC-SHA256 Signed Webhooks &amp; SSRF Defense
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              When an NSQL rule triggers a `CALL WEBHOOK 'url'` action, `nunciod` dispatches an HTTP POST payload with cryptographic signatures.
+              When an NSQL rule triggers a `CALL WEBHOOK &apos;url&apos;` action, `nunciod` dispatches an HTTP POST payload with cryptographic signatures.
             </p>
           </div>
 

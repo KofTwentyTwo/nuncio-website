@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Terminal, Download, Menu, X } from "lucide-react";
+import { Bell, Map, Menu, X } from "lucide-react";
+import { GITHUB_URL, ROADMAP_URL } from "@/lib/status";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -46,19 +47,29 @@ export function Header() {
             <Link href="/docs" className="hover:text-white transition-colors">
               Documentation
             </Link>
+            <a
+              href={ROADMAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Roadmap
+            </a>
             <Link href="/about" className="hover:text-white transition-colors">
               About
             </Link>
           </nav>
 
-          {/* CTA & Downloads */}
+          {/* CTA */}
           <div className="hidden sm:flex items-center gap-3">
             <a
-              href="/#downloads"
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="apple-button-primary px-4 py-1.5 text-xs font-semibold flex items-center gap-1.5 shadow-sm"
             >
-              <Download className="w-3.5 h-3.5" />
-              Download Latest Release
+              <Bell className="w-3.5 h-3.5" />
+              Notify Me at Launch
             </a>
           </div>
 
@@ -97,17 +108,29 @@ export function Header() {
           <Link href="/docs" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
             Documentation
           </Link>
+          <a
+            href="https://koftwentytwo.github.io/nuncio/roadmap/"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-1.5 py-2 border-b border-white/5 hover:text-white"
+          >
+            <Map className="w-3.5 h-3.5" />
+            Roadmap
+          </a>
           <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="block py-2 border-b border-white/5 hover:text-white">
             About
           </Link>
           <div className="pt-2">
             <a
-              href="/#downloads"
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full apple-button-primary py-2.5 text-xs font-semibold flex items-center justify-center gap-1.5"
             >
-              <Download className="w-3.5 h-3.5" />
-              Download Latest Release
+              <Bell className="w-3.5 h-3.5" />
+              Notify Me at Launch
             </a>
           </div>
         </div>

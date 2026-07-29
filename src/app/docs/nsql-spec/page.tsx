@@ -79,7 +79,7 @@ WITH STOP PROCESSING;`}
                 Microsecond Dry-Run Preview Engine
               </span>
               <p className="text-slate-300 leading-relaxed">
-                Before saving or persisting any NSQL rule, execute `nuncio filter test --sql "..."` to run a zero-mutation memory simulation against your 100,000+ message database in under 10ms.
+                Before saving or persisting any NSQL rule, execute `nuncio filter test --sql &quot;...&quot;` to run a zero-mutation memory simulation against your 100,000+ message database in under 10ms.
               </p>
             </div>
           </div>

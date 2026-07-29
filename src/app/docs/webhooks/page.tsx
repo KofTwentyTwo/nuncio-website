@@ -23,7 +23,7 @@ export default function WebhooksDocPage() {
                 HMAC-SHA256 Signed Webhooks &amp; SSRF Defense
               </h1>
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                When an NSQL filter rule executes `CALL WEBHOOK 'url'`, `nunciod` dispatches an HTTP POST payload verified with cryptographic signatures and strict network safety bounds.
+                When an NSQL filter rule executes `CALL WEBHOOK &apos;url&apos;`, `nunciod` dispatches an HTTP POST payload verified with cryptographic signatures and strict network safety bounds.
               </p>
             </div>
 
