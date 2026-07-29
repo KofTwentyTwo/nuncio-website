@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Cpu, Play, CheckCircle, ShieldAlert, Zap, CornerDownRight, AlertTriangle } from "lucide-react";
+import { Cpu, Play, CheckCircle, ShieldAlert, CornerDownRight, AlertTriangle } from "lucide-react";
+import { StatusBadge } from "./StatusBadge";
 
 interface SampleEmail {
   subject: string;
@@ -14,10 +15,10 @@ interface SampleEmail {
 }
 
 const SAMPLE_EMAIL: SampleEmail = {
-  subject: "Urgent Architecture Review & VIP Release Deadline",
-  sender: "alice@kof22.com",
-  recipient: "james.maes@kof22.com",
-  body: "Please review the Nuncio sovereign mail architecture spec.",
+  subject: "Quarterly Report & Deadline Reminder",
+  sender: "notifications@example.com",
+  recipient: "you@example.com",
+  body: "Sample message body used only for this in-browser demo.",
   size_bytes: 6291456, // 6 MB
   folder: "INBOX",
   has_attachment: true,
@@ -26,8 +27,6 @@ const SAMPLE_EMAIL: SampleEmail = {
 interface EvaluationResult {
   matched: boolean;
   actions: string[];
-  timeUs: number;
-  ramKb: number;
   targetAccount: string;
   traces: string[];
   syntaxError?: string;
@@ -38,16 +37,12 @@ interface EvaluationResult {
  * Rejects bad, invalid, or fake NSQL query strings with precise compiler errors.
  */
 function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResult {
-  const startTime = performance.now();
-
   try {
     const text = nsqlText.trim();
     if (!text) {
       return {
         matched: false,
         actions: [],
-        timeUs: 0,
-        ramKb: 4,
         targetAccount: "*",
         traces: ["NSQL query string is empty"],
         syntaxError: "Syntax Error: Empty NSQL query statement",
@@ -63,8 +58,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
       return {
         matched: false,
         actions: [],
-        timeUs: 12,
-        ramKb: 4,
         targetAccount: "*",
         traces: ["Grammar Tokenizer failed: missing mandatory WHEN or THEN clause"],
         syntaxError: "Syntax Error: NSQL statement must follow 'WHEN <condition> THEN <actions>' grammar structure",
@@ -78,8 +71,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
       return {
         matched: false,
         actions: [],
-        timeUs: 14,
-        ramKb: 4,
         targetAccount: "*",
         traces: ["Grammar Tokenizer failed: THEN clause appears before WHEN clause"],
         syntaxError: "Syntax Error: Invalid clause order. 'WHEN' condition must precede 'THEN' actions",
@@ -103,8 +94,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
         return {
           matched: false,
           actions: [],
-          timeUs: 18,
-          ramKb: 4,
           targetAccount,
           traces: ["Validation Error: Invalid ON ACCOUNT glob pattern"],
           syntaxError: `Validation Error: Invalid account pattern '${targetAccount}'`,
@@ -127,8 +116,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
       return {
         matched: false,
         actions: [],
-        timeUs: 15,
-        ramKb: 4,
         targetAccount,
         traces: ["Condition AST empty"],
         syntaxError: "Syntax Error: WHEN clause cannot be empty",
@@ -139,8 +126,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
       return {
         matched: false,
         actions: [],
-        timeUs: 15,
-        ramKb: 4,
         targetAccount,
         traces: ["Action AST empty"],
         syntaxError: "Syntax Error: THEN clause must specify at least one valid action (e.g. MOVE TO, SET read = TRUE)",
@@ -164,8 +149,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
         return {
           matched: false,
           actions: [],
-          timeUs: 22,
-          ramKb: 4,
           targetAccount,
           traces: ["Regex Error"],
           syntaxError: `Compiler Error: Invalid sender wildcard pattern '${senderMatch[1]}'`,
@@ -186,8 +169,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
         return {
           matched: false,
           actions: [],
-          timeUs: 25,
-          ramKb: 4,
           targetAccount,
           traces: ["Regex Compilation Failed"],
           syntaxError: `Compiler Error: Invalid regular expression pattern '${subjectRegexp[1]}' (${msg})`,
@@ -222,8 +203,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
           return {
             matched: false,
             actions: [],
-            timeUs: 30,
-            ramKb: 4,
             targetAccount,
             traces: ["Action Validation Failed"],
             syntaxError: "Syntax Error: MOVE TO action requires target folder enclosed in quotes (e.g. MOVE TO 'INBOX')",
@@ -234,8 +213,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
           return {
             matched: false,
             actions: [],
-            timeUs: 32,
-            ramKb: 4,
             targetAccount,
             traces: ["Security Check Failed"],
             syntaxError: `Validation Error: Invalid target folder name '${folder}'. Folder names must be alphanumeric`,
@@ -248,8 +225,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
           return {
             matched: false,
             actions: [],
-            timeUs: 30,
-            ramKb: 4,
             targetAccount,
             traces: ["Action Validation Failed"],
             syntaxError: "Syntax Error: COPY TO action requires target folder enclosed in quotes (e.g. COPY TO 'Archive')",
@@ -260,8 +235,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
           return {
             matched: false,
             actions: [],
-            timeUs: 32,
-            ramKb: 4,
             targetAccount,
             traces: ["Security Check Failed"],
             syntaxError: `Validation Error: Invalid target folder name '${folder}'. Folder names must be alphanumeric`,
@@ -274,8 +247,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
           return {
             matched: false,
             actions: [],
-            timeUs: 30,
-            ramKb: 4,
             targetAccount,
             traces: ["Action Validation Failed"],
             syntaxError: "Syntax Error: CALL WEBHOOK action requires target URL in quotes (e.g. CALL WEBHOOK 'https://...')",
@@ -286,8 +257,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
           return {
             matched: false,
             actions: [],
-            timeUs: 32,
-            ramKb: 4,
             targetAccount,
             traces: ["Security Violation: Invalid Webhook Scheme"],
             syntaxError: `Security Error: Webhook URL '${url}' must begin with http:// or https://`,
@@ -300,8 +269,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
           return {
             matched: false,
             actions: [],
-            timeUs: 30,
-            ramKb: 4,
             targetAccount,
             traces: ["Action Validation Failed"],
             syntaxError: "Validation Error: FORWARD TO action requires valid email address format (e.g. FORWARD TO 'user@domain.com')",
@@ -321,8 +288,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
         return {
           matched: false,
           actions: [],
-          timeUs: 35,
-          ramKb: 4,
           targetAccount,
           traces: ["Unknown Action Command"],
           syntaxError: `Syntax Error: Unknown NSQL action '${act}'. Valid actions: MOVE TO, COPY TO, SET read, SET flagged, CALL WEBHOOK, FORWARD TO, DELETE, ARCHIVE`,
@@ -332,14 +297,10 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
 
     // Pass 6: Final Result Assembly
     const isTotalMatched = accountMatched && conditionMatched;
-    const endTime = performance.now();
-    const durationUs = Math.max(18, Math.round((endTime - startTime) * 1000));
 
     return {
       matched: isTotalMatched,
       actions: parsedActions,
-      timeUs: durationUs,
-      ramKb: 8,
       targetAccount,
       traces: traces.length > 0 ? traces : ["Condition evaluated successfully"],
     };
@@ -348,8 +309,6 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
     return {
       matched: false,
       actions: [],
-      timeUs: 45,
-      ramKb: 6,
       targetAccount: "*",
       traces: ["Syntax error during AST compilation"],
       syntaxError: `Compiler Error: ${message}`,
@@ -359,7 +318,7 @@ function evaluateNsqlReal(nsqlText: string, sample: SampleEmail): EvaluationResu
 
 export function NsqlPlayground() {
   const [nsql, setNsql] = useState(
-    "CREATE RULE \"VIP Priority Route\"\nON ACCOUNT \"james.maes@kof22.com\"\nPRIORITY 10\nWHEN sender LIKE '%@kof22.com%' AND (subject REGEXP '(Urgent|Architecture)' OR size_bytes > 5242880)\nTHEN MOVE TO 'vip-inbox', SET read = TRUE, SET flagged = TRUE, CALL WEBHOOK 'https://api.kof22.com/webhooks/vip-alert'\nWITH STOP PROCESSING;"
+    "CREATE RULE \"VIP Priority Route\"\nON ACCOUNT \"*@example.com\"\nPRIORITY 10\nWHEN sender LIKE '%@example.com%' AND (subject REGEXP '(Urgent|Deadline)' OR size_bytes > 5242880)\nTHEN MOVE TO 'vip-inbox', SET read = TRUE, SET flagged = TRUE, CALL WEBHOOK 'https://example.com/webhooks/vip-alert'\nWITH STOP PROCESSING;"
   );
 
   const [previewing, setPreviewing] = useState(false);
@@ -383,11 +342,14 @@ export function NsqlPlayground() {
             <span>Nuncio SQL Filter Language (NSQL)</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white">
-            Live Interactive <span className="gradient-text">NSQL Rule Evaluator</span>
+            Live Interactive <span className="gradient-text">NSQL Grammar Demo</span>
           </h2>
           <p className="max-w-3xl mx-auto text-slate-300 text-base sm:text-lg">
-            Edit the NSQL query below and run a real in-browser AST evaluation against sample inbox messages with zero mock hardcoding.
+            Edit the NSQL rule below and run it against one sample message right here in your browser. This demo
+            re-implements the grammar in JavaScript to preview the language — it isn&apos;t the compiled Rust
+            engine, and rules like this don&apos;t act on your real mailbox yet.
           </p>
+          <StatusBadge variant="in-progress" label="Parser & dry-run: real today. Firing on synced mail: planned" />
           <div className="pt-1">
             <a
               href="/docs"
@@ -405,10 +367,10 @@ export function NsqlPlayground() {
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <span className="text-sm font-bold text-white flex items-center gap-2">
                 <Cpu className="w-4 h-4 text-cyan-400" />
-                Live NSQL Query Editor
+                NSQL Grammar Editor (browser demo)
               </span>
               <span className="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/30">
-                ✓ Strict 6-Pass AST Validator Active
+                ✓ Mirrors the 6-pass grammar
               </span>
             </div>
 
@@ -421,8 +383,7 @@ export function NsqlPlayground() {
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2">
               <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
-                <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                <span>1,000,000 Keyset Chunking Engine (&lt;10MB RAM)</span>
+                <span>Evaluated against one sample message, in your browser</span>
               </div>
               <button
                 onClick={handleRunPreview}
@@ -439,7 +400,7 @@ export function NsqlPlayground() {
           <div className="lg:col-span-5 glass-panel p-6 rounded-2xl border border-white/10 space-y-6 shadow-xl">
             <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-3">
               <CheckCircle className="w-5 h-5 text-emerald-400" />
-              Real Dry-Run Evaluation Output
+              Dry-Run Evaluation Output
             </h3>
 
             {previewResult ? (
@@ -464,14 +425,6 @@ export function NsqlPlayground() {
                         <span className={previewResult.matched ? "text-emerald-400 font-bold" : "text-red-400 font-bold"}>
                           {previewResult.matched ? "MATCHED (true)" : "NO MATCH (false)"}
                         </span>
-                      </div>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Evaluation Latency:</span>
-                        <span className="text-cyan-400">{previewResult.timeUs} µs</span>
-                      </div>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Peak Memory Ceiling:</span>
-                        <span className="text-purple-400">{previewResult.ramKb} KB RAM</span>
                       </div>
                     </div>
 
@@ -505,13 +458,17 @@ export function NsqlPlayground() {
             <div className="p-4 rounded-xl bg-purple-950/30 border border-purple-500/30 space-y-2">
               <h4 className="text-xs font-bold text-purple-300 flex items-center gap-1.5">
                 <ShieldAlert className="w-4 h-4 text-purple-400" />
-                Security Enforcement Guarantees
+                Real Engine Defenses (Rust, Not This Demo)
               </h4>
+              <p className="text-[11px] text-slate-400 leading-relaxed">
+                These properties describe the actual <code className="font-mono text-purple-300">nuncio-filter</code> engine
+                today — not the JavaScript grammar preview above, and not yet wired into live sync.
+              </p>
               <ul className="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
-                <li>100% Parameterized Binding (`sqlx::QueryBuilder`) — Zero SQLi.</li>
-                <li>DFA Regex Evaluation with 50ms Hard Timeout — Zero ReDoS.</li>
-                <li>Pre-flight DNS Blacklist — Zero SSRF to 127.0.0.1 or cloud metadata.</li>
-                <li>HMAC-SHA256 Cryptographic Hash Chain Audit Ledger.</li>
+                <li>Parameterized SQL binding — no string-concatenated queries.</li>
+                <li>Static rejection of dangerous nested-quantifier regex patterns before a rule can be saved.</li>
+                <li>Webhook dispatch blocks redirects and known private/loopback IP targets.</li>
+                <li>Every matched rule and webhook dispatch is signed with HMAC-SHA256 and hash-chained into the WORM audit ledger.</li>
               </ul>
             </div>
           </div>

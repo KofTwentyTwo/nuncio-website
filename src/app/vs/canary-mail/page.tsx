@@ -1,22 +1,22 @@
 import React from "react";
 import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
 import { Metadata } from "next";
-import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
+import { ShieldCheck, Database, Bot, Lock } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Nuncio vs Canary Mail — Sovereign Open Source Alternative",
-  description: "Compare Nuncio vs Canary Mail. Why rely on proprietary cloud AI servers for your sensitive emails when Nuncio provides local AI capability controls, zero cloud tracking, and WORM cryptographic audits?",
+  title: "Nuncio vs Canary Mail — A Governed AI Gateway vs Cloud AI Mail",
+  description: "How Nuncio's planned local, policy-governed AI agent access compares to Canary Mail's proprietary cloud AI features. Nuncio is pre-alpha; this describes the design we're building, not a shipped product.",
   alternates: { canonical: "https://nuncio.mx/vs/canary-mail" },
   openGraph: {
-    title: "Nuncio vs Canary Mail — Sovereign Open Source Alternative",
-    description: "Compare Nuncio vs Canary Mail. Local AI capability controls, zero cloud tracking, and WORM cryptographic audits 100% free.",
+    title: "Nuncio vs Canary Mail — A Governed AI Gateway vs Cloud AI Mail",
+    description: "A local-first, auditable design for AI agent access to mail, compared against Canary Mail's cloud AI processing.",
     url: "https://nuncio.mx/vs/canary-mail",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nuncio vs Canary Mail",
-    description: "Compare Nuncio vs Canary Mail. 100% Free & Open Source alternative.",
+    description: "A governed, local AI-agent design compared against Canary Mail's cloud AI features.",
     images: ["/og-image.png"],
   },
 };
@@ -24,48 +24,49 @@ export const metadata: Metadata = {
 export default function VsCanaryMailPage() {
   const differentiators = [
     {
-      title: "Sane AI vs Cloud AI Exposure",
-      icon: <Zap className="w-5 h-5 text-yellow-400" />,
-      desc: "Nuncio uses McpAgentPolicy to enforce fine-grained capability flags and automatic PII redaction. Canary Mail routes email data through proprietary cloud AI endpoints.",
+      title: "A Gateway, Not Cloud AI",
+      icon: <Bot className="w-5 h-5 text-yellow-400" />,
+      desc: "The plan: an MCP client that lets AI agents work with your mail through a governed local gateway, never by routing your messages to a third-party AI service.",
+      status: "planned" as const,
     },
     {
-      title: "WORM Cryptographic Audits",
-      icon: <Database className="w-5 h-5 text-blue-400" />,
-      desc: "Every automated rule, webhook, and AI tool call is recorded in an immutable Write Once Read Many (WORM) audit log ledger sealed with HMAC-SHA256.",
+      title: "WORM Audit Ledger, Today",
+      icon: <Lock className="w-5 h-5 text-blue-400" />,
+      desc: "Every account and rule mutation is already recorded in an immutable, hash-chained audit log you can inspect and verify yourself.",
     },
     {
-      title: "100% Open Source (MIT)",
+      title: "Open Source, Fully Inspectable",
       icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
-      desc: "Inspect 100% of the codebase on GitHub. Canary Mail is a closed proprietary commercial product with a monthly subscription.",
+      desc: "Every line of the engine is public on GitHub under MIT / Apache-2.0. Canary Mail is closed-source and commercially licensed.",
     },
     {
-      title: "4 Unified Interfaces",
-      icon: <Bot className="w-5 h-5 text-emerald-400" />,
-      desc: "Work across desktop GUI, Vim Ratatui Terminal TUI, POSIX CLI, and Model Context Protocol (MCP) with 100% feature parity.",
+      title: "Local-First Storage",
+      icon: <Database className="w-5 h-5 text-emerald-400" />,
+      desc: "Mail lives in local SQLite, owned by a daemon you run yourself — not synced through a vendor's servers to power AI features.",
     },
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "License & Transparency", nuncioValue: "100% Open Source (MIT)", competitorValue: "Closed Proprietary", description: "Audit every line of source code on GitHub" },
-    { feature: "AI Model Privacy Controls", nuncioValue: "McpAgentPolicy + Local Redaction", competitorValue: "Cloud AI Processing", description: "Prevents LLMs from exfiltrating sensitive PII" },
-    { feature: "WORM Audit Ledger", nuncioValue: true, competitorValue: false, description: "Immutable cryptographic event log" },
-    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Vim Ratatui terminal client" },
-    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Command-line integration" },
-    { feature: "NSQL Server-Side Engine", nuncioValue: true, competitorValue: "Standard Filters", description: "SQL rule parser and condition matcher" },
-    { feature: "Local Data Encryption", nuncioValue: "AES-256-GCM Column Level", competitorValue: "PGP / Local Database", description: "PayloadCipher encryption on local disk" },
-    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "Limited", description: "Export entire accounts or NSQL queries" },
-    { feature: "Cross-Platform Support", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS, Windows, iOS, Android", description: "Native binaries across desktop & server environments" },
+    { feature: "License & Transparency", nuncioValue: "Open source (MIT/Apache-2.0)", competitorValue: "Closed proprietary", description: "Audit every line of the engine on GitHub" },
+    { feature: "AI Agent Access Model", nuncioValue: "Local gateway, policy-governed", competitorValue: "Cloud AI processing", description: "Agents would never receive raw account credentials", nuncioStatus: "planned" },
+    { feature: "WORM Audit Ledger", nuncioValue: true, competitorValue: false, description: "Hash-chained, immutable event log — real today" },
+    { feature: "Build & Run From Source", nuncioValue: true, competitorValue: false, description: "cargo build --workspace + run the daemon and CLI locally" },
+    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Planned keyboard-driven terminal client", nuncioStatus: "planned" },
+    { feature: "NSQL Server-Side Rules", nuncioValue: "Author & dry-run test today", competitorValue: "Basic smart filters", description: "Live rule firing on synced mail is still ahead", nuncioStatus: "in-progress" },
+    { feature: "At-Rest Body Encryption", nuncioValue: true, competitorValue: "PGP / local database", description: "Security-hardening milestone, not yet built", nuncioStatus: "planned" },
+    { feature: "Portable Export (MBOX/EML/JSON)", nuncioValue: true, competitorValue: "Limited export", description: "Standard, open formats — real today" },
+    { feature: "Cross-Platform (engine + CLI)", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS, Windows, iOS, Android", description: "The daemon and CLI already build on all three desktop OSes" },
   ];
 
   return (
     <ComparisonPageTemplate
       competitorName="Canary Mail"
       competitorSlug="canary-mail"
-      tagline="Why rely on proprietary cloud AI servers for your sensitive emails when Nuncio provides local AI capability controls, zero cloud tracking, and WORM cryptographic audits?"
-      nuncioPrice="100% Free & Open Source"
-      competitorPrice="$20/yr - $60/yr Subscription"
-      heroHeadline="Why rely on proprietary cloud AI servers for your sensitive emails when Nuncio provides local AI capability controls, zero cloud tracking, and WORM cryptographic audits 100% free?"
-      whySwitchParagraph="Canary Mail added AI features, but routes message contexts to proprietary cloud AI APIs without user-configurable capability policies. Nuncio introduces McpAgentPolicy—giving you granular control over exactly which folders, permissions, and redacted fields an AI model can touch, backed by immutable WORM audit logs."
+      tagline="A local, policy-governed AI gateway we're building, compared against Canary Mail's proprietary cloud AI mail."
+      nuncioPrice="Free & open source (in development)"
+      competitorPrice="$36-$100 / Year (Growth/Pro+)"
+      heroHeadline="Canary Mail routes AI features through proprietary cloud endpoints. We're building Nuncio around a different idea: an MCP gateway that lets AI agents touch your mail only through capability policies and an audit trail you control locally."
+      whySwitchParagraph="Canary Mail's AI features send message context to cloud AI APIs with no user-configurable capability policy. Nuncio's design keeps that decision local: an MCP client (on the roadmap) would broker every agent action through the same daemon that already owns your mail, with fine-grained capability flags and an immutable WORM audit trail. The audit ledger, local SQLite storage, and open-source engine are real today; the MCP gateway itself is the next milestone, not a shipped feature."
       comparisonRows={comparisonRows}
       differentiators={differentiators}
     />

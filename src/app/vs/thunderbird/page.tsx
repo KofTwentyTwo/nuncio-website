@@ -1,22 +1,22 @@
 import React from "react";
 import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
 import { Metadata } from "next";
-import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
+import { ShieldCheck, Database, Bot, Layers } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Nuncio vs Mozilla Thunderbird — Sovereign Open Source Alternative",
-  description: "Compare Nuncio vs Mozilla Thunderbird. Why rely on legacy single-threaded C++ code when Nuncio gives you memory-safe Rust performance, modern glassmorphic GUI, Vim Terminal TUI, POSIX CLI, and native AI MCP support?",
+  title: "Nuncio vs Mozilla Thunderbird — A New Rust Engine vs a Legacy C++ Core",
+  description: "How Nuncio's ground-up, memory-safe Rust engine and one-contract-many-clients design compare to Thunderbird's decades-old C++/Gecko core. Nuncio is pre-alpha; this is a design comparison, not a claim it beats a mature open-source project today.",
   alternates: { canonical: "https://nuncio.mx/vs/thunderbird" },
   openGraph: {
-    title: "Nuncio vs Mozilla Thunderbird — Sovereign Open Source Alternative",
-    description: "Compare Nuncio vs Mozilla Thunderbird. Memory-safe Rust performance, modern glassmorphic GUI, Vim TUI, POSIX CLI, and AI MCP support 100% free.",
+    title: "Nuncio vs Mozilla Thunderbird — A New Rust Engine vs a Legacy C++ Core",
+    description: "A ground-up, memory-safe Rust engine and a single gRPC contract for future clients, compared against Thunderbird's C++/Gecko core.",
     url: "https://nuncio.mx/vs/thunderbird",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nuncio vs Mozilla Thunderbird",
-    description: "Compare Nuncio vs Mozilla Thunderbird. 100% Free & Open Source alternative.",
+    description: "A new, memory-safe Rust engine compared against Thunderbird's decades-old C++ core.",
     images: ["/og-image.png"],
   },
 };
@@ -24,48 +24,50 @@ export const metadata: Metadata = {
 export default function VsThunderbirdPage() {
   const differentiators = [
     {
-      title: "Memory-Safe Rust Engine",
-      icon: <Zap className="w-5 h-5 text-yellow-400" />,
-      desc: "Nuncio is written from the ground up in memory-safe Rust. Thunderbird relies on decades-old C++/Gecko layout engines.",
+      title: "A Ground-Up Rust Engine",
+      icon: <ShieldCheck className="w-5 h-5 text-yellow-400" />,
+      desc: "Nuncio's engine is written from scratch in Rust, with unsafe code forbidden by the build's lint gate. Thunderbird carries forward a C++/Gecko codebase with decades of history.",
     },
     {
-      title: "4 Unified Interfaces",
-      icon: <Database className="w-5 h-5 text-blue-400" />,
-      desc: "Work across desktop GUI, Vim Ratatui Terminal TUI, POSIX CLI, and Model Context Protocol (MCP) AI agents with 100% feature parity.",
+      title: "One Contract, Many Future Clients",
+      icon: <Layers className="w-5 h-5 text-blue-400" />,
+      desc: "A desktop GUI and terminal TUI are planned as thin clients over the same gRPC API the reference CLI already uses — feature parity by contract, not by separately maintained codebases.",
+      status: "planned" as const,
     },
     {
-      title: "NSQL Automation Engine",
-      icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
-      desc: "Write declarative SQL automation statements (WHEN/THEN) with dry-run preview evaluation instead of basic message filters.",
+      title: "A Declarative Rule Language",
+      icon: <Database className="w-5 h-5 text-purple-400" />,
+      desc: "NSQL lets you author and dry-run test SQL-style filter statements today, aiming past Thunderbird's traditional message-filter dialog.",
     },
     {
-      title: "WORM Cryptographic Audits",
+      title: "A WORM Audit Ledger",
       icon: <Bot className="w-5 h-5 text-emerald-400" />,
-      desc: "Record every automated match, webhook, and AI agent action in an immutable HMAC-SHA256 WORM audit log ledger.",
+      desc: "Every account and rule mutation is already recorded in an immutable, hash-chained log — a capability Thunderbird doesn't offer.",
     },
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "Core Architecture", nuncioValue: "Memory-Safe Rust Workspace", competitorValue: "Legacy C++ / Gecko WebEngine", description: "Modern memory-safe architecture" },
-    { feature: "Modern Glassmorphic GUI", nuncioValue: true, competitorValue: "Legacy XUL / HTML", description: "State-of-the-art visual aesthetic" },
-    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Vim Ratatui terminal UI" },
-    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Command-line integration" },
-    { feature: "Native AI MCP Integration", nuncioValue: true, competitorValue: false, description: "Model Context Protocol tools & policies" },
-    { feature: "WORM Cryptographic Audits", nuncioValue: true, competitorValue: false, description: "HMAC-SHA256 audit log ledger" },
-    { feature: "Full-Text Search Latency", nuncioValue: "<10ms (SQLite FTS5)", competitorValue: "~150ms (Gloda Index)", description: "Instant offline trigram index" },
-    { feature: "Data-at-Rest Encryption", nuncioValue: "AES-256-GCM Column Level", competitorValue: "Unencrypted MBOX/SQLite", description: "PayloadCipher encryption on local disk" },
-    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "MBOX Export Only", description: "Export entire accounts or NSQL query results" },
+    { feature: "Core Architecture", nuncioValue: "Memory-safe Rust workspace", competitorValue: "C++ / Gecko engine", description: "Built from scratch, not a legacy inheritance" },
+    { feature: "License & Transparency", nuncioValue: "Open source (MIT/Apache-2.0)", competitorValue: "Open source (MPL 2.0)", description: "Both projects are fully open source" },
+    { feature: "Build & Run From Source", nuncioValue: true, competitorValue: true, description: "cargo build --workspace + run the daemon and CLI locally" },
+    { feature: "Desktop GUI Client", nuncioValue: true, competitorValue: true, description: "Planned thin client over the frozen gRPC API", nuncioStatus: "planned" },
+    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Planned keyboard-driven terminal client", nuncioStatus: "planned" },
+    { feature: "AI Agent Access (MCP)", nuncioValue: true, competitorValue: false, description: "Planned governed gateway for AI agents", nuncioStatus: "planned" },
+    { feature: "WORM Audit Ledger", nuncioValue: true, competitorValue: false, description: "Immutable hash-chained log — real today" },
+    { feature: "Full-Text Search", nuncioValue: "SQLite FTS5, fully offline", competitorValue: "Gloda index", description: "Local search with no network dependency" },
+    { feature: "At-Rest Body Encryption", nuncioValue: true, competitorValue: false, description: "Security-hardening milestone, not yet built", nuncioStatus: "planned" },
+    { feature: "Portable Export (MBOX/EML/JSON)", nuncioValue: true, competitorValue: "MBOX export only", description: "Open, standard formats — real today" },
   ];
 
   return (
     <ComparisonPageTemplate
       competitorName="Mozilla Thunderbird"
       competitorSlug="thunderbird"
-      tagline="Why rely on legacy single-threaded C++ code when Nuncio gives you memory-safe Rust performance, modern glassmorphic GUI, Vim Terminal TUI, POSIX CLI, and native AI MCP support?"
-      nuncioPrice="100% Free & Open Source"
-      competitorPrice="100% Free & Open Source"
-      heroHeadline="Why rely on legacy single-threaded C++ code when Nuncio gives you memory-safe Rust performance, modern glassmorphic GUI, Vim Terminal TUI, POSIX CLI, and native AI MCP support 100% free?"
-      whySwitchParagraph="Thunderbird is a pioneer of open-source email, but struggles under decades of legacy C++/Gecko codebase complexity and lacks modern multi-interface support. Nuncio carries the open-source banner into the modern era—built in memory-safe Rust with multi-shell parity for desktop, terminal, CLI, and AI agents."
+      tagline="A new, memory-safe Rust engine we're building, positioned against Thunderbird's mature but decades-old C++/Gecko core."
+      nuncioPrice="Free & open source (in development)"
+      competitorPrice="Free & Open Source"
+      heroHeadline="Thunderbird earned its place as the open-source email standard-bearer, carrying a C++/Gecko codebase forward for over two decades. We're building Nuncio as a ground-up, memory-safe Rust engine with a single gRPC contract meant to keep every future client in lockstep."
+      whySwitchParagraph="Thunderbird's longevity is a real asset, and this isn't a claim that a pre-alpha project already beats it. It's a bet on a different foundation: Rust instead of C++/Gecko, and one versioned gRPC contract that a desktop GUI, a terminal client, and an AI-agent gateway would all consume identically, instead of separate codebases drifting out of parity. The engine, CLI, IMAP/SMTP sync, FTS5 search, export, and WORM audit ledger are real and buildable from source today; the additional clients and live NSQL rule-firing are what's ahead."
       comparisonRows={comparisonRows}
       differentiators={differentiators}
     />

@@ -1,28 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { Download, Terminal, Check, Copy, Laptop, Command } from "lucide-react";
+import { Bell, Check, Copy, ArrowRight, Terminal, MapPin } from "lucide-react";
+import { GithubIcon } from "./GithubIcon";
+import { GITHUB_URL, ROADMAP_URL } from "@/lib/status";
 
 export function DownloadsSection() {
-  const [copiedBrew, setCopiedBrew] = useState(false);
-  const [copiedCargo, setCopiedCargo] = useState(false);
-  const [activeChannel, setActiveChannel] = useState<"stable" | "nightly">("stable");
+  const [copiedBuild, setCopiedBuild] = useState(false);
 
-  const brewCmd = "brew install koftwentytwo/tap/nuncio";
-  const cargoCmd = activeChannel === "stable" 
-    ? "cargo install nuncio-cli nuncio-tui nuncio-mcp" 
-    : "cargo install --git https://github.com/KofTwentyTwo/nuncio.git --branch dev nuncio-cli nuncio-tui nuncio-mcp nunciod";
+  const buildCmd = "git clone https://github.com/KofTwentyTwo/nuncio.git && cargo build --workspace";
 
-  const handleCopyBrew = () => {
-    navigator.clipboard.writeText(brewCmd);
-    setCopiedBrew(true);
-    setTimeout(() => setCopiedBrew(false), 2000);
-  };
-
-  const handleCopyCargo = () => {
-    navigator.clipboard.writeText(cargoCmd);
-    setCopiedCargo(true);
-    setTimeout(() => setCopiedCargo(false), 2000);
+  const handleCopyBuild = () => {
+    navigator.clipboard.writeText(buildCmd);
+    setCopiedBuild(true);
+    setTimeout(() => setCopiedBuild(false), 2000);
   };
 
   return (
@@ -30,133 +21,119 @@ export function DownloadsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold">
-            <Download className="w-3.5 h-3.5" />
-            <span>Install &amp; Download Nuncio Packages</span>
-          </div>
-
-          {/* Release Channel Toggle Pills */}
-          <div className="flex items-center justify-center gap-3">
-            <button
-              onClick={() => setActiveChannel("stable")}
-              className={`px-5 py-2 rounded-full text-xs font-bold transition-all border ${
-                activeChannel === "stable"
-                  ? "bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/30"
-                  : "bg-slate-900/80 border-white/10 text-slate-400 hover:text-white"
-              }`}
-            >
-              Production GA (Stable)
-            </button>
-            <button
-              onClick={() => setActiveChannel("nightly")}
-              className={`px-5 py-2 rounded-full text-xs font-bold transition-all border flex items-center gap-1.5 ${
-                activeChannel === "nightly"
-                  ? "bg-purple-600 border-purple-500 text-white shadow-lg shadow-purple-500/30"
-                  : "bg-slate-900/80 border-white/10 text-slate-400 hover:text-white"
-              }`}
-            >
-              <Terminal className="w-3.5 h-3.5 text-purple-300" />
-              Development Nightly (Bleeding-Edge)
-            </button>
+            <Bell className="w-3.5 h-3.5" />
+            <span>Nuncio is pre-alpha — there is no installer yet</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white">
-            Available for <span className="gradient-text">macOS, Windows &amp; Linux</span>
+            Be there for <span className="gradient-text">launch day</span>
           </h2>
           <p className="max-w-3xl mx-auto text-gray-300 text-base sm:text-lg">
-            {activeChannel === "stable"
-              ? "Free and open-source under MIT & Apache-2.0 licenses. Choose your preferred installer or package manager below."
-              : "Automated daily snapshot builds compiled directly from the bleeding-edge dev branch."}
+            There&apos;s no packaged app to download today. Follow the build in the open on GitHub, watch the
+            roadmap for milestones, or build it yourself from source right now.
           </p>
         </div>
 
-        {/* GUI Installers Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {/* macOS */}
+        {/* Primary CTAs */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Follow the build */}
           <div className="glass-card p-6 rounded-2xl border border-white/10 space-y-4 text-center flex flex-col justify-between">
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center mx-auto border border-blue-500/30">
-                <Command className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-2xl bg-slate-800/60 text-slate-200 flex items-center justify-center mx-auto border border-white/10">
+                <GithubIcon className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-white">macOS Universal</h3>
-              <p className="text-xs text-gray-300">Supports Apple Silicon (M1/M2/M3/M4) &amp; Intel x64.</p>
+              <h3 className="text-xl font-bold text-white">Follow the build</h3>
+              <p className="text-xs text-gray-300">
+                Every commit, PR, and milestone happens in public. Star the repo to watch progress.
+              </p>
             </div>
             <a
-              href={activeChannel === "stable" ? "https://github.com/KofTwentyTwo/nuncio/releases/latest" : "https://github.com/KofTwentyTwo/nuncio/releases/tag/dev-nightly"}
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full py-3 rounded-xl gradient-bg font-bold text-white text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
-              <Download className="w-4 h-4" />
-              {activeChannel === "stable" ? "Download macOS Release (.DMG)" : "Download macOS Nightly (.tar.gz)"}
+              <GithubIcon className="w-4 h-4" />
+              Follow the build on GitHub
             </a>
           </div>
 
-          {/* Windows */}
+          {/* Roadmap */}
           <div className="glass-card p-6 rounded-2xl border border-white/10 space-y-4 text-center flex flex-col justify-between">
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center mx-auto border border-cyan-500/30">
-                <Laptop className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-2xl bg-slate-800/60 text-slate-200 flex items-center justify-center mx-auto border border-white/10">
+                <MapPin className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-white">Windows 10 / 11</h3>
-              <p className="text-xs text-gray-300">Native WiX Installer (.msi) with Windows Keyring support.</p>
+              <h3 className="text-xl font-bold text-white">See the roadmap</h3>
+              <p className="text-xs text-gray-300">
+                See exactly what&apos;s shipped, what&apos;s in progress, and what&apos;s planned before v1.
+              </p>
             </div>
             <a
-              href={activeChannel === "stable" ? "https://github.com/KofTwentyTwo/nuncio/releases/latest" : "https://github.com/KofTwentyTwo/nuncio/releases/tag/dev-nightly"}
+              href={ROADMAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 font-bold text-white text-xs hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
-              <Download className="w-4 h-4 text-cyan-400" />
-              {activeChannel === "stable" ? "Download Windows Release (.MSI)" : "Download Windows Nightly (.ZIP)"}
-            </a>
-          </div>
-
-          {/* Linux */}
-          <div className="glass-card p-6 rounded-2xl border border-white/10 space-y-4 text-center flex flex-col justify-between">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center mx-auto border border-purple-500/30">
-                <Terminal className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-bold text-white">Linux Standalone</h3>
-              <p className="text-xs text-gray-300">Universal AppImage &amp; Tarball for Ubuntu, Fedora, Arch.</p>
-            </div>
-            <a
-              href={activeChannel === "stable" ? "https://github.com/KofTwentyTwo/nuncio/releases/latest" : "https://github.com/KofTwentyTwo/nuncio/releases/tag/dev-nightly"}
-              className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 font-bold text-white text-xs hover:scale-105 transition-all flex items-center justify-center gap-2"
-            >
-              <Download className="w-4 h-4 text-purple-400" />
-              {activeChannel === "stable" ? "Download Linux Release (.AppImage)" : "Download Linux Nightly (.tar.gz)"}
+              See the roadmap
+              <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>
 
-        {/* Package Manager Options */}
-        <div className="max-w-3xl mx-auto space-y-4">
-          <h4 className="text-center text-xs font-bold text-gray-400 uppercase tracking-widest">Package Manager Commands</h4>
-          
-          {/* Homebrew */}
-          <div className="bg-slate-900/90 border border-white/10 p-3 px-4 rounded-xl flex items-center justify-between font-mono text-xs shadow-inner">
-            <div className="flex items-center gap-3 text-gray-300 overflow-x-auto">
-              <span className="text-amber-400 font-bold">$</span>
-              <span>{brewCmd}</span>
-            </div>
-            <button
-              onClick={handleCopyBrew}
-              className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-gray-300 hover:text-white transition-all shrink-0 ml-2"
+        {/* Notify me at launch */}
+        <div className="max-w-xl mx-auto space-y-4">
+          <h4 className="text-center text-xs font-bold text-gray-400 uppercase tracking-widest">
+            Notify me at launch
+          </h4>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl gradient-bg font-bold text-white text-xs shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
-              {copiedBrew ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-            </button>
+              <GithubIcon className="w-4 h-4" />
+              Watch on GitHub for releases
+            </a>
+            <a
+              href={ROADMAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 font-bold text-white text-xs hover:scale-105 transition-all flex items-center justify-center gap-2"
+            >
+              See the roadmap
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
+          <p className="text-center text-[11px] text-slate-500">
+            No email list exists to sign up for. On GitHub, set Watch → Custom → Releases on the repo and
+            you&apos;ll get notified the moment there&apos;s a build worth installing.
+          </p>
+        </div>
 
-          {/* Cargo */}
+        {/* Build from source today */}
+        <div className="max-w-3xl mx-auto space-y-3">
+          <h4 className="text-center text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center justify-center gap-2">
+            <Terminal className="w-3.5 h-3.5" />
+            Developer? You can build it from source right now
+          </h4>
           <div className="bg-slate-900/90 border border-white/10 p-3 px-4 rounded-xl flex items-center justify-between font-mono text-xs shadow-inner">
             <div className="flex items-center gap-3 text-gray-300 overflow-x-auto">
               <span className="text-amber-400 font-bold">$</span>
-              <span>{cargoCmd}</span>
+              <span>{buildCmd}</span>
             </div>
             <button
-              onClick={handleCopyCargo}
+              onClick={handleCopyBuild}
               className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-gray-300 hover:text-white transition-all shrink-0 ml-2"
             >
-              {copiedCargo ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+              {copiedBuild ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
             </button>
           </div>
+          <p className="text-center text-[11px] text-slate-500">
+            Clones the daemon (<code>nunciod</code>) and reference CLI (<code>nuncio-cli</code>) — no packaged
+            installer, no GUI, no TUI yet.
+          </p>
         </div>
       </div>
     </section>

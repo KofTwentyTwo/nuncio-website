@@ -2,11 +2,12 @@ import React from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DocsLayout } from "@/components/DocsLayout";
-import { Terminal, Database, FileText, Archive, Sparkles } from "lucide-react";
+import { AvailableNow } from "@/components/StatusBadge";
+import { Terminal, Archive } from "lucide-react";
 
 export const metadata = {
-  title: "Universal Portable Data Export & Automated Backups — Nuncio Docs",
-  description: "Complete guide to exporting email accounts, folders, and NSQL queries to MBOX, EML ZIP, JSON, and JSONL formats using nuncio mail export.",
+  title: "Data Export & Backups — Nuncio Docs",
+  description: "Export synced mail to MBOX, EML (zip), JSON, or JSON Lines with nuncio mail export — real and working today, from a source build of the engine.",
 };
 
 export default function ExportBackupsDocPage() {
@@ -20,10 +21,11 @@ export default function ExportBackupsDocPage() {
               <span className="text-xs font-mono text-emerald-400 uppercase font-bold tracking-wider">Maintenance • Backups</span>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white flex items-center gap-3">
                 <Terminal className="w-8 h-8 text-emerald-400 shrink-0" />
-                Universal Data Export &amp; Automated CLI Backups
+                Data Export &amp; Backups
               </h1>
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Nuncio empowers you to perform full backups or exports of all your emails, accounts, folders, or NSQL result sets into standard portable open formats without vendor lock-in.
+                Export synced mail to standard, portable, open formats with no vendor lock-in — this is one of the
+                genuinely working pieces of the engine you can build from source today. <AvailableNow />
               </p>
             </div>
 
@@ -31,20 +33,21 @@ export default function ExportBackupsDocPage() {
             <div className="bg-slate-900/90 p-6 rounded-2xl border border-white/10 space-y-4 shadow-lg">
               <h3 className="text-base font-bold text-emerald-300 flex items-center gap-2">
                 <Terminal className="w-4 h-4 text-emerald-400" />
-                1. Headless CLI Automated Backup Commands
+                1. `nuncio mail export`
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Run automated periodic backup scripts via POSIX shell scripts, systemd timers, or cron jobs using `nuncio mail export`:
+                Restrict an export to one account or one folder (the two flags are mutually exclusive); omit both to
+                export everything synced.
               </p>
               <pre className="bg-slate-950 p-4 rounded-xl text-emerald-300 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
-{`# Export full account inbox to standard RFC 4155 MBOX format
-nuncio mail export --account "james.maes@kof22.com" --format mbox --output ~/backups/inbox.mbox
+{`# Export one account's synced mail to MBOX
+nuncio mail export --format mbox --out ~/backups/inbox.mbox --account <account-id>
 
-# Export specific folder to compressed EML ZIP archive with manifest.json
-nuncio mail export --folder "Archive" --format eml-zip --output ~/backups/archive.zip
+# Export one folder to a zip of raw .eml files plus manifest.json
+nuncio mail export --format eml --out ~/backups/archive.zip --folder <folder-id>
 
-# Export NSQL filter query results to line-delimited JSONL for LLM data pipelines
-nuncio mail export --query "sender LIKE '%@kof22.com%'" --format jsonl --output ~/backups/kof22_vip.jsonl`}
+# Export everything synced to JSON Lines
+nuncio mail export --format jsonl --out ~/backups/all-mail.jsonl`}
               </pre>
             </div>
 
@@ -52,20 +55,20 @@ nuncio mail export --query "sender LIKE '%@kof22.com%'" --format jsonl --output 
             <div className="bg-slate-900/90 p-6 rounded-2xl border border-white/10 space-y-4 shadow-lg">
               <h3 className="text-base font-bold text-cyan-300 flex items-center gap-2">
                 <Archive className="w-4 h-4 text-cyan-400" />
-                2. Supported Portable Export Formats
+                2. Supported Formats
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                 <div className="p-4 rounded-xl bg-slate-950 border border-white/10 space-y-2">
-                  <span className="font-bold text-white block">MBOX (`.mbox`)</span>
-                  <p className="text-slate-300">Standard RFC 4155 mailbox format compatible with Thunderbird, Apple Mail, and Python `mailbox` module.</p>
+                  <span className="font-bold text-white block">MBOX (`--format mbox`)</span>
+                  <p className="text-slate-300">Standard mailbox format readable by Thunderbird, Apple Mail, and most mail tooling.</p>
                 </div>
                 <div className="p-4 rounded-xl bg-slate-950 border border-white/10 space-y-2">
-                  <span className="font-bold text-white block">EML ZIP Archive (`.zip`)</span>
-                  <p className="text-slate-300">Compressed archive containing raw `.eml` MIME message files and `manifest.json` metadata index.</p>
+                  <span className="font-bold text-white block">EML zip (`--format eml`)</span>
+                  <p className="text-slate-300">A zip archive of individual `.eml` MIME files plus a `manifest.json` index.</p>
                 </div>
                 <div className="p-4 rounded-xl bg-slate-950 border border-white/10 space-y-2">
-                  <span className="font-bold text-white block">JSON (`.json`) &amp; JSONL (`.jsonl`)</span>
-                  <p className="text-slate-300">Structured payload streams tailored for LLM fine-tuning, vector embeddings, and custom analytics.</p>
+                  <span className="font-bold text-white block">JSON / JSON Lines (`--format json` / `jsonl`)</span>
+                  <p className="text-slate-300">Structured payloads suited to scripting, analytics, or feeding other tools.</p>
                 </div>
               </div>
             </div>

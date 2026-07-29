@@ -3,38 +3,49 @@
 import React from "react";
 import { Bot, Monitor, Zap, Database, Lock, FileCheck, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { StatusBadge } from "./StatusBadge";
+import type { StatusVariant } from "@/lib/status";
 
 export function ManifestoPillarsSection() {
-  const manifestoPillars = [
+  const manifestoPillars: Array<{
+    title: string;
+    icon: React.ReactNode;
+    desc: string;
+    status?: StatusVariant;
+  }> = [
     {
       title: "1. Sane & Controlled AI Access",
       icon: <Bot className="w-6 h-6 text-emerald-400" />,
-      desc: "AI co-pilots should empower you, not exfiltrate your life. McpAgentPolicy enforces granular RBAC capability flags, folder boundaries, and automatic SSN/credit card redaction before any payload touches an LLM.",
+      desc: "AI co-pilots should empower you, not exfiltrate your life. The plan: a policy gateway that enforces granular RBAC capability flags, folder boundaries, and automatic redaction of sensitive data before any payload touches an LLM.",
+      status: "planned",
     },
     {
       title: "2. First-Class UI/UX in Every Space",
       icon: <Monitor className="w-6 h-6 text-purple-400" />,
-      desc: "No second-class interfaces. Enjoy equal polish across native macOS glassmorphism, Windows, Linux, Vim Ratatui Terminal TUI, POSIX scriptable CLI, and native MCP AI agent integration with 100% feature parity.",
+      desc: "No second-class interfaces, by design. A single frozen gRPC contract is meant to guarantee equal polish and feature parity across a native desktop app, a Vim-style terminal TUI, a scriptable POSIX CLI, and an MCP AI agent bridge — not left to each client's discipline.",
+      status: "planned",
     },
     {
       title: "3. Uncompromising Speed & Performance",
       icon: <Zap className="w-6 h-6 text-yellow-400" />,
-      desc: "Engineered in native Rust over single-writer SQLite WAL storage. Search 100,000+ emails in under 10 milliseconds, execute NSQL rules in microsecond time, and run with zero battery drain.",
+      desc: "Engineered in native Rust over single-writer SQLite WAL storage, so search, filtering, and sync stay fast as your mailbox grows. We'll publish real, methodology-backed benchmarks as the engine matures — not invented numbers.",
     },
     {
       title: "4. Sovereign Control & Zero Closed Formats",
       icon: <Database className="w-6 h-6 text-blue-400" />,
-      desc: "No cloud lock-in, no proprietary sync servers, no closed formats. Your emails, accounts, rules, and calendars stay in standard local SQLite files on your disk. You own your data 100%.",
+      desc: "No cloud lock-in, no proprietary sync servers, no closed formats. Your emails, accounts, rules, and calendars live in standard local SQLite files on your disk, with MBOX/EML/JSON export already working today. You own your data.",
     },
     {
       title: "5. Zero-Trust Security & Encryption",
       icon: <Lock className="w-6 h-6 text-red-400" />,
-      desc: "Column-level AES-256-GCM data-at-rest encryption (PayloadCipher), age X25519 attachment ciphers, ZeroizeOnDrop memory page locking, and HTML email sandboxing with tracking pixel neutralization.",
+      desc: "Column-level data-at-rest encryption, hardened attachment ciphers, and HTML email sandboxing with tracking-pixel neutralization are on the security hardening milestone — real engineering targets, not shipped yet.",
+      status: "planned",
     },
     {
       title: "6. WORM Cryptographic Audits",
       icon: <FileCheck className="w-6 h-6 text-cyan-400" />,
-      desc: "Every automated rule match, webhook dispatch, account mutation, and AI MCP tool call is recorded in an immutable Write Once Read Many (WORM) audit ledger sealed with HMAC-SHA256 hash chains.",
+      desc: "Every automated rule match, account mutation, and tool call is recorded in an append-only, hash-chained Write Once Read Many (WORM) audit ledger — working today, not a future promise.",
+      status: "available-now",
     },
   ];
 
@@ -69,6 +80,7 @@ export function ManifestoPillarsSection() {
                     {p.icon}
                   </div>
                   <h3 className="text-base font-bold text-white min-w-0 flex-1 leading-tight">{p.title}</h3>
+                  {p.status && <StatusBadge variant={p.status} className="shrink-0" />}
                 </div>
                 <p className="text-slate-300 text-xs leading-relaxed min-h-[4rem]">{p.desc}</p>
               </div>

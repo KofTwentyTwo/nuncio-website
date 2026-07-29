@@ -2,11 +2,12 @@ import React from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DocsLayout } from "@/components/DocsLayout";
-import { Key, Shield, Globe, Lock, Terminal, Sparkles } from "lucide-react";
+import { StatusBadge } from "@/components/StatusBadge";
+import { Key, Shield, Terminal, Lock } from "lucide-react";
 
 export const metadata = {
-  title: "Account Setup & Provider Configuration — Nuncio Docs",
-  description: "Comprehensive guide to setting up IMAP, SMTP, JMAP, Google Workspace OAuth 2.0 PKCE, and CalDAV/CardDAV accounts in Nuncio.",
+  title: "Account Setup & Provider Configuration (Planned) — Nuncio Docs",
+  description: "The intended experience for connecting IMAP, SMTP, JMAP, and CalDAV/CardDAV accounts in Nuncio. Nuncio is pre-alpha; this page describes the design, not a flow you can complete with a real account today.",
 };
 
 export default function AccountSetupDocPage() {
@@ -17,61 +18,58 @@ export default function AccountSetupDocPage() {
         <DocsLayout activeSlug="account-setup">
           <div className="space-y-8">
             <div className="border-b border-white/10 pb-6 space-y-2">
-              <span className="text-xs font-mono text-purple-400 uppercase font-bold tracking-wider">Getting Started • Step 2</span>
+              <span className="text-xs font-mono text-purple-400 uppercase font-bold tracking-wider">Getting Started • Planned</span>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white flex items-center gap-3">
                 <Key className="w-8 h-8 text-purple-400 shrink-0" />
                 Account Setup &amp; Provider Configuration
               </h1>
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Nuncio connects to unlimited email and calendar accounts across any standard IMAP/SMTP host, JMAP provider, or Google Workspace.
+                This page describes the intended end-user experience for connecting mail and calendar accounts. Nuncio
+                is pre-alpha: there is no polished onboarding flow for a real account yet, and this is not a
+                step-by-step guide you can follow today.
               </p>
+              <StatusBadge variant="planned" label="Intended experience — not usable with a real account yet" />
             </div>
 
-            {/* IMAP/SMTP Setup */}
+            {/* IMAP/SMTP Setup — real capability, developer path */}
             <div className="bg-slate-900/90 p-6 rounded-2xl border border-white/10 space-y-4 shadow-lg">
               <h3 className="text-base font-bold text-purple-300 flex items-center gap-2">
                 <Terminal className="w-4 h-4 text-purple-400" />
-                1. Standard IMAP &amp; SMTP Provider Setup
+                What Exists Today: IMAP/SMTP Sync in the Engine
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Add standard email accounts (ProtonMail Bridge, Fastmail, Posteo, custom domain servers) via CLI or GUI:
+                The underlying capability — real IMAP fetch, storage, and SMTP send, tested against mock servers — is
+                genuinely implemented in the engine you can build from source. The <code className="text-purple-300 font-mono">nuncio account add</code>{" "}
+                and <code className="text-purple-300 font-mono">nuncio account list/show/edit/delete/test</code> commands exist on the reference
+                CLI today for developers driving the daemon directly; there is no consumer-facing setup wizard around
+                them yet.
               </p>
-              <pre className="bg-slate-950 p-4 rounded-xl text-purple-300 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
-{`# Add IMAP/SMTP account via CLI
-nuncio account add \\
-  --label "Work Mail" \\
-  --email "james.maes@kof22.com" \\
-  --imap "mail.kof22.com:993" \\
-  --smtp "mail.kof22.com:465"`}
-              </pre>
             </div>
 
-            {/* Google OAuth PKCE */}
+            {/* Planned providers */}
             <div className="bg-slate-900/90 p-6 rounded-2xl border border-white/10 space-y-4 shadow-lg">
               <h3 className="text-base font-bold text-cyan-300 flex items-center gap-2">
                 <Shield className="w-4 h-4 text-cyan-400" />
-                2. Google Workspace &amp; Gmail OAuth 2.0 PKCE (`RFC 7636`)
+                Planned: Broader Provider Support
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Nuncio supports native OAuth 2.0 Proof Key for Code Exchange (`RFC 7636`). You never enter or store raw Google account passwords.
+                JMAP, CalDAV calendar sync, and CardDAV contacts sync are on the roadmap as additional protocol
+                backends alongside IMAP/SMTP. OAuth-based provider flows (for Gmail-style accounts) are part of that
+                same future account-setup experience and are not implemented yet.
               </p>
-              <pre className="bg-slate-950 p-4 rounded-xl text-cyan-300 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
-{`# Add Google account via CLI
-nuncio account add --provider google --email "user@company.com"
-
-# Nuncio opens http://127.0.0.1:9422/oauth/callback in your system browser.
-# Refresh tokens are encrypted and stored inside OS Keyring (DPAPI / Keychain Access).`}
-              </pre>
+              <StatusBadge variant="planned" label="JMAP, CalDAV, CardDAV" />
             </div>
 
-            {/* Keyring Enclave Notice */}
+            {/* Keyring Notice — real */}
             <div className="p-5 rounded-2xl bg-purple-950/30 border border-purple-500/30 space-y-3 text-xs">
               <span className="text-purple-300 font-bold text-sm block flex items-center gap-2">
                 <Lock className="w-4 h-4 text-purple-400" />
-                Zero Raw Passwords in SQLite Storage
+                Credentials Go Through the OS Keyring, Today
               </span>
               <p className="text-slate-300 leading-relaxed">
-                All account passwords, OAuth 2.0 refresh tokens, and private SASL credentials are isolated directly inside your operating system&apos;s hardware-backed credential vault (macOS Keychain Access, Windows DPAPI, or Linux Secret Service via `keyring-rs`). SQLite databases store zero credential strings.
+                Account credentials are routed through the OS keyring rather than stored in plaintext or in SQLite —
+                that boundary is real in the engine now, and stays true regardless of which onboarding flow eventually
+                sits on top of it.
               </p>
             </div>
           </div>

@@ -2,11 +2,12 @@ import React from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DocsLayout } from "@/components/DocsLayout";
-import { Layers, Monitor, Terminal, Bot, Shield, Eye } from "lucide-react";
+import { StatusBadge } from "@/components/StatusBadge";
+import { Layers, Monitor, Shield } from "lucide-react";
 
 export const metadata = {
-  title: "HTML & Image Rendering Guide — Nuncio Docs",
-  description: "Comprehensive guide to HTML email parsing, inline image rendering (Kitty/iTerm2/Sixel), tracking beacon neutralization, and Markdown conversion.",
+  title: "HTML Email Rendering & Sandboxing (Planned) — Nuncio Docs",
+  description: "The plan for rendering HTML email safely: a sandboxed iframe with scripts disabled. HTML sanitization is on the roadmap and not implemented yet.",
 };
 
 export default function HtmlRenderingDocPage() {
@@ -17,57 +18,63 @@ export default function HtmlRenderingDocPage() {
         <DocsLayout activeSlug="html-rendering">
           <div className="space-y-8">
             <div className="border-b border-white/10 pb-6 space-y-2">
-              <span className="text-xs font-mono text-purple-400 uppercase font-bold tracking-wider">User Experience • Rendering</span>
+              <span className="text-xs font-mono text-purple-400 uppercase font-bold tracking-wider">Security • Planned</span>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white flex items-center gap-3">
                 <Layers className="w-8 h-8 text-purple-400 shrink-0" />
-                Rendering HTML &amp; Inline Images Across Non-GUI Shells
+                HTML Email Rendering &amp; Sandboxing
               </h1>
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Nuncio provides seamless HTML and image rendering mechanics across Terminal TUI, POSIX CLI, and AI MCP agents without compromising security.
+                Untrusted HTML in email is a real attack surface. The plan is a sandboxed rendering pipeline —
+                nothing on this page is built yet.
+              </p>
+              <StatusBadge variant="planned" label="HTML sanitization — not implemented yet" />
+            </div>
+
+            {/* The design */}
+            <div className="bg-slate-900/90 p-6 rounded-2xl border border-white/10 space-y-4 shadow-lg">
+              <h3 className="text-base font-bold text-purple-300 flex items-center gap-2">
+                <Shield className="w-4 h-4 text-purple-400" />
+                The Design: Sandbox First
+              </h3>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                The intended approach, per the project&apos;s own security conventions, is to render untrusted HTML
+                email inside an <code className="text-purple-300 font-mono">&lt;iframe sandbox&gt;</code> with JavaScript disabled, rather than trusting a
+                webview to render remote content directly. That includes stripping remote tracking pixels and blocking
+                external script and style injection before anything reaches the renderer.
               </p>
             </div>
 
-            {/* Rendering Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
-              <div className="p-5 rounded-2xl bg-slate-900 border border-white/10 space-y-3">
-                <div className="flex items-center gap-2 font-bold text-cyan-300 text-sm">
-                  <Monitor className="w-4 h-4 text-cyan-400" />
-                  <span>1. Terminal TUI (Ratatui)</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div className="p-5 rounded-2xl bg-slate-900 border border-white/10 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-blue-400 text-sm block">Desktop GUI Rendering</span>
+                  <StatusBadge variant="planned" />
                 </div>
                 <p className="text-slate-300 leading-relaxed">
-                  Converts HTML to clean ANSI text via `html2text` with tracking pixels blocked. High-resolution images render inline using <b>Kitty Graphics Protocol</b>, <b>iTerm2 Inline Images</b>, or <b>Sixel</b> graphics. Press <code className="text-white font-mono font-bold">o</code> to view in system browser.
+                  Sandboxed iframe rendering inside the planned desktop client — not built.
                 </p>
               </div>
-
-              <div className="p-5 rounded-2xl bg-slate-900 border border-white/10 space-y-3">
-                <div className="flex items-center gap-2 font-bold text-blue-300 text-sm">
-                  <Terminal className="w-4 h-4 text-blue-400" />
-                  <span>2. POSIX CLI</span>
+              <div className="p-5 rounded-2xl bg-slate-900 border border-white/10 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-cyan-400 text-sm block">Terminal / CLI Rendering</span>
+                  <StatusBadge variant="planned" />
                 </div>
                 <p className="text-slate-300 leading-relaxed">
-                  <code className="text-blue-400 font-mono">nuncio mail show &lt;id&gt;</code> prints formatted plain text. Use <code className="text-blue-400 font-mono">--html</code> for markdown output, <code className="text-blue-400 font-mono">--raw-html</code> for piping to `w3m`/`lynx`, or <code className="text-blue-400 font-mono">--open</code> for browser trigger.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-slate-900 border border-white/10 space-y-3">
-                <div className="flex items-center gap-2 font-bold text-emerald-300 text-sm">
-                  <Bot className="w-4 h-4 text-emerald-400" />
-                  <span>3. AI MCP Agents</span>
-                </div>
-                <p className="text-slate-300 leading-relaxed">
-                  Converts HTML to token-efficient Markdown for LLM prompt contexts. Image attachments are passed as Base64 multimodal vision content blocks to Vision LLMs.
+                  A plain-text or Markdown fallback for non-GUI clients is the intended direction, once those clients
+                  exist.
                 </p>
               </div>
             </div>
 
-            {/* Tracking Pixel Security Box */}
             <div className="p-5 rounded-2xl bg-purple-950/30 border border-purple-500/30 space-y-3 text-xs">
               <span className="text-purple-300 font-bold text-sm block flex items-center gap-2">
-                <Shield className="w-4 h-4 text-purple-400" />
-                Automatic Tracking Pixel &amp; Web Bug Neutralization
+                <Monitor className="w-4 h-4 text-purple-400" />
+                Why This Isn&apos;t Rushed
               </span>
               <p className="text-slate-300 leading-relaxed">
-                Nuncio automatically strips 1x1 tracking GIF/PNG pixels (`&lt;img src=&quot;...track...&quot; width=&quot;1&quot; height=&quot;1&quot;&gt;`), remote CSS `@import` triggers, and external script tags before rendering email payloads.
+                HTML sanitization is exactly the kind of security-sensitive surface we&apos;d rather ship correctly and
+                later than ship early and wrong. It&apos;s tracked as a real milestone on the roadmap, not a checkbox
+                feature.
               </p>
             </div>
           </div>

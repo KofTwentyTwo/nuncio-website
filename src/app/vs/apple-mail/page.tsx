@@ -1,22 +1,22 @@
 import React from "react";
 import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
 import { Metadata } from "next";
-import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
+import { ShieldCheck, Database, Bot, Layers } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Nuncio vs Apple Mail — Sovereign Open Source Alternative",
-  description: "Compare Nuncio vs Apple Mail. Upgrade from basic legacy Apple Mail to Nuncio's NSQL filter engine, sub-10ms SQLite FTS5 search, Vim Terminal TUI, POSIX CLI, and native AI MCP support.",
+  title: "Nuncio vs Apple Mail — Cross-Platform Engine vs an Apple-Only Client",
+  description: "How Nuncio's cross-platform daemon and NSQL rule engine compare to Apple Mail's macOS/iOS-only reach. Nuncio is pre-alpha; this is a design comparison, not a claim it's ready to switch to today.",
   alternates: { canonical: "https://nuncio.mx/vs/apple-mail" },
   openGraph: {
-    title: "Nuncio vs Apple Mail — Sovereign Open Source Alternative",
-    description: "Compare Nuncio vs Apple Mail. Sub-10ms SQLite search, Vim Terminal TUI, POSIX CLI, and native AI MCP support 100% free.",
+    title: "Nuncio vs Apple Mail — Cross-Platform Engine vs an Apple-Only Client",
+    description: "A local-first engine that runs on macOS, Windows, and Linux, with an open NSQL rule language, compared to Apple Mail.",
     url: "https://nuncio.mx/vs/apple-mail",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nuncio vs Apple Mail",
-    description: "Compare Nuncio vs Apple Mail. 100% Free & Open Source alternative.",
+    description: "A cross-platform, open-source engine compared to Apple Mail's Apple-only reach.",
     images: ["/og-image.png"],
   },
 };
@@ -24,48 +24,49 @@ export const metadata: Metadata = {
 export default function VsAppleMailPage() {
   const differentiators = [
     {
-      title: "100% Cross-Platform",
-      icon: <Zap className="w-5 h-5 text-yellow-400" />,
-      desc: "Run Nuncio on macOS, Windows, and Linux. Apple Mail is strictly locked to Apple platforms.",
+      title: "Cross-Platform Engine",
+      icon: <Layers className="w-5 h-5 text-yellow-400" />,
+      desc: "The daemon and reference CLI build and run on macOS, Windows, and Linux today. Apple Mail is strictly locked to Apple hardware.",
     },
     {
-      title: "Sub-10ms FTS5 Search",
+      title: "Offline SQLite Search",
       icon: <Database className="w-5 h-5 text-blue-400" />,
-      desc: "Instant search across 100,000+ messages using SQLite FTS5 trigram indexing instead of slow Spotlight indexing.",
+      desc: "SQLite FTS5 indexes your synced mail locally, with no dependency on macOS Spotlight or any external index.",
     },
     {
-      title: "Vim Ratatui Terminal TUI",
+      title: "An Open NSQL Rule Language",
       icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
-      desc: "Triage emails inside your terminal session with single-key Vim chords. Apple Mail offers no terminal interface.",
+      desc: "Author and dry-run test declarative SQL-style filter rules today, with webhook dispatch and forwarding on the roadmap for live mail.",
     },
     {
-      title: "NSQL Automation Engine",
+      title: "A Governed AI Gateway",
       icon: <Bot className="w-5 h-5 text-emerald-400" />,
-      desc: "Define powerful declarative SQL automation rules with full webhook, forwarding, and dry-run preview capabilities.",
+      desc: "An MCP client is planned to let AI agents work with your mail through capability policies and an audit trail, not through Apple Mail's absence of any AI surface.",
+      status: "planned" as const,
     },
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "OS Availability", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS & iOS Only", description: "Native binaries across desktop & server platforms" },
-    { feature: "Full-Text Search Engine", nuncioValue: "Sub-10ms SQLite FTS5 Trigram", competitorValue: "macOS Spotlight Index", description: "Instant local search results" },
-    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Vim Ratatui terminal UI" },
-    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Command-line integration" },
-    { feature: "Native AI MCP Integration", nuncioValue: true, competitorValue: false, description: "Model Context Protocol tools & policies" },
-    { feature: "WORM Cryptographic Audits", nuncioValue: true, competitorValue: false, description: "HMAC-SHA256 audit log ledger" },
-    { feature: "Automation Rule Engine", nuncioValue: "NSQL Declarative Rules", competitorValue: "Basic Mail Rules", description: "Full SQL syntax parser (WHEN/THEN rules)" },
-    { feature: "Data-at-Rest Encryption", nuncioValue: "AES-256-GCM Column Level", competitorValue: "Unencrypted Local SQLite", description: "PayloadCipher encryption on local disk" },
-    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "MBOX Only", description: "Export entire accounts or NSQL query results" },
+    { feature: "OS Availability (engine + CLI)", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS & iOS only", description: "Build and run the daemon and CLI on all three desktop OSes" },
+    { feature: "Full-Text Search Engine", nuncioValue: "SQLite FTS5, fully offline", competitorValue: "macOS Spotlight index", description: "No dependency on a system-wide index" },
+    { feature: "Build & Run From Source", nuncioValue: true, competitorValue: false, description: "cargo build --workspace + run the daemon and CLI locally" },
+    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Planned keyboard-driven terminal client", nuncioStatus: "planned" },
+    { feature: "AI Agent Access (MCP)", nuncioValue: true, competitorValue: false, description: "Planned governed gateway for AI agents", nuncioStatus: "planned" },
+    { feature: "WORM Audit Ledger", nuncioValue: true, competitorValue: false, description: "Immutable hash-chained log — real today" },
+    { feature: "Automation Rule Engine", nuncioValue: "NSQL, author & dry-run test today", competitorValue: "Basic mail rules", description: "Live rule firing on synced mail is still ahead", nuncioStatus: "in-progress" },
+    { feature: "At-Rest Body Encryption", nuncioValue: true, competitorValue: "Unencrypted local SQLite", description: "Security-hardening milestone, not yet built", nuncioStatus: "planned" },
+    { feature: "Portable Export (MBOX/EML/JSON)", nuncioValue: true, competitorValue: "MBOX only", description: "Open, standard formats — real today" },
   ];
 
   return (
     <ComparisonPageTemplate
       competitorName="Apple Mail"
       competitorSlug="apple-mail"
-      tagline="Upgrade from basic legacy Apple Mail to Nuncio's NSQL filter engine, sub-10ms SQLite FTS5 search, Vim Terminal TUI, POSIX CLI, and native AI MCP support."
-      nuncioPrice="100% Free & Open Source"
-      competitorPrice="Included with macOS (Apple Locked)"
-      heroHeadline="Upgrade from basic legacy Apple Mail to Nuncio's NSQL filter engine, sub-10ms SQLite FTS5 search, Vim Terminal TUI, POSIX CLI, and native AI MCP support 100% free."
-      whySwitchParagraph="Apple Mail is a decent default client for macOS, but lacks modern automation, power-user keyboard velocity, cross-platform support for Windows or Linux, and AI capabilities. Nuncio delivers native macOS glassmorphic beauty while extending full parity to terminal environments and AI agents."
+      tagline="A cross-platform, open-source engine we're building against Apple Mail's Apple-only reach."
+      nuncioPrice="Free & open source (in development)"
+      competitorPrice="Included with macOS (Apple-locked)"
+      heroHeadline="Apple Mail is a solid default for macOS and iOS, but it stops at the edge of Apple's ecosystem and has no automation language or AI surface. We're building Nuncio's engine to run anywhere and expose a real, inspectable rule language."
+      whySwitchParagraph="Apple Mail is a fine default client, but it doesn't run on Windows or Linux, and its rules are a closed, basic list. Nuncio's engine (nunciod) and reference CLI already build and run cross-platform, with local FTS5 search, portable export, and a WORM audit ledger real today. The NSQL rule language can be authored and dry-run tested now; getting it to fire on live synced mail, and building the terminal and AI-agent clients, are the next milestones — not features you can use yet."
       comparisonRows={comparisonRows}
       differentiators={differentiators}
     />

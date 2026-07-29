@@ -1,22 +1,22 @@
 import React from "react";
 import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
 import { Metadata } from "next";
-import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
+import { ShieldCheck, Database, Bot, Layers } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Nuncio vs Superhuman — Sovereign Open Source Alternative",
-  description: "Compare Nuncio vs Superhuman. Why pay $360/year for closed cloud email when Nuncio gives you local SQLite WAL speed, 4 unified interfaces, Vim keyboard velocity, and native AI MCP agent integration 100% free?",
+  title: "Nuncio vs Superhuman — A Free, Local-First Alternative to Paid Cloud Email",
+  description: "How Nuncio's local-first, open-source design compares to Superhuman's paid closed cloud subscription. Nuncio is pre-alpha; this is a design comparison, not a claim it's ready to switch to today.",
   alternates: { canonical: "https://nuncio.mx/vs/superhuman" },
   openGraph: {
-    title: "Nuncio vs Superhuman — Sovereign Open Source Alternative",
-    description: "Compare Nuncio vs Superhuman. Why pay $360/year for closed cloud email when Nuncio gives you local SQLite WAL speed, 4 unified interfaces, and AI MCP integration 100% free?",
+    title: "Nuncio vs Superhuman — A Free, Local-First Alternative to Paid Cloud Email",
+    description: "A local SQLite store, an open NSQL rule language, and a WORM audit ledger, compared against Superhuman's closed cloud subscription.",
     url: "https://nuncio.mx/vs/superhuman",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nuncio vs Superhuman",
-    description: "Compare Nuncio vs Superhuman. 100% Free & Open Source alternative with local SQLite speed.",
+    description: "A free, local-first, open-source design compared against Superhuman's paid closed cloud subscription.",
     images: ["/og-image.png"],
   },
 };
@@ -24,51 +24,53 @@ export const metadata: Metadata = {
 export default function VsSuperhumanPage() {
   const differentiators = [
     {
-      title: "$0 Forever vs $360/Year",
-      icon: <Zap className="w-5 h-5 text-yellow-400" />,
-      desc: "Nuncio is 100% free and open source under MIT / Apache-2.0. Superhuman forces a $30/month recurring subscription.",
+      title: "Free & Open, Not a Paid Subscription",
+      icon: <ShieldCheck className="w-5 h-5 text-yellow-400" />,
+      desc: "Nuncio is MIT / Apache-2.0 with no subscription planned. Superhuman charges a monthly or annual fee across its tiers for its closed cloud client.",
     },
     {
-      title: "Local SQLite vs Closed Cloud",
+      title: "Local SQLite, Not Closed Cloud",
       icon: <Database className="w-5 h-5 text-blue-400" />,
-      desc: "Your emails and search indices stay in local SQLite WAL files on your disk. Superhuman stores your metadata on proprietary cloud servers.",
+      desc: "Synced mail and the search index live in local SQLite WAL files on your disk, owned by a daemon you run — not on Superhuman's servers.",
     },
     {
-      title: "4 Unified Interfaces",
-      icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
-      desc: "Work seamlessly across macOS GUI, Windows, Linux, Vim Ratatui Terminal TUI, POSIX CLI, and Model Context Protocol (MCP).",
+      title: "One Contract, Future Clients",
+      icon: <Layers className="w-5 h-5 text-purple-400" />,
+      desc: "A desktop GUI, terminal TUI, and MCP client are planned as thin clients over the same gRPC API the reference CLI already uses.",
+      status: "planned" as const,
     },
     {
-      title: "Native AI MCP Integration",
+      title: "A Governed AI Gateway",
       icon: <Bot className="w-5 h-5 text-emerald-400" />,
-      desc: "Connect Anthropic Claude, Cursor, and custom AI agents securely using McpAgentPolicy capability controls and automatic PII redaction.",
+      desc: "The plan: let AI agents work with your mail through capability policies and an audit trail, not a black-box cloud AI feature.",
+      status: "planned" as const,
     },
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "Pricing & Subscription", nuncioValue: "100% Free & Open Source", competitorValue: "$30/mo ($360/year)", description: "Zero subscription fees forever" },
-    { feature: "Data Storage Location", nuncioValue: "100% Local SQLite WAL", competitorValue: "Proprietary Cloud Servers", description: "Sovereign data ownership on local disk" },
-    { feature: "Terminal TUI (Vim Chords)", nuncioValue: true, competitorValue: false, description: "Vim motions (j/k/h/l, g i, e, s) in terminal" },
-    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "nuncio mail list --json & pipeline integration" },
-    { feature: "Native AI Agent Support (MCP)", nuncioValue: true, competitorValue: false, description: "Model Context Protocol tools & policies" },
-    { feature: "WORM Cryptographic Audits", nuncioValue: true, competitorValue: false, description: "HMAC-SHA256 hash-chained execution logs" },
-    { feature: "Server-Side Automation (NSQL)", nuncioValue: true, competitorValue: "Basic Rules", description: "Full SQL syntax parser (WHEN/THEN rules)" },
-    { feature: "Full-Text Search Latency", nuncioValue: "<10ms (FTS5 Trigram)", competitorValue: "~250ms (Cloud API)", description: "Instant offline trigram index" },
-    { feature: "Data-at-Rest Encryption", nuncioValue: "AES-256-GCM Column Level", competitorValue: "Server-Side TLS Only", description: "PayloadCipher encryption on local disk" },
-    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "Limited", description: "Export entire accounts or NSQL queries" },
-    { feature: "Tracking Pixel Neutralization", nuncioValue: true, competitorValue: false, description: "Automatic 1x1 image blocking" },
-    { feature: "Cross-Platform Support", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS, Web, iOS", description: "Native binaries across all desktop & server OS" },
+    { feature: "Pricing & Subscription", nuncioValue: "Free & open source (in development)", competitorValue: "≈$300+/yr (tiered plans)", description: "No subscription tier planned" },
+    { feature: "Data Storage Location", nuncioValue: "Local SQLite WAL, daemon you run", competitorValue: "Proprietary cloud servers", description: "Local data ownership" },
+    { feature: "Build & Run From Source", nuncioValue: true, competitorValue: false, description: "cargo build --workspace + run the daemon and CLI locally" },
+    { feature: "Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Real gRPC client today, JSON output for pipelines" },
+    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Planned keyboard-driven terminal client", nuncioStatus: "planned" },
+    { feature: "AI Agent Access (MCP)", nuncioValue: true, competitorValue: false, description: "Planned governed gateway for AI agents", nuncioStatus: "planned" },
+    { feature: "WORM Audit Ledger", nuncioValue: true, competitorValue: false, description: "Immutable hash-chained log — real today" },
+    { feature: "NSQL Automation Engine", nuncioValue: "Author & dry-run test today", competitorValue: "Basic rules", description: "Live rule firing on synced mail is still ahead", nuncioStatus: "in-progress" },
+    { feature: "Local Full-Text Search", nuncioValue: "SQLite FTS5, fully offline", competitorValue: "Cloud-side search API", description: "No network round trip for search" },
+    { feature: "At-Rest Body Encryption", nuncioValue: true, competitorValue: "Server-side TLS only", description: "Security-hardening milestone, not yet built", nuncioStatus: "planned" },
+    { feature: "Portable Export (MBOX/EML/JSON)", nuncioValue: true, competitorValue: "Limited export", description: "Open, standard formats — real today" },
+    { feature: "Cross-Platform (engine + CLI)", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS, Web, iOS", description: "Build and run the daemon on all three desktop OSes" },
   ];
 
   return (
     <ComparisonPageTemplate
       competitorName="Superhuman"
       competitorSlug="superhuman"
-      tagline="Why pay $360/year for closed cloud email when Nuncio gives you local SQLite speed, 4 unified interfaces, and native AI MCP integration 100% free?"
-      nuncioPrice="100% Free & Open Source"
-      competitorPrice="$360 / Year Subscription"
-      heroHeadline="Why pay $360/year for closed cloud email when Nuncio gives you local SQLite WAL speed, 4 unified interfaces, Vim keyboard velocity, and native AI MCP agent integration 100% free?"
-      whySwitchParagraph="Superhuman popularized keyboard shortcuts for email, but locked users into a $30/month subscription model and centralized cloud servers. Nuncio takes the high-velocity keyboard workflow further by making it 100% local, blazing fast with SQLite WAL storage, and extensible across GUI, Vim Terminal TUI, POSIX CLI, and Model Context Protocol (MCP) AI agents."
+      tagline="A free, open, local-first alternative we're building to Superhuman's paid closed cloud email."
+      nuncioPrice="Free & open source (in development)"
+      competitorPrice="≈$300+ / Year (tiered plans)"
+      heroHeadline="Superhuman popularized fast keyboard-driven email, wrapped inside a closed cloud client with a recurring subscription. We're building Nuncio as a free, open, local-first alternative: the same keyboard-first ambition, running on a daemon you own."
+      whySwitchParagraph="Superhuman's keyboard-driven speed is real, but it's delivered through a closed client on top of centralized cloud servers, for a few hundred dollars a year. Nuncio's architecture takes a different path: one daemon (nunciod) that owns your mail state in local SQLite, speaking a single versioned gRPC contract that a future terminal client, desktop GUI, and AI-agent gateway would all consume identically. The daemon, IMAP/SMTP sync, local FTS5 search, export, and the WORM audit ledger are real and buildable from source today; the additional clients and live NSQL rule-firing are what's ahead."
       comparisonRows={comparisonRows}
       differentiators={differentiators}
     />

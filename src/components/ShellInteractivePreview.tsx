@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Terminal, Monitor, Bot, Code, CheckCircle, Copy, Check, Play, RefreshCw, Send, Calendar, ShieldCheck, Sparkles, ChevronRight, Activity, ArrowRight } from "lucide-react";
+import { Terminal, Monitor, Bot, Code, Copy, Check, Sparkles, Activity, ArrowRight, Eye } from "lucide-react";
 
 export function ShellInteractivePreview() {
   const [activeTab, setActiveTab] = useState<"gui" | "tui" | "cli" | "mcp">("gui");
@@ -21,7 +21,7 @@ export function ShellInteractivePreview() {
     "name": "VIP Priority Alerts",
     "priority": 10,
     "enabled": true,
-    "nsql_text": "WHEN sender LIKE '%@kof22.com%' AND subject REGEXP '(Urgent|Architecture)' THEN MOVE TO 'vip-inbox', SET flagged = TRUE;"
+    "nsql_text": "WHEN sender LIKE '%@example.com%' AND subject REGEXP '(Urgent|Architecture)' THEN MOVE TO 'vip-inbox', SET flagged = TRUE;"
   },
   {
     "id": "rule_02NEWS",
@@ -40,15 +40,17 @@ export function ShellInteractivePreview() {
   const [selectedMcpTool, setSelectedMcpTool] = useState<"send" | "event" | "status" | "update">("send");
 
   const tuiRules = [
-    { id: "P10", name: "VIP Priority Alerts", target: "james.maes@kof22.com", nsql: "WHEN sender LIKE '%@kof22.com%' AND subject REGEXP '(Urgent|Architecture)' THEN MOVE TO 'vip-inbox', SET flagged = TRUE;" },
+    { id: "P10", name: "VIP Priority Alerts", target: "you@example.com", nsql: "WHEN sender LIKE '%@example.com%' AND subject REGEXP '(Urgent|Architecture)' THEN MOVE TO 'vip-inbox', SET flagged = TRUE;" },
     { id: "P50", name: "Auto-Archive Newsletters", target: "*", nsql: "WHEN body LIKE '%unsubscribe%' THEN MOVE TO 'Newsletters', SET read = TRUE;" },
     { id: "P100", name: "Spam Purge Filter", target: "*", nsql: "WHEN header['X-Spam-Score'] > 5 THEN MOVE TO 'Trash', SET read = TRUE;" },
   ];
 
+  // Sample content for a concept mockup only — not a real inbox, real people,
+  // or a real build. See the "Product preview" caption on this component.
   const guiEmails = [
-    { id: 1, sender: "Alice Vance (Kof22)", subject: "Urgent Architecture Review & VIP Release", folder: "INBOX", date: "12:42 PM", unread: true, snippet: "Please review the Nuncio sovereign mail architecture spec for 100% parity across all 4 interfaces..." },
-    { id: 2, sender: "Antigravity Agent", subject: "MCP Calendar Event Confirmation: Architecture Alignment", folder: "INBOX", date: "11:15 AM", unread: false, snippet: "Created event 'Architecture Alignment' for tomorrow at 2:00 PM PST via nuncio_cal_create_event." },
-    { id: 3, sender: "GitHub Actions Bot", subject: "Multi-Platform Nightly Build #30031303002 Succeeded", folder: "CI/CD", date: "Yesterday", unread: false, snippet: "macOS Universal .dmg, Windows .msi, and Linux .AppImage artifacts published with SHA256SUMS.txt." },
+    { id: 1, sender: "Project Lead", subject: "Architecture review for the filter engine", folder: "INBOX", date: "12:42 PM", unread: true, snippet: "Please review the sovereign mail architecture spec ahead of the next milestone..." },
+    { id: 2, sender: "Calendar Assistant (AI agent)", subject: "Calendar event confirmed via MCP", folder: "INBOX", date: "11:15 AM", unread: false, snippet: "Created event 'Architecture Sync' for tomorrow via the nuncio_cal_create_event tool." },
+    { id: 3, sender: "CI Bot", subject: "Nightly build finished", folder: "CI/CD", date: "Yesterday", unread: false, snippet: "Sample notification — illustrates what a future CI notification email might look like." },
   ];
 
   const runCliCommand = (cmd: string) => {
@@ -80,7 +82,7 @@ export function ShellInteractivePreview() {
   {
     "id": "msg_9901",
     "subject": "Urgent Architecture Review & VIP Release",
-    "sender": "alice@kof22.com",
+    "sender": "vip@example.com",
     "received_at": 1700000000,
     "matched_score": 0.98
   }
@@ -94,7 +96,7 @@ export function ShellInteractivePreview() {
     "name": "VIP Priority Alerts",
     "priority": 10,
     "enabled": true,
-    "nsql_text": "WHEN sender LIKE '%@kof22.com%' AND subject REGEXP '(Urgent|Architecture)' THEN MOVE TO 'vip-inbox', SET flagged = TRUE;"
+    "nsql_text": "WHEN sender LIKE '%@example.com%' AND subject REGEXP '(Urgent|Architecture)' THEN MOVE TO 'vip-inbox', SET flagged = TRUE;"
   }
 ]`
       );
@@ -109,19 +111,25 @@ export function ShellInteractivePreview() {
 
   return (
     <div className="w-full max-w-5xl mx-auto rounded-2xl glass-panel p-2 border border-white/10 overflow-hidden shadow-2xl">
+      {/* Preview disclosure banner */}
+      <div className="flex items-center justify-center gap-2 px-3 py-1.5 bg-amber-500/10 border-b border-amber-500/20 rounded-t-xl text-amber-300 text-[10px] sm:text-[11px] font-semibold tracking-tight">
+        <Eye className="w-3 h-3" />
+        <span>Product preview — a concept mockup of the vision, not a screenshot of a real build</span>
+      </div>
+
       {/* macOS Window Title Bar */}
-      <div className="flex items-center justify-between px-3.5 py-2.5 bg-slate-950/90 border-b border-white/10 rounded-t-xl">
+      <div className="flex items-center justify-between px-3.5 py-2.5 bg-slate-950/90 border-b border-white/10">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]" />
           <div className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]" />
           <div className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]" />
         </div>
         <div className="text-[11px] font-semibold text-slate-400 font-sans tracking-tight">
-          Nuncio Sovereign Mail &amp; Calendar — Native macOS / Linux / Windows Shell
+          Nuncio Sovereign Mail &amp; Calendar — Concept for a Native macOS / Linux / Windows Shell
         </div>
-        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-semibold text-emerald-400">
-          <Activity className="w-3 h-3 animate-pulse text-emerald-400" />
-          <span>Daemon Connected</span>
+        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-500/10 border border-slate-500/30 text-[10px] font-semibold text-slate-300">
+          <Activity className="w-3 h-3 text-slate-300" />
+          <span>Simulated data</span>
         </div>
       </div>
 
@@ -137,7 +145,7 @@ export function ShellInteractivePreview() {
             }`}
           >
             <Monitor className="w-4 h-4 text-purple-300" />
-            1. Desktop GUI (Featured)
+            1. Desktop GUI
           </button>
           <button
             onClick={() => setActiveTab("tui")}
@@ -175,8 +183,8 @@ export function ShellInteractivePreview() {
         </div>
 
         <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded bg-slate-950 text-[11px] font-mono text-gray-400 border border-slate-800">
-          <Activity className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-          <span>Daemon IPC Connected</span>
+          <Eye className="w-3.5 h-3.5 text-amber-400" />
+          <span>Simulated — click around, no live daemon behind this</span>
         </div>
       </div>
 
@@ -190,7 +198,7 @@ export function ShellInteractivePreview() {
             <div className="bg-cyan-950/80 border border-cyan-500/30 text-cyan-200 p-2 px-3 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center font-bold text-[11px] sm:text-xs gap-1">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>NUNCIO TUI │ Account: james.maes@kof22.com │ State: Connected</span>
+                <span>NUNCIO TUI │ Account: you@example.com │ State: Connected</span>
               </div>
               <span className="text-cyan-400">AppMode::{tuiMode === "rules" ? "FilterRules" : "QueryEditor"}</span>
             </div>
@@ -243,11 +251,11 @@ export function ShellInteractivePreview() {
                       <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
                       Dry-Run Preview [t]:
                     </span>
-                    <span className="text-emerald-400 font-bold">MATCHED (14µs)</span>
+                    <span className="text-emerald-400 font-bold">MATCHED</span>
                   </div>
                   {tuiDryRunRun && (
                     <div className="text-[10px] text-cyan-300 space-y-1 border-t border-slate-800 pt-2">
-                      <p>✓ Rule evaluated against sample message in 0.014ms</p>
+                      <p>✓ Rule evaluated against sample message</p>
                       <p>✓ Action sequence: MOVE TO &apos;vip-inbox&apos;, SET flagged = TRUE</p>
                     </div>
                   )}
@@ -385,12 +393,12 @@ export function ShellInteractivePreview() {
                             <h4 className="text-sm font-bold text-white">{mail.subject}</h4>
                             <p className="text-xs text-purple-300">From: {mail.sender}</p>
                           </div>
-                          <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Verified DKIM/SPF</span>
+                          <span className="text-[10px] px-2 py-0.5 rounded bg-slate-500/20 text-slate-300 border border-slate-500/30">Concept UI</span>
                         </div>
                         <p className="text-xs text-gray-300 leading-relaxed pt-1">{mail.snippet}</p>
                       </div>
                       <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] text-gray-400">
-                        <span>AES-256-GCM Encrypted at Rest</span>
+                        <span>At-rest encryption — planned</span>
                         <button className="px-3 py-1 rounded gradient-bg text-white font-semibold text-xs flex items-center gap-1">
                           Reply <ArrowRight className="w-3 h-3" />
                         </button>
@@ -461,9 +469,9 @@ export function ShellInteractivePreview() {
   "params": {
     "name": "nuncio_mail_send",
     "arguments": {
-      "to": "alice@kof22.com",
+      "to": "vip@example.com",
       "subject": "Architecture Sync",
-      "body": "All 4 interfaces operating with 100% parity!"
+      "body": "Sample message sent via the MCP gateway."
     }
   }
 }`}
