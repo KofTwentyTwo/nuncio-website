@@ -2,6 +2,8 @@ import React from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DOCS_NAVIGATION } from "@/lib/docs-navigation";
+import { StatusBadge } from "@/components/StatusBadge";
+import { GITHUB_URL, ROADMAP_URL } from "@/lib/status";
 import {
   BookOpen,
   ArrowRight,
@@ -15,12 +17,15 @@ import {
   Terminal,
   FileCheck,
   HelpCircle,
+  AlertTriangle,
+  GitBranch,
+  MapPin,
 } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Documentation & Knowledge Base — Nuncio",
-  description: "Complete technical manual, installation guide, NSQL filter language specification, protocol setup, and MCP LLM agent integration guide for Nuncio.",
+  title: "Documentation — Nuncio (Pre-Alpha)",
+  description: "Docs for the Nuncio engine: what genuinely builds and runs from source today (the daemon, CLI, sync, search, export, WORM audits) versus what's designed but not yet usable (GUI, TUI, MCP, live-firing filters, at-rest encryption, HTML sanitization). Nuncio is pre-alpha — not yet usable for real accounts.",
 };
 
 const ICON_MAP: Record<string, React.ReactNode> = {
@@ -45,7 +50,7 @@ export default function DocsIndexPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold tracking-tight shadow-lg uppercase">
             <BookOpen className="w-3.5 h-3.5 text-blue-400" />
-            <span>Nuncio Knowledge Base &amp; Technical Manual</span>
+            <span>Nuncio Documentation</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
@@ -53,8 +58,35 @@ export default function DocsIndexPage() {
           </h1>
 
           <p className="text-slate-300 text-lg sm:text-xl font-normal max-w-3xl mx-auto leading-relaxed">
-            In-depth standalone guides for installation, protocol setup, NSQL filter rules, AI MCP integration, security whitepapers, and automated backups.
+            Guides for the engine you can build from source today, and honest design docs for what&apos;s still on
+            the roadmap: NSQL filter rules, the WORM audit ledger, export &amp; recovery, and the planned MCP AI
+            gateway.
           </p>
+
+          {/* Prominent pre-alpha notice */}
+          <div className="max-w-2xl mx-auto p-5 rounded-2xl bg-amber-950/30 border border-amber-500/40 text-left space-y-2">
+            <div className="flex items-center gap-2 text-amber-300 font-bold text-sm">
+              <AlertTriangle className="w-4 h-4 shrink-0" />
+              <span>Pre-alpha — not yet usable for real accounts</span>
+            </div>
+            <p className="text-slate-300 text-xs leading-relaxed">
+              Nuncio has no installer and no end-user onboarding flow. Pages here that describe a developer building
+              the daemon and CLI from source, running IMAP/SMTP sync, search, export, or the WORM audit ledger are
+              describing real, working code. Anything about a desktop GUI, terminal TUI, MCP AI client, live-firing
+              filters, at-rest encryption, or HTML sanitization is <StatusBadge variant="planned" className="mx-1 align-middle" /> —
+              the design we&apos;re building toward, not something you can use today.
+            </p>
+            <div className="flex flex-wrap items-center gap-3 pt-1 text-xs font-semibold">
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-blue-400 hover:underline">
+                <GitBranch className="w-3.5 h-3.5" />
+                Follow the build on GitHub
+              </a>
+              <a href={ROADMAP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-blue-400 hover:underline">
+                <MapPin className="w-3.5 h-3.5" />
+                See the roadmap
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* 10 Standalone Documentation Cards Grid */}

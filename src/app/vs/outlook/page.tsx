@@ -1,22 +1,22 @@
 import React from "react";
 import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
 import { Metadata } from "next";
-import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
+import { ShieldCheck, Database, Bot, Terminal } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Nuncio vs Microsoft Outlook — Sovereign Open Source Alternative",
-  description: "Compare Nuncio vs Microsoft Outlook. Why put up with slow bloated electron builds, ads, and telemetry when Nuncio gives you lightweight native Rust speed, 4 unified interfaces, and zero data tracking?",
+  title: "Nuncio vs Microsoft Outlook — A Minimal Rust Daemon vs a Subscription Web App",
+  description: "How Nuncio's minimal, memory-safe Rust daemon compares to Outlook's telemetry and subscription model. Nuncio is pre-alpha; this is a design comparison, not a claim it's ready to switch to today.",
   alternates: { canonical: "https://nuncio.mx/vs/outlook" },
   openGraph: {
-    title: "Nuncio vs Microsoft Outlook — Sovereign Open Source Alternative",
-    description: "Compare Nuncio vs Microsoft Outlook. Lightweight native Rust speed, 4 unified interfaces, and zero telemetry 100% free.",
+    title: "Nuncio vs Microsoft Outlook — A Minimal Rust Daemon vs a Subscription Web App",
+    description: "A memory-safe Rust engine with zero ad trackers, compared against Outlook's telemetry and Microsoft 365 subscription.",
     url: "https://nuncio.mx/vs/outlook",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nuncio vs Microsoft Outlook",
-    description: "Compare Nuncio vs Microsoft Outlook. 100% Free & Open Source alternative.",
+    description: "A minimal, open-source Rust engine compared to Outlook's telemetry and subscription model.",
     images: ["/og-image.png"],
   },
 };
@@ -24,48 +24,50 @@ export const metadata: Metadata = {
 export default function VsOutlookPage() {
   const differentiators = [
     {
-      title: "Lightweight Native Rust Speed",
-      icon: <Zap className="w-5 h-5 text-yellow-400" />,
-      desc: "Nuncio uses native Rust and Tauri v2 requiring under 80MB RAM. The new Outlook is an Electron web view using over 1GB RAM.",
+      title: "Memory-Safe Rust Core",
+      icon: <ShieldCheck className="w-5 h-5 text-yellow-400" />,
+      desc: "The engine is written in Rust with unsafe code forbidden by the workspace lint gate — a different foundation than the new Outlook's web-view shell.",
     },
     {
-      title: "Zero Telemetry & Ads",
+      title: "No Ads, No Telemetry",
       icon: <Database className="w-5 h-5 text-blue-400" />,
-      desc: "Nuncio contains zero ad network trackers or diagnostic telemetry. New Outlook displays sponsored ads directly inside your inbox.",
+      desc: "Nuncio's engine contains no ad network, no diagnostic telemetry pipeline, and no sponsored placements in your inbox.",
     },
     {
-      title: "Vim Terminal TUI & POSIX CLI",
-      icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
-      desc: "Work with single-key velocity inside terminal multiplexers or SSH sessions. Outlook offers zero command-line support.",
+      title: "A Scriptable CLI, Today",
+      icon: <Terminal className="w-5 h-5 text-purple-400" />,
+      desc: "nuncio-cli is a real, scriptable gRPC client you can build and run right now. Outlook has no command-line surface at all.",
     },
     {
-      title: "NSQL Engine & WORM Audits",
+      title: "An Open Rule Language",
       icon: <Bot className="w-5 h-5 text-emerald-400" />,
-      desc: "Define declarative SQL automation rules and verify execution history in immutable HMAC-SHA256 WORM audit logs.",
+      desc: "NSQL rules can be authored and dry-run tested today as SQL-style statements — with live rule firing on synced mail on the roadmap.",
+      status: "in-progress" as const,
     },
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "Memory Usage", nuncioValue: "< 80 MB RAM (Native Rust)", competitorValue: "> 1.2 GB RAM (Electron Web)", description: "Nuncio uses 15x less memory" },
-    { feature: "Inbox Ads & Telemetry", nuncioValue: "Zero Ads / Zero Telemetry", competitorValue: "Display Ads in Free Version", description: "100% private open-source client" },
-    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Vim Ratatui terminal UI" },
-    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Command-line integration" },
-    { feature: "Native AI MCP Integration", nuncioValue: true, competitorValue: false, description: "Model Context Protocol tools & policies" },
-    { feature: "WORM Cryptographic Audits", nuncioValue: true, competitorValue: false, description: "HMAC-SHA256 audit log ledger" },
-    { feature: "NSQL Automation Engine", nuncioValue: true, competitorValue: "Basic Rules", description: "Full SQL syntax parser (WHEN/THEN rules)" },
-    { feature: "Data-at-Rest Encryption", nuncioValue: "AES-256-GCM Column Level", competitorValue: "Unencrypted Local Cache", description: "PayloadCipher encryption on local disk" },
-    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "PST Export Only", description: "Export entire accounts or NSQL query results" },
+    { feature: "Pricing Model", nuncioValue: "Free & open source (in development)", competitorValue: "Microsoft 365 subscription (from ~$6.99/mo)", description: "No subscription tier planned" },
+    { feature: "Ads & Telemetry", nuncioValue: "None in the engine", competitorValue: "Ads in free tier; telemetry in paid tiers", description: "Inspect the engine's source to verify" },
+    { feature: "Build & Run From Source", nuncioValue: true, competitorValue: false, description: "cargo build --workspace + run the daemon and CLI locally" },
+    { feature: "Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Real gRPC client today, JSON output for pipelines" },
+    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Planned keyboard-driven terminal client", nuncioStatus: "planned" },
+    { feature: "AI Agent Access (MCP)", nuncioValue: true, competitorValue: false, description: "Planned governed gateway for AI agents", nuncioStatus: "planned" },
+    { feature: "WORM Audit Ledger", nuncioValue: true, competitorValue: false, description: "Immutable hash-chained log — real today" },
+    { feature: "NSQL Automation Engine", nuncioValue: "Author & dry-run test today", competitorValue: "Basic rules", description: "Live rule firing on synced mail is still ahead", nuncioStatus: "in-progress" },
+    { feature: "At-Rest Body Encryption", nuncioValue: true, competitorValue: "Unencrypted local cache", description: "Security-hardening milestone, not yet built", nuncioStatus: "planned" },
+    { feature: "Portable Export (MBOX/EML/JSON)", nuncioValue: true, competitorValue: "PST export only", description: "Open, standard formats — real today" },
   ];
 
   return (
     <ComparisonPageTemplate
       competitorName="Microsoft Outlook"
       competitorSlug="outlook"
-      tagline="Why put up with slow bloated electron builds, ads, and telemetry when Nuncio gives you lightweight native Rust speed, 4 unified interfaces, and zero data tracking?"
-      nuncioPrice="100% Free & Open Source"
-      competitorPrice="Microsoft 360 Subscription / Ad-Supported"
-      heroHeadline="Why put up with slow bloated electron builds, ads, and telemetry when Nuncio gives you lightweight native Rust speed, 4 unified interfaces, and zero data tracking 100% free?"
-      whySwitchParagraph="Microsoft's transition to the web-based 'New Outlook' replaced native desktop performance with bloated web views, intrusive inbox ads, and mandatory cloud syncing. Nuncio provides a high-performance native alternative that starts in under 100 milliseconds and runs across macOS, Windows, Linux, and terminal environments."
+      tagline="A minimal, memory-safe Rust daemon we're building, compared against Outlook's telemetry and subscription model."
+      nuncioPrice="Free & open source (in development)"
+      competitorPrice="Microsoft 365 Subscription / Ad-Supported"
+      heroHeadline="The new Outlook is a web view wrapped in a subscription, with ads in the free tier and telemetry throughout. We're building Nuncio as a minimal, memory-safe Rust daemon with no ad network and no telemetry pipeline, full stop."
+      whySwitchParagraph="Microsoft's transition to the web-based 'New Outlook' brought inbox ads and mandatory account telemetry along with cloud sync. Nuncio's design starts from a different place: a Rust daemon (nunciod) with unsafe code forbidden by the build's own lint gate, no ad network, and no diagnostic pipeline. The daemon, IMAP/SMTP sync, WORM audit ledger, and export already build and run from source today; live-firing NSQL rules and at-rest encryption are the next milestones."
       comparisonRows={comparisonRows}
       differentiators={differentiators}
     />

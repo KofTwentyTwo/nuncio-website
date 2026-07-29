@@ -9,19 +9,19 @@ export const DOCS_NAVIGATION: DocNavNode[] = [
   {
     slug: "quickstart",
     category: "Getting Started",
-    title: "Quickstart & Installation",
+    title: "Quickstart: Build & Run From Source",
     iconName: "Download",
   },
   {
     slug: "account-setup",
     category: "Getting Started",
-    title: "Account Setup & Providers",
+    title: "Account Setup (Planned)",
     iconName: "Key",
   },
   {
     slug: "interfaces",
     category: "User Interfaces",
-    title: "Four Shells & Vim Keybindings",
+    title: "Client Interfaces (CLI Today, More Planned)",
     iconName: "Monitor",
   },
   {
@@ -39,25 +39,25 @@ export const DOCS_NAVIGATION: DocNavNode[] = [
   {
     slug: "mcp",
     category: "AI Integration",
-    title: "Native MCP AI Server Setup",
+    title: "Model Context Protocol (Planned)",
     iconName: "Bot",
   },
   {
     slug: "html-rendering",
-    category: "User Experience",
-    title: "HTML & Image Rendering Guide",
+    category: "Security",
+    title: "HTML Rendering & Sandboxing (Planned)",
     iconName: "Layers",
   },
   {
     slug: "export-backups",
     category: "Maintenance",
-    title: "Universal Data Export & Backups",
+    title: "Data Export & Backups",
     iconName: "Terminal",
   },
   {
     slug: "worm-audits",
     category: "Security & Compliance",
-    title: "WORM Cryptographic Audits",
+    title: "WORM Audit Ledger",
     iconName: "FileCheck",
   },
   {

@@ -6,24 +6,20 @@ import {
   Terminal,
   Code,
   Cpu,
-  Shield,
+  Key,
   Bot,
   Search,
-  Check,
-  Copy,
   ChevronRight,
   HelpCircle,
   Download,
-  Key,
-  Lock,
-  Database,
   FileCheck,
-  RefreshCw,
   Sparkles,
   Layers,
   AlertTriangle,
   Monitor,
 } from "lucide-react";
+import { StatusBadge, AvailableNow } from "@/components/StatusBadge";
+import { GITHUB_URL, ROADMAP_URL } from "@/lib/status";
 
 interface DocTopic {
   id: string;
@@ -33,88 +29,60 @@ interface DocTopic {
   content: React.ReactNode;
 }
 
+/**
+ * Standalone tabbed documentation reader. Not currently linked from any
+ * route — the per-slug pages under src/app/docs/* (via DocsLayout) are the
+ * live docs surface. Kept accurate in case it's wired back in.
+ */
 export function DocsHub() {
   const [activeTopic, setActiveTopic] = useState<string>("quickstart");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
-
-  const copyToClipboard = (text: string, label: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedCode(label);
-    setTimeout(() => setCopiedCode(null), 2000);
-  };
 
   const topics: DocTopic[] = [
     {
       id: "quickstart",
       category: "Getting Started",
-      title: "Quickstart & Installation Guide",
+      title: "Quickstart: Build & Run From Source",
       icon: <Download className="w-4 h-4 text-amber-400" />,
       content: (
         <div className="space-y-6">
           <div className="border-b border-white/10 pb-4 space-y-1">
-            <span className="text-xs font-mono text-amber-400 uppercase font-bold tracking-wider">Getting Started • Step 1</span>
+            <span className="text-xs font-mono text-amber-400 uppercase font-bold tracking-wider">Getting Started</span>
             <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">
               <Download className="w-6 h-6 text-amber-400 shrink-0" />
-              Installing Nuncio Across Platforms
+              Build &amp; Run the Engine From Source
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Nuncio is 100% free and open-source under MIT &amp; Apache-2.0 licenses. Install via package managers or standalone installer packages.
+              There is no installer or package yet. What&apos;s real: clone the repo, build the workspace, and run the
+              daemon and reference CLI locally. <AvailableNow className="ml-1 align-middle" />
             </p>
           </div>
 
-          {/* Homebrew */}
           <div className="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3 shadow-lg">
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-bold text-amber-300">Option 1: macOS &amp; Linux (Homebrew Tap)</span>
-              <button
-                onClick={() => copyToClipboard("brew install koftwentytwo/tap/nuncio", "brew")}
-                className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-2 py-1 rounded bg-slate-800 border border-white/10"
-              >
-                {copiedCode === "brew" ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copiedCode === "brew" ? "Copied!" : "Copy"}</span>
-              </button>
-            </div>
+            <span className="text-sm font-bold text-amber-300">Clone &amp; Build</span>
             <pre className="bg-slate-950 p-3 rounded-xl text-emerald-400 font-mono text-xs overflow-x-auto border border-slate-800">
-              brew install koftwentytwo/tap/nuncio
+{`git clone https://github.com/KofTwentyTwo/nuncio.git
+cd nuncio
+cargo build --workspace`}
             </pre>
           </div>
 
-          {/* Cargo */}
           <div className="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3 shadow-lg">
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-bold text-cyan-300">Option 2: Cargo Rust Binaries (Cross-Platform)</span>
-              <button
-                onClick={() => copyToClipboard("cargo install nuncio-cli nuncio-tui nuncio-mcp nunciod", "cargo")}
-                className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-2 py-1 rounded bg-slate-800 border border-white/10"
-              >
-                {copiedCode === "cargo" ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copiedCode === "cargo" ? "Copied!" : "Copy"}</span>
-              </button>
-            </div>
+            <span className="text-sm font-bold text-cyan-300">Run the Daemon, Drive It With the CLI</span>
             <pre className="bg-slate-950 p-3 rounded-xl text-emerald-400 font-mono text-xs overflow-x-auto border border-slate-800">
-              cargo install nuncio-cli nuncio-tui nuncio-mcp nunciod
+{`cargo run -p nunciod
+cargo run -p nuncio-cli -- system status`}
             </pre>
           </div>
 
-          {/* Desktop Installers */}
-          <div className="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3 shadow-lg">
-            <span className="text-sm font-bold text-purple-300">Option 3: Pre-Packaged Desktop Installers</span>
-            <ul className="text-xs text-slate-300 space-y-2 list-disc list-inside">
-              <li><strong className="text-white">macOS Universal (`.dmg`)</strong>: Supports M1/M2/M3/M4 Apple Silicon &amp; Intel x64.</li>
-              <li><strong className="text-white">Windows (`.msi`)</strong>: Native WiX installer with Windows DPAPI Keyring integration.</li>
-              <li><strong className="text-white">Linux (`.AppImage`)</strong>: Standalone binary bundle for Ubuntu, Fedora, and Arch.</li>
-            </ul>
-          </div>
-
-          {/* Daemon Auto-Spawn callout */}
           <div className="p-4 rounded-2xl bg-blue-950/30 border border-blue-500/30 space-y-2 text-xs">
             <span className="text-blue-300 font-bold block flex items-center gap-1.5">
               <Sparkles className="w-4 h-4 text-blue-400" />
-              Hybrid Daemon Architecture (`nunciod`)
+              The Daemon (`nunciod`)
             </span>
             <p className="text-slate-300 leading-relaxed">
-              When you launch any Nuncio application interface (`nuncio`, `nuncio-tui`, `nuncio-gui`, `nuncio-mcp`), it automatically auto-spawns the background synchronization daemon (`nunciod`) if it is not already running.
+              The daemon owns all state and serves a versioned gRPC API on loopback (`127.0.0.1:9420`) behind a
+              keyring-minted bearer token. The reference CLI is a full gRPC client over that same contract.
             </p>
           </div>
         </div>
@@ -123,47 +91,40 @@ export function DocsHub() {
     {
       id: "account-setup",
       category: "Getting Started",
-      title: "Account Setup & Provider Config",
+      title: "Account Setup (Planned)",
       icon: <Key className="w-4 h-4 text-purple-400" />,
       content: (
         <div className="space-y-6">
           <div className="border-b border-white/10 pb-4 space-y-1">
-            <span className="text-xs font-mono text-purple-400 uppercase font-bold tracking-wider">Getting Started • Step 2</span>
+            <span className="text-xs font-mono text-purple-400 uppercase font-bold tracking-wider">Getting Started • Planned</span>
             <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">
               <Key className="w-6 h-6 text-purple-400 shrink-0" />
-              Connecting Mail &amp; Calendar Providers
+              Account Setup &amp; Provider Configuration
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Configure unlimited IMAP, SMTP, JMAP, Google Workspace, and CalDAV accounts.
+              A polished, end-user onboarding flow for connecting accounts does not exist yet.{" "}
+              <StatusBadge variant="planned" className="ml-1 align-middle" />
             </p>
           </div>
 
-          {/* IMAP/SMTP Setup */}
           <div className="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
-            <span className="text-sm font-bold text-purple-300">1. Standard IMAP &amp; SMTP Configuration</span>
-            <pre className="bg-slate-950 p-3 rounded-xl text-purple-300 font-mono text-xs overflow-x-auto border border-slate-800">
-{`# Add IMAP/SMTP account via CLI
-nuncio account add \\
-  --label "Work Mail" \\
-  --email "user@company.com" \\
-  --imap "mail.company.com:993" \\
-  --smtp "mail.company.com:465"`}
-            </pre>
-          </div>
-
-          {/* Google OAuth PKCE */}
-          <div className="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
-            <span className="text-sm font-bold text-cyan-300">2. Google Workspace &amp; Gmail OAuth 2.0 PKCE (`RFC 7636`)</span>
+            <span className="text-sm font-bold text-purple-300">What Exists Today</span>
             <p className="text-slate-300 text-xs leading-relaxed">
-              Nuncio implements PKCE loopback authentication (`http://127.0.0.1:9422/oauth/callback`) so you never store raw passwords for Google accounts.
+              IMAP/SMTP sync is real and tested against mock servers. The CLI&apos;s <code className="text-purple-300 font-mono">account add / list / show / edit / delete / test</code>{" "}
+              commands exist for developers driving the daemon directly. Credentials are always routed through the OS
+              keyring, never stored in plaintext.
             </p>
-            <pre className="bg-slate-950 p-3 rounded-xl text-cyan-300 font-mono text-xs overflow-x-auto border border-slate-800">
-{`# Add Google account via CLI
-nuncio account add --provider google --email "user@company.com"
+          </div>
 
-# Nuncio opens browser loopback URL for OAuth consent.
-# Tokens are stored securely inside native OS Keyring (Keychain/DPAPI).`}
-            </pre>
+          <div className="p-4 rounded-2xl bg-purple-950/30 border border-purple-500/30 space-y-2 text-xs">
+            <span className="text-purple-300 font-bold block flex items-center gap-1.5">
+              <AlertTriangle className="w-4 h-4 text-purple-400" />
+              Planned
+            </span>
+            <p className="text-slate-300 leading-relaxed">
+              JMAP, CalDAV, and CardDAV provider support, and any OAuth-based consumer onboarding flow, are on the
+              roadmap and not implemented yet.
+            </p>
           </div>
         </div>
       ),
@@ -171,48 +132,38 @@ nuncio account add --provider google --email "user@company.com"
     {
       id: "interfaces-guide",
       category: "User Interfaces",
-      title: "Vim Keybindings & Shell Reference",
+      title: "Client Interfaces",
       icon: <Monitor className="w-4 h-4 text-cyan-400" />,
       content: (
         <div className="space-y-6">
           <div className="border-b border-white/10 pb-4 space-y-1">
-            <span className="text-xs font-mono text-cyan-400 uppercase font-bold tracking-wider">User Interfaces • Reference</span>
+            <span className="text-xs font-mono text-cyan-400 uppercase font-bold tracking-wider">User Interfaces</span>
             <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">
               <Monitor className="w-6 h-6 text-cyan-400 shrink-0" />
-              Four Presentation Shells &amp; Keyboard Motion Table
+              One Contract, Several Clients
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              All 4 interfaces (GUI, TUI, CLI, MCP) maintain 100% feature parity synchronized in real-time over daemon IPC.
+              The reference CLI is the one working client today. A desktop GUI, a terminal TUI, and an MCP AI client
+              are planned as separate thin clients over the same gRPC contract.
             </p>
           </div>
 
-          <div className="space-y-4">
-            <h4 className="text-base font-bold text-white">Vim Ratatui TUI (`nuncio-tui`) Keybinding Reference:</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
-              <div className="p-3 rounded-xl bg-slate-900 border border-white/10 flex justify-between">
-                <span className="text-cyan-400">j / k</span>
-                <span className="text-slate-300">Move selection down / up</span>
-              </div>
-              <div className="p-3 rounded-xl bg-slate-900 border border-white/10 flex justify-between">
-                <span className="text-cyan-400">h / l</span>
-                <span className="text-slate-300">Focus sidebar / message pane</span>
-              </div>
-              <div className="p-3 rounded-xl bg-slate-900 border border-white/10 flex justify-between">
-                <span className="text-cyan-400">e / s</span>
-                <span className="text-slate-300">Archive / Star message chord</span>
-              </div>
-              <div className="p-3 rounded-xl bg-slate-900 border border-white/10 flex justify-between">
-                <span className="text-cyan-400">d / #</span>
-                <span className="text-slate-300">Delete / Move to Trash</span>
-              </div>
-              <div className="p-3 rounded-xl bg-slate-900 border border-white/10 flex justify-between">
-                <span className="text-cyan-400">f / a</span>
-                <span className="text-slate-300">Open NSQL rules / Accounts modal</span>
-              </div>
-              <div className="p-3 rounded-xl bg-slate-900 border border-white/10 flex justify-between">
-                <span className="text-cyan-400">/ or s</span>
-                <span className="text-slate-300">Trigger FTS5 trigram search</span>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="p-3 rounded-xl bg-slate-900 border border-white/10 flex justify-between items-center">
+              <span className="text-slate-300">Reference CLI</span>
+              <AvailableNow />
+            </div>
+            <div className="p-3 rounded-xl bg-slate-900 border border-white/10 flex justify-between items-center">
+              <span className="text-slate-300">Desktop GUI</span>
+              <StatusBadge variant="planned" />
+            </div>
+            <div className="p-3 rounded-xl bg-slate-900 border border-white/10 flex justify-between items-center">
+              <span className="text-slate-300">Terminal TUI</span>
+              <StatusBadge variant="planned" />
+            </div>
+            <div className="p-3 rounded-xl bg-slate-900 border border-white/10 flex justify-between items-center">
+              <span className="text-slate-300">MCP AI Client</span>
+              <StatusBadge variant="planned" />
             </div>
           </div>
         </div>
@@ -221,56 +172,41 @@ nuncio account add --provider google --email "user@company.com"
     {
       id: "nsql-spec",
       category: "Automation Engine",
-      title: "NSQL Language Specification & Grammar",
+      title: "NSQL Language Specification",
       icon: <Cpu className="w-4 h-4 text-cyan-400" />,
       content: (
         <div className="space-y-6">
           <div className="border-b border-white/10 pb-4 space-y-1">
-            <span className="text-xs font-mono text-cyan-400 uppercase font-bold tracking-wider">NSQL Filter Engine • Language Spec</span>
+            <span className="text-xs font-mono text-cyan-400 uppercase font-bold tracking-wider">NSQL Filter Engine</span>
             <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">
               <Cpu className="w-6 h-6 text-cyan-400 shrink-0" />
-              NSQL Syntax &amp; Compiler Grammar Manual
+              NSQL Syntax &amp; Grammar
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              NSQL (Nuncio SQL) parses declarative filter rules into typed Rust AST objects executed inside `nunciod`.
+              NSQL is parsed and validated by <code className="text-cyan-300 font-mono">nuncio-filter</code> using{" "}
+              <code className="text-cyan-300 font-mono">sqlparser-rs</code>. Authoring and dry-run testing rules is real
+              today; firing them against live synced mail is still ahead. <AvailableNow label="Author & dry-run test" />
             </p>
           </div>
 
           <div className="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
-            <span className="text-sm font-bold text-cyan-300">Complete NSQL Grammar Form</span>
+            <span className="text-sm font-bold text-cyan-300">Real Grammar</span>
             <pre className="bg-slate-950 p-4 rounded-xl text-cyan-300 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
-{`CREATE RULE "VIP Priority Route"
-ON ACCOUNT "user@company.com"
-PRIORITY 10
-WHEN sender LIKE '%@kof22.com%' AND (subject REGEXP '(Urgent|Audit)' OR size_bytes > 5242880)
-THEN MOVE TO 'vip-inbox', COPY TO 'Archive', SET read = TRUE, CALL WEBHOOK 'https://api.kof22.com/webhook'
-WITH STOP PROCESSING;`}
+{`[ON ACCOUNT '<target_account>']
+[WHERE] <field> <operator> <value> [AND|OR <condition>]
+ACTION <action_1> [, <action_2> ...];`}
             </pre>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
             <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-2">
-              <span className="font-bold text-white block">Supported Field Target Symbols</span>
-              <ul className="space-y-1 text-slate-300 font-mono">
-                <li>• <code className="text-cyan-300">subject</code>: Email subject header text</li>
-                <li>• <code className="text-cyan-300">sender / from</code>: From email address</li>
-                <li>• <code className="text-cyan-300">recipient / to</code>: Recipient email address</li>
-                <li>• <code className="text-cyan-300">body</code>: Plain text / HTML body</li>
-                <li>• <code className="text-cyan-300">size_bytes / size</code>: Attachment &amp; message size</li>
-                <li>• <code className="text-cyan-300">header[&apos;X-Spam&apos;]</code>: Custom MIME headers</li>
-              </ul>
+              <span className="font-bold text-white block">Fields &amp; Operators</span>
+              <p className="text-slate-300 font-mono">subject, from, to, body, has_attachment, size, folder, date, account</p>
+              <p className="text-slate-300 font-mono">= != CONTAINS NOT CONTAINS MATCHES &gt; &lt; &gt;= &lt;= IN NOT IN</p>
             </div>
-
             <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-2">
-              <span className="font-bold text-white block">Supported Action Verbs</span>
-              <ul className="space-y-1 text-slate-300 font-mono">
-                <li>• <code className="text-emerald-300">MOVE TO &apos;folder&apos;</code>: Move message</li>
-                <li>• <code className="text-emerald-300">COPY TO &apos;folder&apos;</code>: Copy message</li>
-                <li>• <code className="text-emerald-300">SET read = TRUE</code>: Mark read</li>
-                <li>• <code className="text-emerald-300">SET flagged = TRUE</code>: Star / flag</li>
-                <li>• <code className="text-emerald-300">FORWARD TO &apos;email&apos;</code>: Forward message</li>
-                <li>• <code className="text-emerald-300">CALL WEBHOOK &apos;url&apos;</code>: Send signed HTTP POST</li>
-              </ul>
+              <span className="font-bold text-white block">Actions</span>
+              <p className="text-slate-300 font-mono">MOVE TO, COPY TO, MARK READ, MARK UNREAD, FLAG, UNFLAG, DELETE, FORWARD TO, CALL WEBHOOK</p>
             </div>
           </div>
         </div>
@@ -290,36 +226,20 @@ WITH STOP PROCESSING;`}
               HMAC-SHA256 Signed Webhooks &amp; SSRF Defense
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              When an NSQL rule triggers a `CALL WEBHOOK &apos;url&apos;` action, `nunciod` dispatches an HTTP POST payload with cryptographic signatures.
+              A `CALL WEBHOOK &apos;url&apos;` action dispatches an HMAC-signed HTTP POST with SSRF defenses. The
+              dispatcher is implemented and tested; it is not yet invoked from the live sync path.
             </p>
-          </div>
-
-          <div className="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
-            <span className="text-sm font-bold text-emerald-300">Outbound Webhook JSON Payload Schema</span>
-            <pre className="bg-slate-950 p-4 rounded-xl text-emerald-300 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
-{`{
-  "event": "filter_executed",
-  "rule_id": "rule_vip_01",
-  "rule_name": "VIP Priority Route",
-  "message_id": "msg_892317823",
-  "account": "user@company.com",
-  "sender": "alice@kof22.com",
-  "subject": "Urgent Architecture Review",
-  "actions_taken": ["MOVE TO 'vip-inbox'", "CALL WEBHOOK 'https://api.kof22.com/webhook'"],
-  "matched_at": 1700000000
-}`}
-            </pre>
           </div>
 
           <div className="p-4 rounded-2xl bg-purple-950/30 border border-purple-500/30 space-y-2 text-xs">
             <span className="text-purple-300 font-bold block flex items-center gap-1.5">
-              <Shield className="w-4 h-4 text-purple-400" />
-              SSRF Defense Specifications
+              <Layers className="w-4 h-4 text-purple-400" />
+              SSRF Defense
             </span>
             <ul className="text-slate-300 space-y-1 list-disc list-inside">
-              <li>Pre-flight DNS IP blacklisting blocking `127.0.0.1`, `169.254.169.254`, and private subnets (`10.0.0.0/8`, `192.168.0.0/16`).</li>
-              <li>`max_redirects(0)` preventing HTTP 301/302 redirect loops to internal networks.</li>
-              <li>`X-Nuncio-Signature` request header containing HMAC-SHA256 signature payload.</li>
+              <li>Pre-flight DNS blocking of loopback, cloud metadata endpoints, and private subnets.</li>
+              <li>Zero-redirect-loop policy on the outbound HTTP client.</li>
+              <li>An `X-Nuncio-Signature` header carrying the HMAC-SHA256 signature.</li>
             </ul>
           </div>
         </div>
@@ -328,32 +248,31 @@ WITH STOP PROCESSING;`}
     {
       id: "mcp-deep-dive",
       category: "AI Integration",
-      title: "Native MCP AI Server & Security Enclave",
+      title: "Model Context Protocol (Planned)",
       icon: <Bot className="w-4 h-4 text-emerald-400" />,
       content: (
         <div className="space-y-6">
           <div className="border-b border-white/10 pb-4 space-y-1">
-            <span className="text-xs font-mono text-emerald-400 uppercase font-bold tracking-wider">AI Integration • MCP Server</span>
+            <span className="text-xs font-mono text-emerald-400 uppercase font-bold tracking-wider">AI Integration • Planned</span>
             <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">
               <Bot className="w-6 h-6 text-emerald-400 shrink-0" />
-              Model Context Protocol (`nuncio-mcp`) Integration
+              A Governed Gateway for AI Agents
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Connect Claude Desktop, Antigravity, ChatGPT, Cursor, and custom LLMs safely over stdio streams.
+              An MCP client is planned as a separate thin client over the daemon&apos;s gRPC contract. It does not
+              exist yet, and no config below will connect to anything today.{" "}
+              <StatusBadge variant="planned" className="ml-1 align-middle" />
             </p>
           </div>
 
           <div className="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
-            <span className="text-sm font-bold text-emerald-300">Claude Desktop Config (`claude_desktop_config.json`)</span>
+            <span className="text-sm font-bold text-emerald-300">Target Configuration Shape</span>
             <pre className="bg-slate-950 p-4 rounded-xl text-emerald-300 font-mono text-xs overflow-x-auto border border-slate-800">
 {`{
   "mcpServers": {
     "nuncio": {
       "command": "nuncio-mcp",
-      "args": ["--stdio"],
-      "env": {
-        "NUNCIO_LOG_LEVEL": "info"
-      }
+      "args": ["--stdio"]
     }
   }
 }`}
@@ -364,41 +283,21 @@ WITH STOP PROCESSING;`}
     },
     {
       id: "html-rendering",
-      category: "User Experience",
-      title: "HTML & Image Rendering Guide",
+      category: "Security",
+      title: "HTML Rendering & Sandboxing (Planned)",
       icon: <Monitor className="w-4 h-4 text-purple-400" />,
       content: (
         <div className="space-y-6">
           <div className="border-b border-white/10 pb-4 space-y-1">
-            <span className="text-xs font-mono text-purple-400 uppercase font-bold tracking-wider">User Experience • Rendering</span>
+            <span className="text-xs font-mono text-purple-400 uppercase font-bold tracking-wider">Security • Planned</span>
             <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">
               <Monitor className="w-6 h-6 text-purple-400 shrink-0" />
-              Rendering HTML &amp; Inline Images Across Non-GUI Shells
+              HTML Email Rendering &amp; Sandboxing
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Rendering HTML emails and images seamlessly in TUI, CLI, and MCP without tracking beacons.
+              The plan is to render untrusted HTML email inside a sandboxed iframe with scripts disabled. Not
+              implemented yet. <StatusBadge variant="planned" className="ml-1 align-middle" />
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-2">
-              <h4 className="text-sm font-bold text-cyan-300">1. Terminal TUI (Ratatui)</h4>
-              <p className="text-slate-400 text-xs leading-relaxed">
-                Converts HTML to ANSI via <code className="text-cyan-400 font-mono">html2text</code>. High-res images render inline using <b>Kitty</b>, <b>iTerm2</b>, or <b>Sixel</b> graphics.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-2">
-              <h4 className="text-sm font-bold text-blue-300">2. POSIX CLI</h4>
-              <p className="text-slate-400 text-xs leading-relaxed">
-                <code className="text-blue-400 font-mono">nuncio mail show &lt;id&gt;</code> prints plain text. Use <code className="text-blue-400 font-mono">--html</code> for markdown or <code className="text-blue-400 font-mono">--open</code> for system browser.
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-2">
-              <h4 className="text-sm font-bold text-emerald-300">3. AI MCP Agents</h4>
-              <p className="text-slate-400 text-xs leading-relaxed">
-                Converts HTML to Markdown. Image attachments pass as Base64 multimodal vision blocks to Vision LLMs.
-              </p>
-            </div>
           </div>
         </div>
       ),
@@ -406,35 +305,27 @@ WITH STOP PROCESSING;`}
     {
       id: "export-backups",
       category: "Maintenance",
-      title: "Universal Data Export & Automated Backups",
+      title: "Data Export & Backups",
       icon: <Terminal className="w-4 h-4 text-emerald-400" />,
       content: (
         <div className="space-y-6">
           <div className="border-b border-white/10 pb-4 space-y-1">
-            <span className="text-xs font-mono text-emerald-400 uppercase font-bold tracking-wider">Maintenance • Backups</span>
+            <span className="text-xs font-mono text-emerald-400 uppercase font-bold tracking-wider">Maintenance</span>
             <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">
               <Terminal className="w-6 h-6 text-emerald-400 shrink-0" />
-              Universal Data Export &amp; Automated CLI Backups
+              Export Synced Mail to Open Formats
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Export full accounts, specific folders, or NSQL query results to standard portable open formats without vendor lock-in.
+              Export to MBOX, an EML zip, JSON, or JSON Lines — no vendor lock-in. <AvailableNow />
             </p>
           </div>
 
-          <div className="space-y-4">
-            <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-3">
-              <span className="text-sm font-bold text-emerald-300 font-mono">1. Headless CLI Automated Backup Commands</span>
-              <pre className="bg-slate-950 p-4 rounded-xl text-emerald-300 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
-{`# Export full account inbox to standard RFC 4155 MBOX format
-nuncio mail export --account "user@company.com" --format mbox --output ~/backups/inbox.mbox
-
-# Export specific folder to compressed EML ZIP archive with manifest.json
-nuncio mail export --folder "Archive" --format eml-zip --output ~/backups/archive.zip
-
-# Export NSQL filter query results to line-delimited JSONL for LLM data pipelines
-nuncio mail export --query "sender LIKE '%@kof22.com%'" --format jsonl --output ~/backups/kof22_vip.jsonl`}
-              </pre>
-            </div>
+          <div className="p-4 rounded-xl bg-slate-900 border border-white/10 space-y-3">
+            <span className="text-sm font-bold text-emerald-300 font-mono">nuncio mail export</span>
+            <pre className="bg-slate-950 p-4 rounded-xl text-emerald-300 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
+{`nuncio mail export --format mbox --out ~/backups/inbox.mbox --account <account-id>
+nuncio mail export --format eml --out ~/backups/archive.zip --folder <folder-id>`}
+            </pre>
           </div>
         </div>
       ),
@@ -442,29 +333,26 @@ nuncio mail export --query "sender LIKE '%@kof22.com%'" --format jsonl --output 
     {
       id: "worm-audits",
       category: "Security & Compliance",
-      title: "WORM Cryptographic Audit Hash Ledger",
+      title: "WORM Audit Ledger",
       icon: <FileCheck className="w-4 h-4 text-cyan-400" />,
       content: (
         <div className="space-y-6">
           <div className="border-b border-white/10 pb-4 space-y-1">
-            <span className="text-xs font-mono text-cyan-400 uppercase font-bold tracking-wider">Compliance • WORM Audits</span>
+            <span className="text-xs font-mono text-cyan-400 uppercase font-bold tracking-wider">Compliance</span>
             <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">
               <FileCheck className="w-6 h-6 text-cyan-400 shrink-0" />
-              Write Once Read Many (WORM) Hash-Chain Ledger
+              Write Once, Read Many Audit Ledger
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Every automated action, rule match, account mutation, and AI tool call writes an immutable entry linked via HMAC-SHA256 block chains.
+              Account and rule mutations are recorded in an append-only, hash-chained ledger. <AvailableNow />
             </p>
           </div>
 
           <div className="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
-            <span className="text-sm font-bold text-cyan-300">WORM Audit CLI Diagnostics</span>
+            <span className="text-sm font-bold text-cyan-300">CLI</span>
             <pre className="bg-slate-950 p-4 rounded-xl text-cyan-300 font-mono text-xs overflow-x-auto border border-slate-800">
-{`# Verify cryptographic hash chain across all WORM audit records
-nuncio store verify-audit-chain
-
-# List recent WORM audit ledger records via CLI
-nuncio audit list --limit 50 --json`}
+{`nuncio system audit list --limit 50
+nuncio system audit verify`}
             </pre>
           </div>
         </div>
@@ -473,7 +361,7 @@ nuncio audit list --limit 50 --json`}
     {
       id: "recovery",
       category: "Maintenance",
-      title: "Self-Healing Database Recovery Engine",
+      title: "Database Corruption Recovery",
       icon: <HelpCircle className="w-4 h-4 text-blue-400" />,
       content: (
         <div className="space-y-6">
@@ -481,22 +369,12 @@ nuncio audit list --limit 50 --json`}
             <span className="text-xs font-mono text-blue-400 uppercase font-bold tracking-wider">Maintenance • Self-Healing</span>
             <h3 className="text-2xl font-extrabold text-white flex items-center gap-2">
               <HelpCircle className="w-6 h-6 text-blue-400 shrink-0" />
-              Database Corruption Recovery &amp; Stream Salvage
+              Automatic Corruption Detection &amp; Salvage
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              If SQLite database corruption occurs due to power outage or disk failure, Nuncio automatically isolates damaged files and salvages valid records.
+              A corrupted local database is isolated and salvaged automatically when the store is opened — no manual
+              command required. <AvailableNow />
             </p>
-          </div>
-
-          <div className="bg-slate-900/90 p-4 sm:p-5 rounded-2xl border border-white/10 space-y-3">
-            <span className="text-sm font-bold text-blue-300">Manual Recovery Diagnostics</span>
-            <pre className="bg-slate-950 p-4 rounded-xl text-blue-300 font-mono text-xs overflow-x-auto border border-slate-800">
-{`# Check database integrity manually
-nuncio store check-integrity
-
-# View isolated corrupted backups
-ls -l ~/.nuncio/corrupted_backups/`}
-            </pre>
           </div>
         </div>
       ),
@@ -518,14 +396,29 @@ ls -l ~/.nuncio/corrupted_backups/`}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-4 shadow-lg">
             <BookOpen className="w-3.5 h-3.5" />
-            <span>Nuncio Knowledge Base &amp; Technical Manual</span>
+            <span>Nuncio Documentation</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Comprehensive <span className="gradient-text">Documentation Hub</span>
+            Documentation <span className="gradient-text">Hub</span>
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-300">
-            In-depth architectural guides, NSQL compiler specs, CLI flag matrices, AI MCP setup, and security whitepapers.
+            What&apos;s real and buildable from source today, and what&apos;s an honest, labeled design for what&apos;s
+            still ahead.
           </p>
+
+          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-950/30 border border-amber-500/40 text-amber-300 text-xs font-semibold">
+            <AlertTriangle className="w-3.5 h-3.5" />
+            <span>Pre-alpha — not yet usable for real accounts</span>
+          </div>
+
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-xs font-semibold">
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+              Follow the build on GitHub
+            </a>
+            <a href={ROADMAP_URL} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+              See the roadmap
+            </a>
+          </div>
 
           {/* Search Bar */}
           <div className="mt-6 relative max-w-md mx-auto">
@@ -545,7 +438,7 @@ ls -l ~/.nuncio/corrupted_backups/`}
           {/* Side Navigation */}
           <div className="lg:col-span-4 glass-panel p-4 rounded-2xl border border-white/10 space-y-2 shadow-xl">
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider px-3 block mb-2 font-mono">
-              Knowledge Base Index ({filteredTopics.length})
+              Documentation Index ({filteredTopics.length})
             </span>
             <div className="space-y-1.5">
               {filteredTopics.map((topic) => (

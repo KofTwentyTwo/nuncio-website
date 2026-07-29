@@ -1,22 +1,22 @@
 import React from "react";
 import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
 import { Metadata } from "next";
-import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
+import { ShieldCheck, Database, Layers, Terminal } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Nuncio vs Airmail — Sovereign Open Source Alternative",
-  description: "Compare Nuncio vs Airmail. Why settle for macOS-only locked client apps when Nuncio offers cross-platform parity across macOS, Windows, Linux, Terminal TUI, POSIX CLI, and AI MCP agents?",
+  title: "Nuncio vs Airmail — Local-First Design vs a macOS-Only Client",
+  description: "How Nuncio's local-first daemon and one-contract-many-clients architecture compare to Airmail's macOS-only Pro subscription. Nuncio is pre-alpha; this is a design comparison, not a claim it's ready to switch to today.",
   alternates: { canonical: "https://nuncio.mx/vs/airmail" },
   openGraph: {
-    title: "Nuncio vs Airmail — Sovereign Open Source Alternative",
-    description: "Compare Nuncio vs Airmail. Cross-platform parity across macOS, Windows, Linux, TUI, CLI, and AI MCP agents 100% free.",
+    title: "Nuncio vs Airmail — Local-First Design vs a macOS-Only Client",
+    description: "Cross-platform daemon architecture, an open NSQL rule language, and a WORM audit ledger — compared against Airmail's Pro subscription model.",
     url: "https://nuncio.mx/vs/airmail",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nuncio vs Airmail",
-    description: "Compare Nuncio vs Airmail. 100% Free & Open Source alternative.",
+    description: "A local-first, open-source design compared to Airmail's macOS-only Pro subscription.",
     images: ["/og-image.png"],
   },
 };
@@ -24,49 +24,52 @@ export const metadata: Metadata = {
 export default function VsAirmailPage() {
   const differentiators = [
     {
-      title: "100% Cross-Platform",
-      icon: <Zap className="w-5 h-5 text-yellow-400" />,
-      desc: "Nuncio runs on macOS, Windows, Linux, and any terminal. Airmail is strictly locked to the Apple ecosystem.",
+      title: "Cross-Platform by Design",
+      icon: <Layers className="w-5 h-5 text-yellow-400" />,
+      desc: "The engine (nunciod) and reference CLI already build and run on macOS, Windows, and Linux. Airmail is strictly Apple-ecosystem.",
     },
     {
-      title: "Zero Subscription Fees",
+      title: "Free & Open Source, Always",
       icon: <Database className="w-5 h-5 text-blue-400" />,
-      desc: "Nuncio is 100% free open source under MIT / Apache-2.0. Airmail requires Airmail Pro annual subscriptions for core features.",
+      desc: "Nuncio is MIT / Apache-2.0 with no planned subscription tier. Airmail requires an Airmail Pro annual subscription for core multi-account features.",
     },
     {
-      title: "Vim Ratatui Terminal TUI",
-      icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
-      desc: "Triage thousands of messages directly inside your SSH session or terminal multiplexer with Vim chords (j/k/h/l, g i, e, s).",
+      title: "One Contract, Many Future Clients",
+      icon: <Terminal className="w-5 h-5 text-purple-400" />,
+      desc: "A terminal TUI and desktop GUI are on the roadmap, both as thin clients over the same gRPC API the CLI already uses — not separate codebases to keep in sync.",
+      status: "planned" as const,
     },
     {
-      title: "NSQL Engine & WORM Audits",
-      icon: <Bot className="w-5 h-5 text-emerald-400" />,
-      desc: "Automate email triage with SQL rule statements and verify integrity with HMAC-SHA256 WORM cryptographic audit logs.",
+      title: "NSQL Rules & a WORM Ledger",
+      icon: <ShieldCheck className="w-5 h-5 text-emerald-400" />,
+      desc: "Write and dry-run test declarative SQL-style filter rules today, and inspect every account/rule mutation in an immutable hash-chained audit log.",
     },
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "Pricing Model", nuncioValue: "100% Free & Open Source", competitorValue: "$9.99/yr Pro Subscription", description: "Zero hidden costs or forced upgrades" },
-    { feature: "OS Availability", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS & iOS Only", description: "Native binaries across all major operating systems" },
-    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Ratatui Vim terminal UI" },
-    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Command-line integration for shell scripts" },
-    { feature: "AI Model Context Protocol (MCP)", nuncioValue: true, competitorValue: false, description: "Expose email tools to Claude & AI agents" },
-    { feature: "WORM Audit Trail", nuncioValue: true, competitorValue: false, description: "Immutable cryptographic ledger" },
-    { feature: "Local Data Encryption", nuncioValue: "AES-256-GCM Column Level", competitorValue: "Standard macOS Keychain", description: "PayloadCipher encryption on disk" },
-    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "Basic EML Export", description: "Export entire accounts or NSQL result sets" },
-    { feature: "Database Self-Healing", nuncioValue: true, competitorValue: false, description: "Automatic SQLite corruption recovery" },
-    { feature: "HTML Email Sandboxing", nuncioValue: "Strict CSP + iframe", competitorValue: "Basic WebKit Render", description: "Neutralizes tracking pixels & remote scripts" },
+    { feature: "Pricing Model", nuncioValue: "Free & open source (in development)", competitorValue: "$9.99/yr Pro subscription", description: "No planned subscription tier for Nuncio" },
+    { feature: "OS Availability (engine + CLI)", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS & iOS only", description: "Build the daemon and CLI from source on any of the three today" },
+    { feature: "Build & Run From Source", nuncioValue: true, competitorValue: false, description: "`cargo build --workspace` and run nunciod + nuncio-cli locally" },
+    { feature: "Multi-Account IMAP/SMTP Sync", nuncioValue: true, competitorValue: true, description: "Real fetch -> store -> read -> send, tested against mock servers" },
+    { feature: "Local Full-Text Search", nuncioValue: "SQLite FTS5, fully offline", competitorValue: "Local index", description: "No cloud round trip for search" },
+    { feature: "Portable Export (MBOX/EML/JSON)", nuncioValue: true, competitorValue: "Basic EML export", description: "No vendor lock-in on your mail data" },
+    { feature: "WORM Audit Trail", nuncioValue: true, competitorValue: false, description: "Immutable, hash-chained log of account and rule changes" },
+    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Keyboard-driven terminal client over the frozen gRPC API", nuncioStatus: "planned" },
+    { feature: "Desktop GUI Interface", nuncioValue: true, competitorValue: true, description: "Native desktop client consuming the same API contract", nuncioStatus: "planned" },
+    { feature: "Server-Side Rule Engine (NSQL)", nuncioValue: "Create & dry-run test today", competitorValue: "Basic mail rules", description: "Rules can be authored and tested now; firing on live synced mail is still ahead", nuncioStatus: "in-progress" },
+    { feature: "At-Rest Body Encryption", nuncioValue: true, competitorValue: "OS Keychain only", description: "Encrypting message bodies at rest is a security-hardening milestone", nuncioStatus: "planned" },
+    { feature: "HTML Email Sandboxing", nuncioValue: true, competitorValue: "Standard WebKit render", description: "Sandboxed iframe rendering with scripts disabled", nuncioStatus: "planned" },
   ];
 
   return (
     <ComparisonPageTemplate
       competitorName="Airmail"
       competitorSlug="airmail"
-      tagline="Why settle for macOS-only locked client apps when Nuncio offers cross-platform parity across macOS, Windows, Linux, Terminal TUI, POSIX CLI, and AI MCP agents?"
-      nuncioPrice="100% Free & Open Source"
+      tagline="A local-first, cross-platform architecture we're building against Airmail's macOS-only Pro subscription."
+      nuncioPrice="Free & open source (in development)"
       competitorPrice="$9.99 / Year Pro Subscription"
-      heroHeadline="Why settle for macOS-only locked client apps when Nuncio offers cross-platform parity across macOS, Windows, Linux, Terminal TUI, POSIX CLI, and AI MCP agents 100% free?"
-      whySwitchParagraph="Airmail offers a clean macOS interface, but locks power users into Apple platforms and requires a Pro subscription for multi-account syncing. Nuncio provides equal visual polish across macOS, Windows, and Linux while adding a Vim Ratatui Terminal TUI, POSIX CLI, and native MCP AI agent integration."
+      heroHeadline="Airmail is a polished macOS-only client behind a Pro paywall. We're building Nuncio as a free, open, local-first alternative that runs the same engine on macOS, Windows, and Linux from day one."
+      whySwitchParagraph="Airmail's clean interface is locked to Apple hardware, and multi-account syncing sits behind a recurring Pro subscription. Nuncio starts from a different premise: one daemon (nunciod) that owns your mail state locally and speaks a single versioned gRPC contract, so a terminal client, a desktop GUI, and the reference CLI can all be thin, interchangeable clients instead of three separate apps to maintain. The daemon, IMAP/SMTP sync, full-text search, export, and the WORM audit ledger are real and buildable from source today; the additional clients and the NSQL engine's live rule-firing are the next milestones."
       comparisonRows={comparisonRows}
       differentiators={differentiators}
     />

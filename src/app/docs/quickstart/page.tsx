@@ -2,11 +2,13 @@ import React from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DocsLayout } from "@/components/DocsLayout";
-import { Download, Terminal, Check, Copy, Sparkles, Shield, Monitor, Layers } from "lucide-react";
+import { AvailableNow } from "@/components/StatusBadge";
+import { GITHUB_URL } from "@/lib/status";
+import { Download, Terminal, Sparkles, GitBranch } from "lucide-react";
 
 export const metadata = {
-  title: "Quickstart & Installation Guide — Nuncio Docs",
-  description: "Comprehensive step-by-step guide to installing Nuncio across macOS, Windows, Linux, Homebrew, and Cargo Rust binaries.",
+  title: "Quickstart — Build & Run Nuncio From Source — Nuncio Docs",
+  description: "How to clone the Nuncio engine repository and build and run the daemon (nunciod) and reference CLI (nuncio-cli) from source today. There is no packaged installer yet — Nuncio is pre-alpha.",
 };
 
 export default function QuickstartDocPage() {
@@ -20,76 +22,74 @@ export default function QuickstartDocPage() {
               <span className="text-xs font-mono text-amber-400 uppercase font-bold tracking-wider">Getting Started • Step 1</span>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white flex items-center gap-3">
                 <Download className="w-8 h-8 text-amber-400 shrink-0" />
-                Quickstart &amp; Multi-Platform Installation
+                Quickstart: Build &amp; Run From Source
               </h1>
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Nuncio is 100% free, sovereign, and open-source under MIT &amp; Apache-2.0 licenses. Choose your target platform below for instant setup.
+                Nuncio is pre-alpha — there is no installer, package, or download for end users yet. What is real: a
+                Cargo workspace you can clone and build today, which gives you a working daemon (<code className="text-amber-300 font-mono">nunciod</code>)
+                and a reference CLI (<code className="text-amber-300 font-mono">nuncio-cli</code>) that talks to it. <AvailableNow className="ml-1 align-middle" />
               </p>
             </div>
 
-            {/* Homebrew section */}
+            {/* Clone + build */}
             <div className="bg-slate-900/90 p-6 rounded-2xl border border-white/10 space-y-4 shadow-lg">
               <h3 className="text-base font-bold text-amber-300 flex items-center gap-2">
                 <Terminal className="w-4 h-4 text-amber-400" />
-                Option 1: macOS &amp; Linux via Homebrew Tap
+                1. Clone &amp; Build the Workspace
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                The fastest way to install Nuncio CLI, TUI, MCP, and daemon binaries on macOS and Linux is using our official Homebrew tap:
+                Requires the Rust toolchain pinned in <code className="text-amber-300 font-mono">rust-toolchain.toml</code>. Cargo will fetch it
+                automatically via rustup.
               </p>
               <pre className="bg-slate-950 p-4 rounded-xl text-emerald-400 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
-{`# Add tap and install all Nuncio workspace binaries
-brew tap koftwentytwo/tap
-brew install nuncio`}
+{`git clone https://github.com/KofTwentyTwo/nuncio.git
+cd nuncio
+cargo build --workspace`}
               </pre>
             </div>
 
-            {/* Cargo section */}
+            {/* Run the daemon */}
             <div className="bg-slate-900/90 p-6 rounded-2xl border border-white/10 space-y-4 shadow-lg">
               <h3 className="text-base font-bold text-cyan-300 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-cyan-400" />
-                Option 2: Cargo Rust Crates (Cross-Platform)
+                <Sparkles className="w-4 h-4 text-cyan-400" />
+                2. Run the Daemon (`nunciod`)
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                If you have the Rust toolchain installed, build and install directly from crates.io with native CPU optimizations:
+                The daemon owns all state and serves a versioned gRPC API on loopback <code className="text-cyan-300 font-mono">127.0.0.1:9420</code>,
+                behind a bearer token minted into your OS keyring on first run.
               </p>
-              <pre className="bg-slate-950 p-4 rounded-xl text-emerald-400 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
-{`cargo install nuncio-cli nuncio-tui nuncio-mcp nunciod`}
+              <pre className="bg-slate-950 p-4 rounded-xl text-cyan-300 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
+{`cargo run -p nunciod`}
               </pre>
             </div>
 
-            {/* Standalone Desktop Package Installers */}
+            {/* Drive it with the CLI */}
             <div className="bg-slate-900/90 p-6 rounded-2xl border border-white/10 space-y-4 shadow-lg">
               <h3 className="text-base font-bold text-purple-300 flex items-center gap-2">
-                <Monitor className="w-4 h-4 text-purple-400" />
-                Option 3: Pre-Packaged Desktop GUI Installers
+                <Terminal className="w-4 h-4 text-purple-400" />
+                3. Drive It With the Reference CLI
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-                <div className="p-4 rounded-xl bg-slate-950 border border-white/10 space-y-2">
-                  <span className="font-bold text-white block">macOS Universal</span>
-                  <p className="text-slate-400">Apple Silicon (M1-M4) &amp; Intel x64 `.dmg` disk image.</p>
-                  <a href="https://github.com/KofTwentyTwo/nuncio/releases/latest" className="text-blue-400 font-bold hover:underline inline-block pt-1">Download .DMG →</a>
-                </div>
-                <div className="p-4 rounded-xl bg-slate-950 border border-white/10 space-y-2">
-                  <span className="font-bold text-white block">Windows 10 / 11</span>
-                  <p className="text-slate-400">WiX `.msi` installer with Windows DPAPI Keyring integration.</p>
-                  <a href="https://github.com/KofTwentyTwo/nuncio/releases/latest" className="text-cyan-400 font-bold hover:underline inline-block pt-1">Download .MSI →</a>
-                </div>
-                <div className="p-4 rounded-xl bg-slate-950 border border-white/10 space-y-2">
-                  <span className="font-bold text-white block">Linux Standalone</span>
-                  <p className="text-slate-400">Universal `.AppImage` &amp; Tarball for Ubuntu, Fedora, Arch.</p>
-                  <a href="https://github.com/KofTwentyTwo/nuncio/releases/latest" className="text-purple-400 font-bold hover:underline inline-block pt-1">Download .AppImage →</a>
-                </div>
-              </div>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                With the daemon running in one terminal, <code className="text-purple-300 font-mono">nuncio-cli</code> is a full gRPC client and
+                the project&apos;s own end-to-end test driver:
+              </p>
+              <pre className="bg-slate-950 p-4 rounded-xl text-purple-300 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed">
+{`cargo run -p nuncio-cli -- system status`}
+              </pre>
             </div>
 
-            {/* Hybrid Daemon Topology */}
+            {/* Honesty callout */}
             <div className="p-5 rounded-2xl bg-blue-950/30 border border-blue-500/30 space-y-3">
               <span className="text-blue-300 font-bold text-sm block flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-blue-400" />
-                Daemon Auto-Spawning &amp; IPC IPC Architecture (`nunciod`)
+                What This Gets You Today
               </span>
               <p className="text-slate-300 text-xs leading-relaxed">
-                Nuncio operates on a zero-configuration hybrid daemon architecture. Launching any presentation interface (`nuncio`, `nuncio-tui`, `nuncio-gui`, `nuncio-mcp`) automatically auto-spawns `nunciod` in the background. All presentation shells share a single-writer SQLite WAL database instance with zero race conditions.
+                From source, you get real IMAP/SMTP sync, SQLite FTS5 full-text search, MBOX/EML/JSON/JSONL export, and
+                a hash-chained WORM audit ledger — driven entirely through the CLI. There is no desktop GUI, terminal
+                TUI, or MCP AI client yet; those are separate client projects planned on top of the same gRPC contract.
+                See <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline inline-flex items-center gap-1">the repository<GitBranch className="w-3 h-3" /></a> for
+                the current state of the workspace.
               </p>
             </div>
           </div>

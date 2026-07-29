@@ -1,22 +1,22 @@
 import React from "react";
 import { ComparisonPageTemplate, ComparisonFeatureRow } from "@/components/ComparisonPageTemplate";
 import { Metadata } from "next";
-import { ShieldCheck, Zap, Bot, Database } from "lucide-react";
+import { ShieldCheck, Database, Bot, Terminal } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Nuncio vs Spark Mail — Sovereign Open Source Alternative",
-  description: "Compare Nuncio vs Spark Mail. Why trust proprietary cloud servers with your email credentials when Nuncio gives you local SQLite storage, zero subscription fees, and 4 unified interfaces?",
+  title: "Nuncio vs Spark Mail — Direct-to-Server Sync vs Proxy Servers",
+  description: "How Nuncio's daemon connects directly to your mail server compares to Spark Mail's proxy-server sync and Premium subscription. Nuncio is pre-alpha; this is a design comparison, not a claim it's ready to switch to today.",
   alternates: { canonical: "https://nuncio.mx/vs/spark-mail" },
   openGraph: {
-    title: "Nuncio vs Spark Mail — Sovereign Open Source Alternative",
-    description: "Compare Nuncio vs Spark Mail. Local SQLite storage, zero subscription fees, and 4 unified interfaces 100% free.",
+    title: "Nuncio vs Spark Mail — Direct-to-Server Sync vs Proxy Servers",
+    description: "A local daemon that talks directly to IMAP/SMTP, compared against Spark's central proxy architecture and Premium subscription.",
     url: "https://nuncio.mx/vs/spark-mail",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nuncio vs Spark Mail",
-    description: "Compare Nuncio vs Spark Mail. 100% Free & Open Source alternative.",
+    description: "A local-first, open-source design compared to Spark Mail's proxy-server architecture and Premium subscription.",
     images: ["/og-image.png"],
   },
 };
@@ -24,48 +24,50 @@ export const metadata: Metadata = {
 export default function VsSparkMailPage() {
   const differentiators = [
     {
-      title: "100% Local Storage",
-      icon: <Zap className="w-5 h-5 text-yellow-400" />,
-      desc: "Nuncio stores all accounts and messages directly on your disk in SQLite WAL format. Spark routes push notifications through central servers.",
+      title: "Direct to Your Mail Server",
+      icon: <Database className="w-5 h-5 text-yellow-400" />,
+      desc: "The nunciod daemon connects straight to your IMAP/SMTP server from your own machine — no middleman proxy relaying your mail metadata.",
     },
     {
-      title: "Zero Subscription Fees",
-      icon: <Database className="w-5 h-5 text-blue-400" />,
-      desc: "Nuncio is 100% free and open source. Spark Premium requires a $59.99/year subscription for advanced team and priority inbox features.",
+      title: "No Subscription Tier",
+      icon: <ShieldCheck className="w-5 h-5 text-blue-400" />,
+      desc: "Nuncio is MIT / Apache-2.0 with no plan to gate features behind a subscription. Spark Premium is $59.99/year for team and priority-inbox features.",
     },
     {
-      title: "Vim Terminal TUI & POSIX CLI",
-      icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
-      desc: "Work with single-key velocity in any Linux or macOS terminal. Spark offers no command-line or terminal interface.",
+      title: "A Scriptable CLI, Today",
+      icon: <Terminal className="w-5 h-5 text-purple-400" />,
+      desc: "The reference nuncio-cli is a real, scriptable client over the daemon's gRPC API right now. Spark has no command-line interface at all.",
     },
     {
-      title: "Sane AI & WORM Audits",
+      title: "A Governed AI Gateway",
       icon: <Bot className="w-5 h-5 text-emerald-400" />,
-      desc: "Connect AI agents via Model Context Protocol with RBAC policies and inspect every mutation in WORM cryptographic audit logs.",
+      desc: "An MCP client is on the roadmap, designed to broker AI agent access to your mail through capability policies and an audit trail.",
+      status: "planned" as const,
     },
   ];
 
   const comparisonRows: ComparisonFeatureRow[] = [
-    { feature: "Pricing Model", nuncioValue: "100% Free & Open Source", competitorValue: "$59.99/year Premium", description: "No paid tiers or feature paywalls" },
-    { feature: "Push Notification Architecture", nuncioValue: "Direct Local IMAP/JMAP Daemon", competitorValue: "Central Spark Proxy Servers", description: "Nuncio connects directly from your machine" },
-    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Vim Ratatui terminal UI" },
-    { feature: "POSIX Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Command-line automation" },
-    { feature: "Native AI MCP Integration", nuncioValue: true, competitorValue: false, description: "Model Context Protocol tools" },
-    { feature: "WORM Cryptographic Audits", nuncioValue: true, competitorValue: false, description: "HMAC-SHA256 audit ledger" },
-    { feature: "NSQL Automation Engine", nuncioValue: true, competitorValue: "Basic Smart Inbox", description: "Full SQL syntax rule statements" },
-    { feature: "Universal Portable Export", nuncioValue: "MBOX, ZIP, JSON, JSONL", competitorValue: "PDF / Print Only", description: "Export entire accounts or queries" },
-    { feature: "Cross-Platform Support", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS, Windows, iOS, Android", description: "Native binaries across all desktop platforms" },
+    { feature: "Pricing Model", nuncioValue: "Free & open source (in development)", competitorValue: "$59.99/yr Premium", description: "No paid tier planned" },
+    { feature: "Sync Architecture", nuncioValue: "Direct local daemon to IMAP/SMTP", competitorValue: "Central Spark proxy servers", description: "Nuncio connects from your machine, not a vendor's cloud" },
+    { feature: "Build & Run From Source", nuncioValue: true, competitorValue: false, description: "cargo build --workspace + run the daemon and CLI locally" },
+    { feature: "Scriptable CLI", nuncioValue: true, competitorValue: false, description: "Real gRPC client today, JSON output for pipelines" },
+    { feature: "Terminal TUI Interface", nuncioValue: true, competitorValue: false, description: "Planned keyboard-driven terminal client", nuncioStatus: "planned" },
+    { feature: "AI Agent Access (MCP)", nuncioValue: true, competitorValue: false, description: "Planned governed gateway for AI agents", nuncioStatus: "planned" },
+    { feature: "WORM Audit Ledger", nuncioValue: true, competitorValue: false, description: "Immutable hash-chained log — real today" },
+    { feature: "NSQL Automation Engine", nuncioValue: "Author & dry-run test today", competitorValue: "Basic smart inbox", description: "Live rule firing on synced mail is still ahead", nuncioStatus: "in-progress" },
+    { feature: "Portable Export (MBOX/EML/JSON)", nuncioValue: true, competitorValue: "PDF / print only", description: "Open, standard formats — real today" },
+    { feature: "Cross-Platform (engine + CLI)", nuncioValue: "macOS, Windows, Linux", competitorValue: "macOS, Windows, iOS, Android", description: "Build and run the daemon on all three desktop OSes" },
   ];
 
   return (
     <ComparisonPageTemplate
       competitorName="Spark Mail"
       competitorSlug="spark-mail"
-      tagline="Why trust proprietary cloud servers with your email credentials when Nuncio gives you local SQLite storage, zero subscription fees, and 4 unified interfaces?"
-      nuncioPrice="100% Free & Open Source"
+      tagline="A daemon that talks directly to your mail server, compared against Spark's proxy-server sync and Premium subscription."
+      nuncioPrice="Free & open source (in development)"
       competitorPrice="$59.99 / Year Premium"
-      heroHeadline="Why trust proprietary cloud servers with your email credentials when Nuncio gives you local SQLite storage, zero subscription fees, and 4 unified interfaces 100% free?"
-      whySwitchParagraph="Spark Mail relies on central proxy servers to handle push notifications and cloud sync, creating a potential vector for credentials and email metadata. Nuncio's hybrid daemon (nunciod) runs locally on your computer—connecting directly to IMAP/JMAP servers with zero middleman proxies."
+      heroHeadline="Spark Mail routes push notifications and sync through its own proxy servers, then paywalls team and priority-inbox features. We're building Nuncio's daemon to talk to your IMAP/SMTP server directly, with no subscription tier and no relay in between."
+      whySwitchParagraph="Spark's central proxy servers sit between you and your mail provider, and its Premium plan gates advanced workflow features behind a yearly fee. Nuncio's architecture puts a single daemon (nunciod) on your own machine, talking directly to your provider and owning your mail state in local SQLite. That daemon, its IMAP/SMTP sync, full-text search, export, and WORM audit ledger already build and run from source; the terminal client and governed AI gateway are the next milestones, not shipped today."
       comparisonRows={comparisonRows}
       differentiators={differentiators}
     />
