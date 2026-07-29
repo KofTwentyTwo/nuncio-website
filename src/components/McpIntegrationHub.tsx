@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Bot, Copy, Check, Terminal, ShieldCheck, ArrowRight, Database, Lock, Zap, FileCheck, Layers } from "lucide-react";
+import { Bot, Copy, Check, Terminal, ShieldCheck, ArrowRight, Lock, FileCheck, Layers } from "lucide-react";
 import Link from "next/link";
+import { StatusBadge } from "./StatusBadge";
 
 export function McpIntegrationHub() {
   const [copied, setCopied] = useState(false);
@@ -27,24 +28,19 @@ export function McpIntegrationHub() {
 
   const mcpAdvantages = [
     {
-      title: "1. Unified Multi-Account Aggregation Hub",
+      title: "1. A Single Local Vault for Every Account",
       icon: <Layers className="w-5 h-5 text-blue-400" />,
-      desc: "Aggregate all your email accounts—unlimited IMAP, JMAP, Gmail, Google Workspace, iCloud, and custom domain accounts—into a single local SQLite storage vault.",
+      desc: "The design goal: aggregate every account you connect — IMAP today, JMAP once it lands — into one local SQLite vault an agent can query, instead of handing separate credentials to separate tools.",
     },
     {
-      title: "2. Controlled Gateway (Zero Uncontrolled Access)",
+      title: "2. Controlled Gateway, Not Direct Access",
       icon: <Lock className="w-5 h-5 text-purple-400" />,
-      desc: "Local LLMs and AI agents NEVER get raw passwords or direct, uncontrolled access to your Gmail or IMAP accounts. All AI actions pass strictly through Nuncio's security enclave with McpAgentPolicy RBAC and automatic PII redaction.",
+      desc: "Local LLMs and AI agents are meant to never see raw passwords or get direct, uncontrolled access to your accounts. Every AI action would pass through Nuncio's security enclave under an RBAC policy with automatic PII redaction.",
     },
     {
-      title: "3. WORM Audits & NSQL Filtering",
+      title: "3. WORM Audits for Every AI Action",
       icon: <FileCheck className="w-5 h-5 text-cyan-400" />,
-      desc: "Every single AI agent tool call, email read, draft generation, and send action is logged in an immutable Write Once Read Many (WORM) audit ledger sealed with HMAC-SHA256 hash chains.",
-    },
-    {
-      title: "4. Microsecond Local Speed",
-      icon: <Zap className="w-5 h-5 text-yellow-400" />,
-      desc: "Instant local FTS5 trigram search (<10ms across 100,000+ messages). Local LLMs get sub-millisecond context retrieval without network latency or cloud API fees.",
+      desc: "The plan is that every AI agent tool call, read, draft, and send lands in the same immutable, HMAC-SHA256 hash-chained audit ledger that already exists for other engine actions today.",
     },
   ];
 
@@ -54,18 +50,20 @@ export function McpIntegrationHub() {
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-tight shadow-lg">
             <Bot className="w-3.5 h-3.5" />
-            <span>Native Model Context Protocol (MCP) Server</span>
+            <span>Planned: Model Context Protocol (MCP) Client</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             Sane &amp; Controlled <span className="gradient-text">AI Agent Architecture</span>
           </h2>
           <p className="text-slate-300 text-base sm:text-lg">
-            Tie all your accounts together in a single place—and control exactly how local LLMs access your data via security policies, WORM audits, and microsecond SQLite speed.
+            A governed MCP bridge is on the roadmap as a separate client over the same gRPC contract — not a
+            direct line from your inbox to an LLM. It doesn&apos;t exist yet; here&apos;s the design.
           </p>
+          <StatusBadge variant="planned" label="Planned client — not built yet" />
         </div>
 
-        {/* 4 Core Advantage Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Core Advantage Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {mcpAdvantages.map((adv, idx) => (
             <div key={idx} className="glass-card p-6 rounded-2xl border border-white/10 flex flex-col justify-between h-full space-y-3 hover:border-emerald-500/40 transition-colors">
               <div className="space-y-3">
@@ -79,7 +77,7 @@ export function McpIntegrationHub() {
           ))}
         </div>
 
-        {/* MCP Stdio Configuration Card */}
+        {/* MCP Stdio Configuration Preview */}
         <div className="max-w-4xl mx-auto glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
             <div className="flex items-center gap-3">
@@ -87,8 +85,8 @@ export function McpIntegrationHub() {
                 <Terminal className="w-5 h-5" />
               </div>
               <div className="min-w-0 flex-1">
-                <h3 className="text-base font-bold text-white whitespace-nowrap truncate">Claude Desktop / Antigravity Config (`claude_desktop_config.json`)</h3>
-                <span className="text-xs text-slate-400 font-mono">Executable: nuncio-mcp --stdio</span>
+                <h3 className="text-base font-bold text-white whitespace-nowrap truncate">Target config shape (not usable yet)</h3>
+                <span className="text-xs text-slate-400 font-mono">nuncio-mcp doesn&apos;t exist as a binary today</span>
               </div>
             </div>
             <button
@@ -96,7 +94,7 @@ export function McpIntegrationHub() {
               className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-gray-200 transition-all border border-white/10 shrink-0"
             >
               {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-              {copied ? "Copied Config!" : "Copy MCP JSON"}
+              {copied ? "Copied preview" : "Copy preview JSON"}
             </button>
           </div>
 
@@ -104,32 +102,22 @@ export function McpIntegrationHub() {
             {mcpConfig}
           </pre>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 text-xs">
-            <div className="p-4 rounded-2xl bg-slate-900/80 border border-white/10 space-y-1.5">
-              <span className="text-emerald-400 font-bold block font-mono">nuncio_mail_send</span>
-              <span className="text-slate-300">Draft or send emails with Human-in-the-Loop prompt authorization.</span>
-            </div>
-            <div className="p-4 rounded-2xl bg-slate-900/80 border border-white/10 space-y-1.5">
-              <span className="text-cyan-400 font-bold block font-mono">nuncio_export_data</span>
-              <span className="text-slate-300">Export MBOX, EML ZIP, or JSON data streams programmatically.</span>
-            </div>
-            <div className="p-4 rounded-2xl bg-slate-900/80 border border-white/10 space-y-1.5">
-              <span className="text-purple-400 font-bold block font-mono">nuncio_audit_verify</span>
-              <span className="text-slate-300">Verify HMAC-SHA256 WORM cryptographic audit chain integrity.</span>
-            </div>
-          </div>
+          <p className="text-xs text-slate-400">
+            This is what a client config would look like once the MCP bridge ships — pasting it into an MCP
+            client today will not connect to anything.
+          </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
             <div className="flex items-center gap-2 text-xs text-slate-300">
               <ShieldCheck className="w-4 h-4 text-purple-400 shrink-0" />
-              <span>Protected by McpAgentPolicy RBAC, folder whitelists &amp; automatic SSN/credit card redaction.</span>
+              <span>Designed to run under an RBAC policy, folder whitelists &amp; automatic PII redaction — none of which exist yet.</span>
             </div>
 
             <Link
               href="/mcp"
               className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1.5 transition-colors shrink-0"
             >
-              <span>Explore Standalone MCP Hub Page</span>
+              <span>Explore the MCP vision page</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

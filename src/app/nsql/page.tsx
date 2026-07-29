@@ -1,36 +1,37 @@
 import React from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Code, Terminal, Sparkles, CheckCircle2, ArrowRight, ShieldCheck, Zap, Play } from "lucide-react";
-import Link from "next/link";
+import { Code, CheckCircle2, GitBranch, MapPin } from "lucide-react";
+import { StatusBadge } from "@/components/StatusBadge";
+import { GITHUB_URL, ROADMAP_URL } from "@/lib/status";
 import { NsqlPlayground } from "@/components/NsqlPlayground";
 
 export const metadata = {
-  title: "NSQL Engine — Nuncio SQL Filter & Automation Language",
-  description: "Learn about NSQL: Nuncio's SQL-powered email filter and automation engine built with sqlparser 0.54, ON ACCOUNT wildcards, dry-run previews, and signed HMAC webhooks.",
+  title: "NSQL — Nuncio's SQL Filter & Automation Language",
+  description: "NSQL is Nuncio's real SQL-style filter language: the parser, validator, and dry-run tester exist today. Wiring compiled rules into the live sync path so they act on your mail is the next milestone.",
 };
 
 export default function NsqlPage() {
   const nsqlExamples = [
     {
       title: "VIP Priority Router",
-      sql: "WHEN sender LIKE '%@kof22.com%' AND subject REGEXP '(Urgent|Architecture)' ON ACCOUNT '*@company.com' THEN MOVE TO 'vip-inbox', SET flagged = TRUE;",
-      desc: "Routes urgent architectural reviews from company domain accounts directly into the VIP folder with immediate flagging.",
+      sql: "WHEN sender LIKE '%@example.com%' AND subject REGEXP '(Urgent|Deadline)' ON ACCOUNT '*@example.com' THEN MOVE TO 'vip-inbox', SET flagged = TRUE;",
+      desc: "Routes urgent mail from a given domain into a VIP folder with immediate flagging.",
     },
     {
       title: "Automated Newsletter Archiver",
       sql: "WHEN body LIKE '%unsubscribe%' THEN MOVE TO 'Newsletters', SET read = TRUE;",
-      desc: "Automatically identifies incoming commercial newsletters, moves them out of the main inbox, and marks them as read.",
+      desc: "Identifies commercial newsletters, moves them out of the main inbox, and marks them as read.",
     },
     {
       title: "Spam & Malicious Attachment Purge",
       sql: "WHEN header['X-Spam-Score'] > 5 OR attachment_name LIKE '%.exe' THEN MOVE TO 'Trash', SET read = TRUE;",
-      desc: "Purges emails exceeding spam thresholds or carrying hazardous binary attachments directly into Trash.",
+      desc: "Purges mail exceeding a spam threshold or carrying a hazardous binary attachment.",
     },
     {
-      title: "Secure HMAC Webhook Dispatcher",
-      sql: "WHEN subject LIKE '%Deploy Alert%' THEN EXECUTE WEBHOOK 'https://api.kof22.com/webhooks/deploy';",
-      desc: "Dispatches an authenticated HMAC-SHA256 webhook notification to an external endpoint upon receiving deployment alerts.",
+      title: "Signed Webhook Dispatcher",
+      sql: "WHEN subject LIKE '%Deploy Alert%' THEN CALL WEBHOOK 'https://example.com/webhooks/deploy';",
+      desc: "Dispatches an HMAC-SHA256-signed webhook to an external endpoint when a rule matches.",
     },
   ];
 
@@ -50,8 +51,11 @@ export default function NsqlPage() {
           </h1>
 
           <p className="text-slate-300 text-lg sm:text-xl font-normal max-w-2xl mx-auto">
-            Write declarative SQL filter statements to organize inboxes, set flags, route folders, and dispatch signed webhooks — executed in microsecond time inside background sync loops.
+            Write declarative SQL-style rules to organize inboxes, set flags, route folders, and dispatch signed
+            webhooks. The parser, validator, and dry-run tester are real and working today — running compiled
+            rules automatically against your live, syncing mailbox is the next milestone on the roadmap.
           </p>
+          <StatusBadge variant="in-progress" label="Compiles & dry-runs today — live firing is planned" />
         </div>
 
         {/* Live Interactive Playground Container */}
@@ -63,7 +67,7 @@ export default function NsqlPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-6">
           <div className="text-center space-y-2">
             <h2 className="text-2xl font-bold text-white">Example NSQL Rule Catalog</h2>
-            <p className="text-slate-400 text-sm">Declarative statements compiled into AST objects using sqlparser 0.54.</p>
+            <p className="text-slate-400 text-sm">Statements like these compile and dry-run successfully today — none of them act on a live mailbox yet.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -82,14 +86,25 @@ export default function NsqlPage() {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 text-center pt-6">
-          <Link
-            href="/#downloads"
+        <div className="max-w-4xl mx-auto px-4 text-center pt-6 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="apple-button-primary px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2"
           >
-            Download Nuncio &amp; Try NSQL
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+            <GitBranch className="w-4 h-4" />
+            Follow the build on GitHub
+          </a>
+          <a
+            href={ROADMAP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 text-sm font-semibold text-white inline-flex items-center gap-2 transition-colors"
+          >
+            <MapPin className="w-4 h-4" />
+            See the roadmap
+          </a>
         </div>
       </main>
       <Footer />
