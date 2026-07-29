@@ -45,7 +45,9 @@ export function DocsTeaserSection() {
             Complete <span className="gradient-text">Documentation Hub</span>
           </h2>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            From installation and Google OAuth PKCE to NSQL grammar specs, HMAC webhooks, and AI MCP integration — explore all 10 technical guides in our dedicated docs portal.
+            From building the daemon and CLI from source to the NSQL grammar spec, signed webhooks, and the AI
+            MCP integration design — explore all 10 guides in our dedicated docs portal, covering what&apos;s
+            real today and what&apos;s ahead on the roadmap.
           </p>
         </div>
 

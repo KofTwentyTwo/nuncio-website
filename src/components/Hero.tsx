@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
-import { Download, ArrowRight, ShieldCheck, Sparkles, Monitor, Code, FileCheck } from "lucide-react";
+import { Bell, ArrowRight, GitBranch, ShieldCheck, Sparkles, Monitor, Code, FileCheck } from "lucide-react";
 import { ShellInteractivePreview } from "./ShellInteractivePreview";
+import { AvailableNow, StatusBadge } from "./StatusBadge";
+import { ROADMAP_URL, GITHUB_URL } from "@/lib/status";
 
 export function Hero() {
   return (
@@ -13,7 +15,7 @@ export function Hero() {
           {/* Announcement Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold tracking-tight shadow-lg">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>Nuncio — Sovereign, Fast &amp; 100% Open Source</span>
+            <span>Nuncio — Sovereign, Fast &amp; 100% Open Source. Under active construction.</span>
           </div>
 
           {/* Main Hero Headline */}
@@ -24,7 +26,7 @@ export function Hero() {
 
           {/* Subtitle */}
           <p className="text-slate-300 text-lg sm:text-xl font-normal max-w-3xl mx-auto leading-relaxed">
-            No paid subscriptions, closed formats, or locked-away data. Enjoy four extraordinary interfaces, AI NSQL filters, and cryptographic audit logs without losing control of your data.
+            No paid subscriptions, closed formats, or locked-away data. We&apos;re building four extraordinary interfaces, an AI-driven NSQL filter engine, and cryptographic audit logs on a single sovereign core — in the open, from day one.
           </p>
 
           {/* Action Buttons */}
@@ -33,23 +35,35 @@ export function Hero() {
               href="#downloads"
               className="apple-button-primary px-6 py-3 text-sm font-semibold flex items-center gap-2"
             >
-              <Download className="w-4 h-4" />
-              Download Latest Release
+              <Bell className="w-4 h-4" />
+              Notify me at launch
             </a>
             <a
-              href="#experiences"
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="apple-button-secondary px-6 py-3 text-sm font-semibold flex items-center gap-2"
             >
-              Explore the 4 Interfaces
+              <GitBranch className="w-4 h-4" />
+              Follow the build on GitHub
+            </a>
+            <a
+              href={ROADMAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 text-sm font-semibold flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
+            >
+              See the roadmap
               <ArrowRight className="w-4 h-4 text-slate-400" />
             </a>
           </div>
 
           {/* Trust Feature Bar */}
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-slate-400 text-xs font-medium">
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-slate-400 text-xs font-medium">
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              100% Local AES-256 Encryption
+              Local AES-256 encryption at rest
+              <StatusBadge variant="planned" />
             </span>
             <span className="flex items-center gap-1.5">
               <Code className="w-4 h-4 text-cyan-400" />
@@ -57,16 +71,18 @@ export function Hero() {
             </span>
             <span className="flex items-center gap-1.5">
               <FileCheck className="w-4 h-4 text-purple-400" />
-              HMAC Cryptographic Audit Logs
+              HMAC Cryptographic WORM Audit Logs
+              <AvailableNow />
             </span>
             <span className="flex items-center gap-1.5">
               <Monitor className="w-4 h-4 text-blue-400" />
-              macOS, Linux &amp; Windows
+              Native apps for macOS, Linux &amp; Windows
+              <StatusBadge variant="planned" />
             </span>
           </div>
         </div>
 
-        {/* Featured Desktop GUI & Interactive Preview Container */}
+        {/* Interactive product-preview widget */}
         <div className="pt-4">
           <ShellInteractivePreview />
         </div>

@@ -1,81 +1,89 @@
 "use client";
 
 import React from "react";
-import { Terminal, Code, Monitor, Bot, Zap, Sparkles, ShieldCheck, CheckCircle2, ArrowRight } from "lucide-react";
+import { Terminal, Code, Monitor, Bot, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
+import { StatusBadge } from "./StatusBadge";
+import type { StatusVariant } from "@/lib/status";
 
 export function FourExperiencesSection() {
-  const experiences = [
+  const experiences: Array<{
+    id: string;
+    title: string;
+    status: StatusVariant;
+    subtitle: string;
+    icon: React.ReactNode;
+    accentColor: string;
+    description: string;
+    userBenefits: string[];
+    sampleCommand: string;
+  }> = [
     {
       id: "gui",
-      title: "1. The Desktop Workspace (Featured GUI)",
-      badgeText: "Most Popular",
-      subtitle: "Beautiful Visual Elegance for Everyday Productivity",
+      title: "1. The Desktop Workspace",
+      status: "planned",
+      subtitle: "Beautiful visual elegance for everyday productivity",
       icon: <Monitor className="w-6 h-6 text-purple-400" />,
       accentColor: "border-purple-500/40 bg-purple-500/10 hover:border-purple-500/70 shadow-lg shadow-purple-500/10",
-      badgeBg: "bg-purple-500/20 text-purple-300 border-purple-500/40 font-bold",
       description:
-        "The primary desktop application designed for seamless daily flow. Enjoy a clean, distraction-free inbox with rich email previewing, visual calendar scheduling, and drag-and-drop filter creation.",
+        "A native desktop app, planned as a thin client over the same gRPC API every other interface uses, designed for seamless daily flow: a clean inbox, visual calendar scheduling, and drag-and-drop filter creation.",
       userBenefits: [
-        "Sandboxed HTML email inspector with automatic tracking pixel neutralization",
-        "Unified inbox for all your personal, work, and custom domain accounts",
+        "Sandboxed HTML email inspector with tracking-pixel neutralization",
+        "Unified inbox across all your personal, work, and custom domain accounts",
         "Visual drag-and-drop rule builder and interactive calendar planner",
-        "Blazing-fast native performance with minimal RAM and battery usage",
+        "Native performance targeting minimal RAM and battery usage",
       ],
-      sampleCommand: "Nuncio Desktop App (macOS, Windows, Linux)",
+      sampleCommand: "Nuncio Desktop App — planned for macOS, Windows, Linux",
     },
     {
       id: "tui",
-      title: "2. The Vim Keyboard Terminal (Ratatui TUI)",
-      badgeText: "Power Users",
-      subtitle: "Keyboard Velocity for Triage Without Touching the Mouse",
+      title: "2. The Vim Keyboard Terminal",
+      status: "planned",
+      subtitle: "Keyboard velocity for triage without touching the mouse",
       icon: <Code className="w-6 h-6 text-cyan-400" />,
       accentColor: "border-cyan-500/30 bg-cyan-500/5 hover:border-cyan-500/60",
-      badgeBg: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30 font-semibold",
       description:
-        "Built for developers and power users who demand maximum speed. Process hundreds of inbox messages per minute using intuitive Vim motions, single-key triage chords, and split-view previews.",
+        "A Ratatui-based terminal client on the roadmap for developers and power users who want maximum speed: Vim motions, single-key triage chords, and split-view previews, all driven by the same engine.",
       userBenefits: [
         "Vim navigation (`j`/`k`/`h`/`l`/`g i`) & single-key archive/delete chords",
         "Instant split-pane previewer for text & HTML email content",
-        "Interactive NSQL rule editor & dry-run condition tester built-in",
+        "Interactive NSQL rule editor & dry-run condition tester built in",
         "Runs directly in any terminal tab or SSH session",
       ],
-      sampleCommand: "nuncio-tui (press 'f' for rules, 'a' for accounts)",
+      sampleCommand: "nuncio-tui — planned",
     },
     {
       id: "cli",
-      title: "3. The Developer Command Shell (POSIX CLI)",
-      badgeText: "Automations",
-      subtitle: "Instant Inbox Queries & Automation Right From Your Shell",
+      title: "3. The Developer Command Shell",
+      status: "available-now",
+      subtitle: "Instant inbox queries & automation right from your shell",
       icon: <Terminal className="w-6 h-6 text-blue-400" />,
       accentColor: "border-blue-500/30 bg-blue-500/5 hover:border-blue-500/60",
-      badgeBg: "bg-blue-500/20 text-blue-300 border-blue-500/30 font-semibold",
       description:
-        "Designed for developers, sysadmins, and shell enthusiasts who want effortless scriptability. Search messages, query calendar availability, and trigger custom webhooks directly from command scripts.",
+        "The in-repo reference client and E2E driver for the engine. Build it from source today to search messages, sync IMAP/SMTP accounts, and drive the daemon over its gRPC API directly from your shell.",
       userBenefits: [
         "Pipeable JSON outputs for shell scripts & custom automations (`--json`)",
-        "Instant search across 100,000+ messages in under 10 milliseconds",
-        "Headless background sync daemon (`nunciod`) keeps mail updated silently",
-        "Simple single-command email dispatching & account management",
+        "Local SQLite FTS5 full-text search over your synced mail",
+        "Talks to the headless background sync daemon (`nunciod`) over gRPC",
+        "Multi-account IMAP sync and SMTP send, tested against mock servers",
       ],
-      sampleCommand: "nuncio mail search --query 'urgent' --json",
+      sampleCommand: "cargo run -p nuncio-cli -- mail search --query 'urgent'",
     },
     {
       id: "mcp",
-      title: "4. The AI Executive Assistant (MCP Agent)",
-      badgeText: "AI Assistant",
-      subtitle: "AI Co-Pilots Working Alongside You with Granular Privacy",
+      title: "4. The AI Executive Assistant",
+      status: "planned",
+      subtitle: "AI co-pilots working alongside you with granular privacy",
       icon: <Bot className="w-6 h-6 text-emerald-400" />,
       accentColor: "border-emerald-500/30 bg-emerald-500/5 hover:border-emerald-500/60",
-      badgeBg: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30 font-bold",
       description:
-        "Aggregate ALL your email accounts into one local hub. Connect local LLMs and AI agents (Claude, Antigravity, Cursor) through Nuncio's security gateway—never granting uncontrolled direct credentials to Gmail or IMAP. Controlled via WORM audits, RBAC policies, and microsecond SQLite speed.",
+        "A governed MCP bridge, planned as a separate client, that lets local LLMs and AI agents (Claude, Cursor, and others) talk to Nuncio through a policy gateway — never handed raw IMAP or provider credentials.",
       userBenefits: [
-        "Aggregate unlimited IMAP, JMAP & Gmail accounts into a single local vault",
-        "Controlled AI Gateway: Zero uncontrolled direct access to raw email providers",
-        "Immutable HMAC-SHA256 WORM audit ledger logs every AI tool call & email read",
-        "Sub-10ms local FTS5 search delivers microsecond speed without cloud fees",
+        "Aggregate multiple accounts into a single local vault the agent can query",
+        "Controlled AI gateway: no direct, uncontrolled access to raw providers",
+        "Every AI tool call recorded in the WORM audit ledger",
+        "Built on the same frozen gRPC contract as every other client",
       ],
-      sampleCommand: "nuncio-mcp --stdio (Native Model Context Protocol Server)",
+      sampleCommand: "nuncio-mcp --stdio — planned",
     },
   ];
 
@@ -86,13 +94,14 @@ export function FourExperiencesSection() {
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold tracking-tight shadow-lg">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>Four Extraordinary User Experiences</span>
+            <span>Four Interfaces, One Vision</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             One Engine. <span className="gradient-text">Four Ways to Work.</span>
           </h2>
           <p className="text-slate-300 text-base sm:text-lg">
-            Whether you prefer a sleek desktop window, lightning terminal keybindings, Unix shell scripts, or AI co-piloting — Nuncio fits your exact daily workflow.
+            A sleek desktop window, lightning terminal keybindings, Unix shell scripts, and AI co-piloting — all
+            built on one gRPC contract. The reference CLI is real today; the rest are on the roadmap.
           </p>
         </div>
 
@@ -116,9 +125,7 @@ export function FourExperiencesSection() {
                       <p className="text-xs font-medium text-slate-400 leading-normal mt-0.5">{exp.subtitle}</p>
                     </div>
                   </div>
-                  <span className={`text-xs px-3 py-1 rounded-full border whitespace-nowrap shrink-0 ${exp.badgeBg}`}>
-                    {exp.badgeText}
-                  </span>
+                  <StatusBadge variant={exp.status} className="shrink-0" />
                 </div>
 
                 {/* Description */}
@@ -127,7 +134,9 @@ export function FourExperiencesSection() {
 
               {/* Middle Block: User Benefits Checklist */}
               <div className="space-y-2.5 pt-4 border-t border-white/10 flex-1 flex flex-col justify-start min-h-[9.5rem]">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Key User Features:</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  {exp.status === "available-now" ? "What works today:" : "The vision:"}
+                </span>
                 <ul className="space-y-2 text-xs text-slate-200 font-medium">
                   {exp.userBenefits.map((b, idx) => (
                     <li key={idx} className="flex items-start gap-2.5">
