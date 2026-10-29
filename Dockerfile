@@ -26,7 +26,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-RUN addgroup --system --gid 1001 nodejs && \
+RUN apk upgrade --no-cache && \
+    addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
 # Strip build-time package-manager tooling inherited from the base image.
