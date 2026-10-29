@@ -10,7 +10,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "node --test tests/http-smoke.test.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.6",
@@ -18,7 +19,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "clsx": "^2.1.1",
     "lucide-react": "^1.26.0",
-    "next": "^16.3.8",
+    "next": "16.4.3",
     "next-themes": "^0.4.6",
     "postcss": "^8.5.28",
     "react": "19.2.8",
@@ -31,7 +32,7 @@
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "eslint": "^9.39.5",
-    "eslint-config-next": "16.1.6"
+    "eslint-config-next": "16.4.3"
   },
   "overrides": {
     "sharp": "^0.35.4",
