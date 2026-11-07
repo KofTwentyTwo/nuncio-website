@@ -10,4 +10,5 @@ jobs:
       # The Dockerfile runs the install and build; nothing to run before it.
       prebuild: 'true'
       publish-branch: main
-      gitops-file: tenants/nuncio/website/kustomization.yaml
+      # Deploys: Argo CD Image Updater in cluster-gitops follows the newest image pushed from
+      # this branch, so CI needs no GitOps write token.
