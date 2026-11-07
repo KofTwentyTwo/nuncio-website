@@ -1,0 +1,13 @@
+name: build
+on:
+  push:
+jobs:
+  container:
+    uses: self:KofTwentyTwo/ci-workflows/.gitea/workflows/container.yaml@v1
+    secrets: inherit
+    with:
+      images: nuncio-website|Dockerfile
+      # The Dockerfile runs the install and build; nothing to run before it.
+      prebuild: 'true'
+      publish-branch: main
+      gitops-file: tenants/nuncio/website/kustomization.yaml
